@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/* ============================================
+   Citychurch Custom CSS
+   Oatmeal / Taupe Theme with Light + Dark Mode
+   ============================================ */
+
+/* --- Taupe Color Palette (Tailwind v4) --- */
+:root {
+  --taupe-50: oklch(98.6% 0.002 67.8);
+  --taupe-100: oklch(96% 0.002 17.2);
+  --taupe-200: oklch(92.2% 0.005 34.3);
+  --taupe-300: oklch(86.8% 0.007 39.5);
+  --taupe-400: oklch(71.4% 0.014 41.2);
+  --taupe-500: oklch(54.7% 0.021 43.1);
+  --taupe-600: oklch(43.8% 0.017 39.3);
+  --taupe-700: oklch(36.7% 0.016 35.7);
+  --taupe-800: oklch(26.8% 0.011 36.5);
+  --taupe-900: oklch(21.4% 0.009 43.1);
+  --taupe-950: oklch(14.7% 0.004 49.3);
+
+  /* Brand accent — from logo */
+  --accent: oklch(63% 0.2 360);
+  --accent-soft: oklch(63% 0.12 360);
+
+  /* Light mode defaults */
+  --bg-primary: var(--taupe-50);
+  --bg-secondary: white;
+  --bg-card: white;
+  --bg-muted: var(--taupe-100);
+  --text-primary: var(--taupe-900);
+  --text-secondary: var(--taupe-600);
+  --text-muted: var(--taupe-400);
+  --border-color: var(--taupe-200);
+  --border-subtle: var(--taupe-100);
+}
+
+.dark {
+  --bg-primary: var(--taupe-950);
+  --bg-secondary: var(--taupe-900);
+  --bg-card: var(--taupe-800);
+  --bg-muted: var(--taupe-800);
+  --text-primary: var(--taupe-50);
+  --text-secondary: var(--taupe-300);
+  --text-muted: var(--taupe-500);
+  --border-color: var(--taupe-700);
+  --border-subtle: var(--taupe-800);
+}
+
+/* --- Base Typography --- */
+body {
+  font-family: 'Inter', 'system-ui', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Newspaper / Magazine Typography for Blog --- */
+.blog-prose {
+  font-family: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
+  font-size: 1.125rem;
+  line-height: 1.85;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.blog-prose h1,
+.blog-prose h2,
+.blog-prose h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.blog-prose h1 {
+  font-size: 2.5rem;
+  line-height: 1.15;
+}
+
+.blog-prose h2 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+}
+
+.blog-prose p {
+  margin-bottom: 1.25em;
+}
+
+.blog-prose blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 2em 0;
+}
+
+.blog-prose .dropcap::first-letter {
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.15rem;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.blog-prose figure {
+  margin: 2.5em 0;
+}
+
+.blog-prose figcaption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+/* --- Dividers --- */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+/* --- Smooth theme transition --- */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease;
+}
+
+/* Exclude video/image elements from transitions */
+img, video, iframe, canvas, svg {
+  transition: none;
+}
+
+/* --- Card hover effect --- */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.3);
+}
+
+/* --- Video embed responsive --- */
+.video-embed {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --- Navbar --- */
+.nav-link {
+  position: relative;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* --- Scrollbar styling --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--taupe-400);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--taupe-600);
+}
+
+/* --- Mobile menu --- */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.mobile-menu.open {
+  max-height: 500px;
+}
+
+/* --- Scroll animations --- */
+.reveal {
+  opacity: 0;
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
