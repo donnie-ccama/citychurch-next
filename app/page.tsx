@@ -25,7 +25,7 @@ export default function Home() {
       <section
         style={{
           position: 'relative',
-          minHeight: '85vh',
+          minHeight: '65vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -63,7 +63,7 @@ export default function Home() {
               fontWeight: 800,
               letterSpacing: '-0.04em',
               lineHeight: 1.05,
-              marginBottom: '1.25rem',
+              marginBottom: '0.375rem',
             }}
           >
             Citychurch
@@ -76,7 +76,7 @@ export default function Home() {
               fontSize: 'clamp(1.125rem, 2.5vw, 1.5rem)',
               fontStyle: 'italic',
               color: 'var(--text-secondary)',
-              marginBottom: '2.5rem',
+              marginBottom: '1.5rem',
               letterSpacing: '0.01em',
             }}
           >
