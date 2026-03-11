@@ -58,11 +58,11 @@ export const demoBlogPosts = [
 export const demoSermons = [
   {
     id: '1',
-    title: 'The Weight of Showing Up',
+    title: 'The Protection and Purity of Marriage',
     speaker: 'Pastor Sarah Mitchell',
     series: 'Present',
     sermon_date: '2026-03-09',
-    video_url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    video_url: 'https://player.vimeo.com/video/1172206088?badge=0&autopause=0&player_id=0&app_id=58479',
     description: 'What does it mean to truly be present in a world that rewards distraction? This week we explore the radical act of simply showing up.',
     featured: true,
     created_at: '2026-03-09T10:00:00Z',

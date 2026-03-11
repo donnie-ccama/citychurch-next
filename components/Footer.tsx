@@ -14,6 +14,7 @@ export default function Footer() {
     >
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
         <div
+          className="footer-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',

@@ -18,7 +18,7 @@ export default function VideoEmbed({ url, title }: VideoEmbedProps) {
       <iframe
         src={url}
         title={title}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
         allowFullScreen
         style={{
           width: '100%',

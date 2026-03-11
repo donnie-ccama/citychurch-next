@@ -53,6 +53,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 /* --- Newspaper / Magazine Typography for Blog --- */
@@ -253,5 +254,153 @@ img, video, iframe, canvas, svg {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   Phone:   ≤ 640px
+   Tablet:  641px – 1024px
+   Desktop: > 1024px (default)
+   ============================================ */
+
+/* --- PHONE (portrait & landscape) --- */
+@media (max-width: 640px) {
+  /* Section padding: compact */
+  section {
+    padding: 3rem 1rem !important;
+  }
+
+  /* Hero video: shorter on phones */
+  .hero-video {
+    min-height: 50vh !important;
+  }
+
+  /* Grids: single column */
+  [style*="grid-template-columns"],
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer grid */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    text-align: center;
+  }
+
+  /* Card padding: tighter */
+  .card-hover {
+    padding: 1.25rem !important;
+  }
+
+  /* Heading sizes */
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem) !important;
+  }
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  /* CTA buttons: full width */
+  [style*="display: inline-flex"],
+  [style*="display:inline-flex"] {
+    width: 100%;
+    justify-content: center !important;
+  }
+
+  /* Hero CTA button group: stack vertically */
+  .hero-video [style*="display: flex"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  /* Blog prose: tighter on mobile */
+  .blog-prose {
+    font-size: 1rem;
+  }
+  .blog-prose h1 {
+    font-size: 1.75rem !important;
+  }
+  .blog-prose h2 {
+    font-size: 1.375rem !important;
+  }
+
+  /* Mute button: smaller on phone */
+  .hero-video button {
+    width: 40px !important;
+    height: 40px !important;
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+}
+
+/* --- PHONE LANDSCAPE --- */
+@media (max-width: 640px) and (orientation: landscape) {
+  .hero-video {
+    min-height: 70vh !important;
+  }
+
+  section {
+    padding: 2rem 1rem !important;
+  }
+
+  /* Allow 2-col grids in landscape phone */
+  [style*="grid-template-columns"],
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* --- TABLET (portrait) --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  section {
+    padding: 4rem 1.25rem !important;
+  }
+
+  /* Grids: 2 columns on tablet */
+  [style*="grid-template-columns"],
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+  }
+}
+
+/* --- TABLET LANDSCAPE --- */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+  .hero-video {
+    min-height: 60vh !important;
+  }
+
+  /* Allow 3-col grids in tablet landscape */
+  [style*="grid-template-columns"],
+  [style*="gridTemplateColumns"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* --- Touch device enhancements --- */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects on touch devices */
+  .card-hover:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Larger tap targets */
+  .nav-link {
+    padding: 0.5rem 0 !important;
   }
 }
