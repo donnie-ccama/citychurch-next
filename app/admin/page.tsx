@@ -6,14 +6,14 @@ export default function AdminDashboard() {
   const stats = [
     { label: 'Blog Posts', count: 12, color: '#4F46E5' },
     { label: 'Sermons', count: 24, color: '#7C3AED' },
-    { label: 'Events', count: 8, color: '#EC4899' },
+    { label: 'Ministries', count: 8, color: '#EC4899' },
     { label: 'Media Items', count: 45, color: '#F59E0B' },
   ];
 
   const quickActions = [
     { label: 'New Blog Post', href: '/admin/blog', color: '#4F46E5' },
     { label: 'New Sermon', href: '/admin/sermons', color: '#7C3AED' },
-    { label: 'New Event', href: '/admin/events', color: '#EC4899' },
+    { label: 'New Ministry', href: '/admin/events', color: '#EC4899' },
     { label: 'New Media', href: '/admin/media', color: '#F59E0B' },
   ];
 

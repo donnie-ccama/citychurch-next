@@ -71,7 +71,7 @@ export default function Home() {
               letterSpacing: '-0.01em',
             }}
           >
-            Ministries
+            Upcoming Ministries
           </Link>
         </div>
       </HeroVideo>
@@ -126,7 +126,7 @@ export default function Home() {
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Ministries" />
+            <SectionHeader label="Get Involved" title="Upcoming Outreach Ministries" />
           </div>
 
           <div
