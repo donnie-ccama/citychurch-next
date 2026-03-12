@@ -128,7 +128,7 @@ export default function Footer() {
                 Sermons
               </Link>
               <Link
-                href="/events"
+                href="/ministries"
                 style={{
                   color: `var(--text-secondary)`,
                   fontSize: '0.9375rem',
@@ -143,7 +143,7 @@ export default function Footer() {
                     'var(--text-secondary)';
                 }}
               >
-                Events
+                Ministries
               </Link>
               <Link
                 href="/media"

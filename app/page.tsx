@@ -55,7 +55,7 @@ export default function Home() {
             </svg>
           </Link>
           <Link
-            href="/events"
+            href="/ministries"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -71,7 +71,7 @@ export default function Home() {
               letterSpacing: '-0.01em',
             }}
           >
-            Upcoming Events
+            Ministries
           </Link>
         </div>
       </HeroVideo>
@@ -126,7 +126,7 @@ export default function Home() {
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Outreach Events" />
+            <SectionHeader label="Get Involved" title="Upcoming Ministries" />
           </div>
 
           <div
@@ -145,7 +145,7 @@ export default function Home() {
 
           <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
             <Link
-              href="/events"
+              href="/ministries"
               style={{
                 color: 'var(--accent)',
                 fontWeight: 600,
@@ -153,7 +153,7 @@ export default function Home() {
                 textDecoration: 'none',
               }}
             >
-              View All Events & Register →
+              View All Ministries & Register →
             </Link>
           </div>
         </div>

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Event } from '@/lib/types';
 
-const demoEvents: Event[] = [
+const demoMinistries: Event[] = [
   {
     id: '1',
     title: 'Sunday Service',
@@ -45,8 +45,8 @@ const demoEvents: Event[] = [
   },
 ];
 
-export default function EventsAdminPage() {
-  const [events, setEvents] = useState<Event[]>(demoEvents);
+export default function MinistriesAdminPage() {
+  const [ministries, setMinistries] = useState<Event[]>(demoMinistries);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -61,8 +61,8 @@ export default function EventsAdminPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newEvent: Event = {
-      id: String(events.length + 1),
+    const newMinistry: Event = {
+      id: String(ministries.length + 1),
       title: formData.title,
       event_date: formData.event_date,
       event_time: formData.event_time,
@@ -74,7 +74,7 @@ export default function EventsAdminPage() {
       active: formData.active,
       created_at: new Date().toISOString().split('T')[0],
     };
-    setEvents([newEvent, ...events]);
+    setMinistries([newMinistry, ...ministries]);
     setFormData({
       title: '',
       event_date: '',
@@ -86,18 +86,18 @@ export default function EventsAdminPage() {
       active: true,
     });
     setShowForm(false);
-    console.log('Event created:', newEvent);
+    console.log('Ministry created:', newMinistry);
   };
 
   const handleDelete = (id: string) => {
-    setEvents(events.filter((event) => event.id !== id));
-    console.log('Event deleted:', id);
+    setMinistries(ministries.filter((m) => m.id !== id));
+    console.log('Ministry deleted:', id);
   };
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: '700', margin: 0 }}>Events</h1>
+        <h1 style={{ fontSize: '2rem', fontWeight: '700', margin: 0 }}>Ministries</h1>
         <button
           onClick={() => setShowForm(!showForm)}
           style={{
@@ -117,7 +117,7 @@ export default function EventsAdminPage() {
             e.currentTarget.style.opacity = '1';
           }}
         >
-          {showForm ? 'Cancel' : '+ New Event'}
+          {showForm ? 'Cancel' : '+ New Ministry'}
         </button>
       </div>
 
@@ -132,7 +132,7 @@ export default function EventsAdminPage() {
             marginBottom: '2rem',
           }}
         >
-          <h2 style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Create New Event</h2>
+          <h2 style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Create New Ministry</h2>
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '1.5rem' }}>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
@@ -281,7 +281,7 @@ export default function EventsAdminPage() {
                     onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                     style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                   />
-                  Featured event
+                  Featured ministry
                 </label>
               </div>
               <div>
@@ -292,7 +292,7 @@ export default function EventsAdminPage() {
                     onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
                     style={{ width: '18px', height: '18px', cursor: 'pointer' }}
                   />
-                  Active event
+                  Active ministry
                 </label>
               </div>
             </div>
@@ -317,7 +317,7 @@ export default function EventsAdminPage() {
                   e.currentTarget.style.opacity = '1';
                 }}
               >
-                Save Event
+                Save Ministry
               </button>
               <button
                 type="button"
@@ -361,86 +361,32 @@ export default function EventsAdminPage() {
                 borderBottom: '1px solid var(--border-color)',
               }}
             >
-              <th
-                style={{
-                  padding: '1rem',
-                  textAlign: 'left',
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
+              <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Title
               </th>
-              <th
-                style={{
-                  padding: '1rem',
-                  textAlign: 'left',
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
+              <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Date
               </th>
-              <th
-                style={{
-                  padding: '1rem',
-                  textAlign: 'left',
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
+              <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Time
               </th>
-              <th
-                style={{
-                  padding: '1rem',
-                  textAlign: 'left',
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
+              <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Location
               </th>
-              <th
-                style={{
-                  padding: '1rem',
-                  textAlign: 'left',
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
+              <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '600', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Active
               </th>
-              <th
-                style={{
-                  padding: '1rem',
-                  textAlign: 'center',
-                  fontWeight: '600',
-                  fontSize: '0.875rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                }}
-              >
+              <th style={{ padding: '1rem', textAlign: 'center', fontWeight: '600', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
-            {events.map((event, index) => (
+            {ministries.map((ministry, index) => (
               <tr
-                key={event.id}
+                key={ministry.id}
                 style={{
-                  borderBottom: index !== events.length - 1 ? '1px solid var(--border-color)' : 'none',
+                  borderBottom: index !== ministries.length - 1 ? '1px solid var(--border-color)' : 'none',
                   transition: 'background-color 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
@@ -450,14 +396,10 @@ export default function EventsAdminPage() {
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }}
               >
-                <td style={{ padding: '1rem', fontWeight: '500' }}>{event.title}</td>
-                <td style={{ padding: '1rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                  {event.event_date}
-                </td>
-                <td style={{ padding: '1rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                  {event.event_time}
-                </td>
-                <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{event.location}</td>
+                <td style={{ padding: '1rem', fontWeight: '500' }}>{ministry.title}</td>
+                <td style={{ padding: '1rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>{ministry.event_date}</td>
+                <td style={{ padding: '1rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>{ministry.event_time}</td>
+                <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{ministry.location}</td>
                 <td style={{ padding: '1rem' }}>
                   <span
                     style={{
@@ -465,24 +407,16 @@ export default function EventsAdminPage() {
                       borderRadius: '4px',
                       fontSize: '0.75rem',
                       fontWeight: '600',
-                      backgroundColor: event.active ? 'rgba(34, 197, 94, 0.1)' : 'rgba(107, 114, 128, 0.1)',
-                      color: event.active ? '#22C55E' : '#6B7280',
+                      backgroundColor: ministry.active ? 'rgba(34, 197, 94, 0.1)' : 'rgba(107, 114, 128, 0.1)',
+                      color: ministry.active ? '#22C55E' : '#6B7280',
                     }}
                   >
-                    {event.active ? 'Yes' : 'No'}
+                    {ministry.active ? 'Yes' : 'No'}
                   </span>
                 </td>
-                <td
-                  style={{
-                    padding: '1rem',
-                    textAlign: 'center',
-                    display: 'flex',
-                    gap: '0.5rem',
-                    justifyContent: 'center',
-                  }}
-                >
+                <td style={{ padding: '1rem', textAlign: 'center', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
                   <button
-                    onClick={() => console.log('Edit:', event.id)}
+                    onClick={() => console.log('Edit:', ministry.id)}
                     style={{
                       padding: '0.5rem 1rem',
                       backgroundColor: 'transparent',
@@ -506,7 +440,7 @@ export default function EventsAdminPage() {
                     Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(event.id)}
+                    onClick={() => handleDelete(ministry.id)}
                     style={{
                       padding: '0.5rem 1rem',
                       backgroundColor: 'transparent',
@@ -536,15 +470,9 @@ export default function EventsAdminPage() {
         </table>
       </div>
 
-      {events.length === 0 && (
-        <div
-          style={{
-            textAlign: 'center',
-            padding: '3rem',
-            color: 'var(--text-secondary)',
-          }}
-        >
-          <p>No events yet. Create your first one!</p>
+      {ministries.length === 0 && (
+        <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
+          <p>No ministries yet. Create your first one!</p>
         </div>
       )}
     </div>

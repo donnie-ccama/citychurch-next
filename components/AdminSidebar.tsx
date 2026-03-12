@@ -75,8 +75,8 @@ export default function AdminSidebar() {
         <Link href="/admin/sermons" style={linkStyle('/admin/sermons')}>
           Sermons
         </Link>
-        <Link href="/admin/events" style={linkStyle('/admin/events')}>
-          Events
+        <Link href="/admin/ministries" style={linkStyle('/admin/ministries')}>
+          Ministries
         </Link>
         <Link href="/admin/media" style={linkStyle('/admin/media')}>
           Media

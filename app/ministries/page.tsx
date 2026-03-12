@@ -5,11 +5,11 @@ import EventCard from '@/components/EventCard';
 import { demoEvents } from '@/lib/supabase-server';
 
 export const metadata: Metadata = {
-  title: 'Events — Citychurch',
-  description: 'Outreach events and volunteer opportunities at Citychurch Amarillo. Join us in serving our neighbors.',
+  title: 'Ministries — Citychurch',
+  description: 'Ministries and volunteer opportunities at Citychurch Amarillo. Join us in serving our neighbors.',
 };
 
-export default function Events() {
+export default function Ministries() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
 
@@ -26,7 +26,7 @@ export default function Events() {
               marginBottom: '1rem',
             }}
           >
-            Outreach Events
+            Ministries
           </h1>
           <p
             style={{
@@ -41,11 +41,11 @@ export default function Events() {
         </div>
       </section>
 
-      {/* EVENTS GRID */}
+      {/* MINISTRIES GRID */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Events" />
+            <SectionHeader label="Get Involved" title="Upcoming Ministries" />
           </div>
 
           <div
@@ -96,13 +96,13 @@ export default function Events() {
           >
             {[
               {
-                title: 'Volunteer for an Event',
-                description: 'Help serve meals, coordinate logistics, or lead a team at one of our outreach events. Sign up for the specific date that works for you.',
-                cta: 'Browse Events',
+                title: 'Volunteer for a Ministry',
+                description: 'Help serve meals, coordinate logistics, or lead a team at one of our outreach ministries. Sign up for the specific date that works for you.',
+                cta: 'Browse Ministries',
                 href: '#',
               },
               {
-                title: 'Attend an Event',
+                title: 'Attend a Ministry',
                 description: 'Come experience community with us. Whether you want to serve or just be part of what\'s happening, you belong here.',
                 cta: 'See What\'s Coming',
                 href: '#',
@@ -115,7 +115,7 @@ export default function Events() {
               },
               {
                 title: 'Support Our Work',
-                description: 'Our events run on donated supplies, volunteer time, and community generosity. Every contribution matters.',
+                description: 'Our ministries run on donated supplies, volunteer time, and community generosity. Every contribution matters.',
                 cta: 'Learn More',
                 href: '/contact',
               },
@@ -197,7 +197,7 @@ export default function Events() {
               Ready to Get Involved?
             </h2>
             <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Fill out the form below to register for an event, volunteer, or inquire about our programs.
+              Fill out the form below to register for a ministry, volunteer, or inquire about our programs.
             </p>
 
             {/* Placeholder for Google Form */}

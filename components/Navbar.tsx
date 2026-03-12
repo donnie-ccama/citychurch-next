@@ -30,7 +30,7 @@ export default function Navbar() {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/sermons', label: 'Sermons' },
-    { href: '/events', label: 'Events' },
+    { href: '/ministries', label: 'Ministries' },
     { href: '/media', label: 'Media' },
     { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Get Involved' },
