@@ -2,12 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * POST /api/subscribe
- * Adds a subscriber to the Mailchimp audience list.
+ * Adds a subscriber to the Mailchimp "Citychurch Website Subscribers" audience.
  *
- * Required environment variables:
- *   MAILCHIMP_API_KEY     — Your Mailchimp API key (e.g., xxxxxxx-us21)
- *   MAILCHIMP_AUDIENCE_ID — Your Mailchimp audience/list ID
- *   MAILCHIMP_SERVER      — Your Mailchimp server prefix (e.g., us21)
+ * Required environment variable (set in Vercel dashboard):
+ *   MAILCHIMP_API_KEY — Your Mailchimp API key (e.g., xxxxxxx-us21)
+ *
+ * Audience: Citychurch Website Subscribers
+ * Audience ID: 4fed0cb6a0
+ * Server: us21
  */
 
 export async function POST(request: NextRequest) {
@@ -19,13 +21,13 @@ export async function POST(request: NextRequest) {
     }
 
     const API_KEY = process.env.MAILCHIMP_API_KEY;
-    const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-    const SERVER = process.env.MAILCHIMP_SERVER; // e.g., 'us21'
+    const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID || '4fed0cb6a0';
+    const SERVER = process.env.MAILCHIMP_SERVER || 'us21';
 
-    if (!API_KEY || !AUDIENCE_ID || !SERVER) {
-      // If Mailchimp isn't configured yet, log and return success
+    if (!API_KEY) {
+      // If Mailchimp API key isn't set yet, log and return success
       // so the form still works during development
-      console.log('[Email Signup] Mailchimp not configured. Received:', { email, firstName, tag });
+      console.log('[Email Signup] MAILCHIMP_API_KEY not set. Received:', { email, firstName, tag });
       return NextResponse.json({ success: true, message: 'Logged (Mailchimp not configured)' });
     }
 
