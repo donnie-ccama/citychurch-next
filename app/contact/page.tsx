@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
+import DonateButton from '@/components/DonateButton';
+import EmailSignup from '@/components/EmailSignup';
 
 export const metadata: Metadata = {
   title: 'Get Involved — Citychurch',
-  description: 'Connect with Citychurch Amarillo. Volunteer, share your story, or get involved in our mission to serve the heart of the city.',
+  description: 'No child in Amarillo should go to bed hungry. Give, volunteer, host a food drive, or pray with Citychurch as we feed children and families across the city.',
 };
 
 export default function Contact() {
@@ -34,7 +36,7 @@ export default function Contact() {
               lineHeight: 1.7,
             }}
           >
-            We'd love to connect with you. Whether you want to volunteer, attend an event, share your story, or support our work — you belong here.
+            No child in Amarillo should go to bed hungry. Whether you give, serve, pray, or show up — there's a place for you in this mission.
           </p>
         </div>
       </section>
@@ -69,24 +71,28 @@ export default function Contact() {
           >
             {[
               {
+                title: 'Feed a Child',
+                description: 'Just $2.50 feeds a child today. Give once, or become a monthly partner and feed children every week.',
+                icon: '♥',
+                hasDonate: true,
+              },
+              {
                 title: 'Volunteer',
-                description: 'Help us serve our community. From meal prep to event coordination to media work — we have roles for every skill.',
-                icon: '🤝',
+                description: 'Serve meals, deliver food, or help in the Cafe. We need hands and hearts every week.',
+                icon: '✋',
+                hasDonate: false,
               },
               {
-                title: 'Attend an Event',
-                description: 'Join us at one of our outreach events. Come to serve, come to eat, come to belong. All are welcome.',
-                icon: '📅',
+                title: 'Host a Food Drive',
+                description: 'Rally your church, school, or business. We\'ll give you everything you need to collect food and supplies for children in Amarillo.',
+                icon: '☐',
+                hasDonate: false,
               },
               {
-                title: 'Share Your Story',
-                description: 'Have a story to tell? We\'d love to document and share what\'s happening in your life and community.',
-                icon: '📖',
-              },
-              {
-                title: 'Support Our Work',
-                description: 'Our mission runs on donations, grants, and community support. Every contribution makes a real difference.',
-                icon: '💝',
+                title: 'Pray With Us',
+                description: 'Lift up the children and families we serve. Pray for provision, for healing, and for generational transformation.',
+                icon: '✝',
+                hasDonate: false,
               },
             ].map((item, idx) => (
               <div
@@ -104,7 +110,8 @@ export default function Contact() {
               >
                 <div
                   style={{
-                    fontSize: '3rem',
+                    fontSize: '2rem',
+                    color: 'var(--accent)',
                     marginBottom: '1rem',
                   }}
                 >
@@ -125,10 +132,17 @@ export default function Contact() {
                     color: 'var(--text-secondary)',
                     fontSize: '0.9375rem',
                     lineHeight: 1.6,
+                    flex: 1,
+                    marginBottom: item.hasDonate ? '1.5rem' : '0',
                   }}
                 >
                   {item.description}
                 </p>
+                {item.hasDonate && (
+                  <div style={{ marginTop: 'auto' }}>
+                    <DonateButton label="Feed a Child Today" />
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -152,8 +166,15 @@ export default function Contact() {
         </div>
       </section>
 
+      {/* EMAIL SIGNUP */}
+      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }} className="reveal">
+          <EmailSignup heading="Stay Connected" subtext="Get stories of impact, ministry updates, and ways to help — delivered to your inbox." />
+        </div>
+      </section>
+
       {/* CHURCH INFO */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
             <div
@@ -175,8 +196,8 @@ export default function Contact() {
               {[
                 {
                   label: 'Email',
-                  value: 'hello@citychurch.com',
-                  href: 'mailto:hello@citychurch.com',
+                  value: 'hello@citychurchamarillo.com',
+                  href: 'mailto:hello@citychurchamarillo.com',
                 },
                 {
                   label: 'Phone',

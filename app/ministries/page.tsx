@@ -2,11 +2,13 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import SectionHeader from '@/components/SectionHeader';
 import EventCard from '@/components/EventCard';
+import DonateButton from '@/components/DonateButton';
+import EmailSignup from '@/components/EmailSignup';
 import { demoEvents } from '@/lib/supabase-server';
 
 export const metadata: Metadata = {
-  title: 'Ministries — Citychurch',
-  description: 'Ministries and volunteer opportunities at Citychurch Amarillo. Join us in serving our neighbors.',
+  title: 'Programs — How We Help | Citychurch',
+  description: 'Citychurch feeds children and families across Amarillo through park meals, the Cafe, and family discipleship. Learn how $2.50 changes a life.',
 };
 
 export default function Ministries() {
@@ -26,7 +28,7 @@ export default function Ministries() {
               marginBottom: '1rem',
             }}
           >
-            Ministries
+            How We Help
           </h1>
           <p
             style={{
@@ -36,16 +38,154 @@ export default function Ministries() {
               lineHeight: 1.7,
             }}
           >
-            Join us as we serve our community through meal services, cleanups, prayer walks, and more. All are welcome.
+            Every week, Citychurch finds, feeds, and teaches children and families across Amarillo. Here's how we do it — and how you can be part of it.
           </p>
         </div>
       </section>
 
-      {/* MINISTRIES GRID */}
+      {/* OUR PROGRAMS */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Ministries" />
+            <SectionHeader label="Our Programs" title="Find. Feed. Teach." />
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '2rem',
+            }}
+          >
+            {[
+              {
+                icon: '◉',
+                title: 'Park & Neighborhood Meals',
+                description: 'We go where the children are — parks, streets, neighborhoods. Each child receives a freshly prepared hot meal: a hot item, fresh fruit, and popcorn.',
+              },
+              {
+                icon: '⌂',
+                title: 'The Cafe',
+                description: 'A safe, welcoming space where families gather for meals, conversation, and community. More than food — it\'s a place to belong.',
+              },
+              {
+                icon: '✦',
+                title: 'Family Discipleship',
+                description: 'We don\'t just feed children — we walk alongside entire families. Home visits, mentorship, and long-term discipleship break generational cycles of poverty.',
+              },
+            ].map((program, idx) => (
+              <div
+                key={idx}
+                className="reveal card-hover"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '12px',
+                  padding: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: '2rem',
+                    color: 'var(--accent)',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  {program.icon}
+                </div>
+                <h3
+                  style={{
+                    fontWeight: 700,
+                    fontSize: '1.125rem',
+                    letterSpacing: '-0.02em',
+                    marginBottom: '0.75rem',
+                  }}
+                >
+                  {program.title}
+                </h3>
+                <p
+                  style={{
+                    color: 'var(--text-secondary)',
+                    fontSize: '0.9375rem',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {program.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COST PER MEAL */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--accent)', color: 'white', textAlign: 'center' }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto' }} className="reveal">
+          <p
+            style={{
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              marginBottom: '0.75rem',
+              opacity: 0.85,
+            }}
+          >
+            The Cost of Hope
+          </p>
+          <h2
+            style={{
+              fontSize: 'clamp(2.5rem, 6vw, 3.5rem)',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              lineHeight: 1.05,
+              marginBottom: '1.5rem',
+            }}
+          >
+            $2.50 Per Meal
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontSize: '1.125rem',
+              lineHeight: 1.7,
+              marginBottom: '2rem',
+              opacity: 0.9,
+            }}
+          >
+            Each meal includes: A freshly prepared hot item · Fresh fruit · Popcorn
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '2rem',
+              flexWrap: 'wrap',
+              marginBottom: '2.5rem',
+              fontSize: '1rem',
+              fontWeight: 600,
+            }}
+          >
+            <span>$2.50 = 1 meal</span>
+            <span>$17.50 = 1 week</span>
+            <span>$75 = 1 month</span>
+            <span>$900 = 1 year</span>
+          </div>
+          <DonateButton
+            label="Feed a Child Today"
+            variant="outline"
+          />
+        </div>
+      </section>
+
+      {/* UPCOMING OPPORTUNITIES */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="reveal">
+            <SectionHeader label="Volunteer" title="Upcoming Opportunities" />
           </div>
 
           <div
@@ -83,7 +223,7 @@ export default function Ministries() {
               <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
             </div>
             <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em', textAlign: 'center', marginBottom: '3rem' }}>
-              Get Involved With Citychurch
+              Come and Live the Mission
             </h2>
           </div>
 
@@ -96,28 +236,28 @@ export default function Ministries() {
           >
             {[
               {
-                title: 'Volunteer for a Ministry',
-                description: 'Help serve meals, coordinate logistics, or lead a team at one of our outreach ministries. Sign up for the specific date that works for you.',
-                cta: 'Browse Ministries',
-                href: '#',
-              },
-              {
-                title: 'Attend a Ministry',
-                description: 'Come experience community with us. Whether you want to serve or just be part of what\'s happening, you belong here.',
-                cta: 'See What\'s Coming',
-                href: '#',
-              },
-              {
-                title: 'Join Our Team',
-                description: 'We\'re looking for people committed to the long-term work. Leadership roles available in outreach, media, and community partnership.',
-                cta: 'Get In Touch',
+                title: 'Serve a Meal',
+                description: 'Help prepare and serve meals to children and families. Every Saturday, volunteers gather to cook, plate, and deliver hope.',
+                cta: 'Sign Up to Serve',
                 href: '/contact',
               },
               {
-                title: 'Support Our Work',
-                description: 'Our ministries run on donated supplies, volunteer time, and community generosity. Every contribution matters.',
-                cta: 'Learn More',
+                title: 'Deliver Meals',
+                description: 'Bring meals directly to children in parks and neighborhoods. You are the hands and feet.',
+                cta: 'Join a Delivery Team',
                 href: '/contact',
+              },
+              {
+                title: 'Host a Food Drive',
+                description: 'Organize a food or supply drive at your church, school, or workplace. We\'ll provide everything you need to get started.',
+                cta: 'Get Started',
+                href: '/contact',
+              },
+              {
+                title: 'Give Monthly',
+                description: '$25/month feeds 10 children every month — consistent, reliable, life-changing. Become a monthly partner.',
+                cta: 'Become a Partner',
+                href: '/donate',
               },
             ].map((item, idx) => (
               <div
@@ -189,38 +329,40 @@ export default function Ministries() {
         </div>
       </section>
 
-      {/* GOOGLE FORM CTA */}
+      {/* READY TO SERVE CTA */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center' }}>
             <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: '1.5rem' }}>
-              Ready to Get Involved?
+              Ready to Serve?
             </h2>
             <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
-              Fill out the form below to register for a ministry, volunteer, or inquire about our programs.
+              Fill out our volunteer form or contact us directly. There is a place for you in this mission.
             </p>
 
-            {/* Placeholder for Google Form */}
-            <div
+            <Link
+              href="/contact"
               style={{
-                backgroundColor: 'var(--bg-card)',
-                border: '2px dashed var(--border-color)',
-                borderRadius: '12px',
-                padding: '4rem 2rem',
-                textAlign: 'center',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.875rem 2rem',
+                backgroundColor: 'var(--accent)',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '0.9375rem',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease',
+                letterSpacing: '-0.01em',
+                marginBottom: '3rem',
               }}
             >
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9375rem', marginBottom: '1rem' }}>
-                Google Form Embed Placeholder
-              </p>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.8125rem' }}>
-                Replace the iframe src with your actual Google Form URL in the components/GoogleFormEmbed component
-              </p>
-            </div>
+              Contact Us
+            </Link>
 
-            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '2rem' }}>
-              You can also reach us at <a href="mailto:hello@citychurch.com" style={{ color: 'var(--accent)', textDecoration: 'none' }}>hello@citychurch.com</a> or visit us on social media.
-            </p>
+            <EmailSignup />
           </div>
         </div>
       </section>

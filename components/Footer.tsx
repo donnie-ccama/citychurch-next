@@ -2,14 +2,25 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import EmailSignup from './EmailSignup';
+
+const DONATE_URL = 'https://aecfdssy.donorsupport.co';
 
 export default function Footer() {
+  const footerLinkStyle = {
+    color: 'var(--text-secondary)',
+    fontSize: '0.9375rem',
+    textDecoration: 'none' as const,
+    transition: 'color 0.2s ease',
+    display: 'block' as const,
+  };
+
   return (
     <footer
       style={{
         padding: '4rem 1.5rem 2rem',
-        backgroundColor: `var(--bg-muted)`,
-        borderTop: `1px solid var(--border-color)`,
+        backgroundColor: 'var(--bg-muted)',
+        borderTop: '1px solid var(--border-color)',
       }}
     >
       <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
@@ -53,7 +64,7 @@ export default function Footer() {
               style={{
                 fontFamily: "'Source Serif 4', Georgia, serif",
                 fontStyle: 'italic',
-                color: `var(--text-muted)`,
+                color: 'var(--text-muted)',
                 fontSize: '0.875rem',
               }}
             >
@@ -61,12 +72,13 @@ export default function Footer() {
             </p>
             <p
               style={{
-                color: `var(--text-muted)`,
+                color: 'var(--text-muted)',
                 fontSize: '0.8125rem',
-                marginTop: '0.75rem',
+                marginTop: '0.5rem',
+                lineHeight: 1.5,
               }}
             >
-              Amarillo, Texas
+              Finding, feeding, and teaching children and families in Amarillo.
             </p>
           </div>
 
@@ -78,7 +90,7 @@ export default function Footer() {
                 fontSize: '0.8125rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
-                color: `var(--text-muted)`,
+                color: 'var(--text-muted)',
                 marginBottom: '1rem',
               }}
             >
@@ -91,174 +103,10 @@ export default function Footer() {
                 gap: '0.5rem',
               }}
             >
-              <Link
-                href="/about"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                About
-              </Link>
-              <Link
-                href="/sermons"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Sermons
-              </Link>
-              <Link
-                href="/ministries"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Ministries
-              </Link>
-              <Link
-                href="/media"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Media
-              </Link>
-            </div>
-          </div>
-
-          {/* More */}
-          <div>
-            <h4
-              style={{
-                fontWeight: 600,
-                fontSize: '0.8125rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                color: `var(--text-muted)`,
-                marginBottom: '1rem',
-              }}
-            >
-              More
-            </h4>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.5rem',
-              }}
-            >
-              <Link
-                href="/blog"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/contact"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Get Involved
-              </Link>
-              <Link
-                href="/media"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Training
-              </Link>
-              <Link
-                href="/media"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Podcasts
-              </Link>
+              <Link href="/about" style={footerLinkStyle}>Our Story</Link>
+              <Link href="/ministries" style={footerLinkStyle}>How We Help</Link>
+              <Link href="/donate" style={footerLinkStyle}>Give</Link>
+              <Link href="/contact" style={footerLinkStyle}>Get Involved</Link>
             </div>
           </div>
 
@@ -270,7 +118,7 @@ export default function Footer() {
                 fontSize: '0.8125rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
-                color: `var(--text-muted)`,
+                color: 'var(--text-muted)',
                 marginBottom: '1rem',
               }}
             >
@@ -283,98 +131,64 @@ export default function Footer() {
                 gap: '0.5rem',
               }}
             >
+              {/* TODO: Replace # with real social URLs */}
+              <a href="#" style={footerLinkStyle}>Facebook</a>
+              <a href="#" style={footerLinkStyle}>Instagram</a>
+              <a href="#" style={footerLinkStyle}>YouTube</a>
               <a
-                href="#youtube"
+                href={DONATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
+                  ...footerLinkStyle,
+                  color: 'var(--accent)',
+                  fontWeight: 600,
                 }}
               >
-                YouTube
-              </a>
-              <a
-                href="#vimeo"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Vimeo
-              </a>
-              <a
-                href="#instagram"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Instagram
-              </a>
-              <a
-                href="#facebook"
-                style={{
-                  color: `var(--text-secondary)`,
-                  fontSize: '0.9375rem',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.color = 'var(--accent)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.color =
-                    'var(--text-secondary)';
-                }}
-              >
-                Facebook
+                Donate
               </a>
             </div>
+          </div>
+
+          {/* Email Signup */}
+          <div>
+            <EmailSignup variant="footer" />
           </div>
         </div>
 
         {/* Bottom */}
         <div
           style={{
-            borderTop: `1px solid var(--border-color)`,
+            borderTop: '1px solid var(--border-color)',
             paddingTop: '1.5rem',
-            textAlign: 'center',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '0.75rem',
           }}
         >
           <p
             style={{
-              color: `var(--text-muted)`,
+              color: 'var(--text-muted)',
               fontSize: '0.75rem',
             }}
           >
-            &copy; 2026 Citychurch Amarillo. All rights reserved.
+            &copy; {new Date().getFullYear()} Citychurch Amarillo. All rights reserved.
           </p>
+          <a
+            href="https://www.perplexity.ai/computer"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'var(--text-muted)',
+              fontSize: '0.6875rem',
+              textDecoration: 'none',
+              opacity: 0.7,
+            }}
+          >
+            Created with Perplexity Computer
+          </a>
         </div>
       </div>
     </footer>

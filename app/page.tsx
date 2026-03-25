@@ -4,15 +4,17 @@ import SectionHeader from '@/components/SectionHeader';
 import HeroVideo from '@/components/HeroVideo';
 import EventCard from '@/components/EventCard';
 import BlogCard from '@/components/BlogCard';
-import { demoSermons, demoEvents, demoBlogPosts } from '@/lib/supabase-server';
+import DonateButton from '@/components/DonateButton';
+import ImpactStats from '@/components/ImpactStats';
+import EmailSignup from '@/components/EmailSignup';
+import { demoEvents, demoBlogPosts } from '@/lib/supabase-server';
 
 export const metadata: Metadata = {
   title: 'Citychurch — ...for the heart of the city.',
-  description: 'Citychurch Amarillo — For the heart of the city. Serving our community through outreach, worship, and authentic storytelling.',
+  description: 'Citychurch Amarillo — Finding, feeding, and teaching children and families who are most vulnerable. $2.50 feeds a child a hot meal, fresh fruit, and popcorn.',
 };
 
 export default function Home() {
-  const featuredSermon = demoSermons[0];
   const upcomingEvents = demoEvents.slice(0, 3);
   const recentPosts = demoBlogPosts.slice(0, 3);
 
@@ -21,8 +23,6 @@ export default function Home() {
 
       {/* HERO SECTION — Video Background */}
       <HeroVideo videoId="1172206088">
-
-
         <div
           className="reveal"
           style={{
@@ -32,30 +32,9 @@ export default function Home() {
             flexWrap: 'wrap',
           }}
         >
+          <DonateButton label="Feed a Child Today" />
           <Link
-            href="/sermons"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.875rem 2rem',
-              backgroundColor: 'var(--accent)',
-              color: 'white',
-              textDecoration: 'none',
-              fontWeight: 600,
-              fontSize: '0.9375rem',
-              borderRadius: '8px',
-              transition: 'opacity 0.2s',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            Watch Latest Sermon
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-          </Link>
-          <Link
-            href="/ministries"
+            href="/donate"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -71,7 +50,7 @@ export default function Home() {
               letterSpacing: '-0.01em',
             }}
           >
-            Upcoming Ministries
+            See How $2.50 Changes a Life
           </Link>
         </div>
       </HeroVideo>
@@ -90,7 +69,7 @@ export default function Home() {
             }}
           >
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Heart</span>
+            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Mission</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
           </div>
 
@@ -103,7 +82,21 @@ export default function Home() {
               fontWeight: 300,
             }}
           >
-            We don't sell anything. We simply show up, serve our neighbors, and document what we see. Our work is rooted in the belief that authentic compassion — without pretense or agenda — can transform a city from the inside out.
+            Citychurch exists to find, feed, and teach children and families in Amarillo who are most vulnerable, introducing them to Jesus Christ while meeting practical needs with dignity, consistency, and long-term discipleship.
+          </p>
+
+          <p
+            style={{
+              fontSize: '1rem',
+              lineHeight: 1.75,
+              color: 'var(--text-secondary)',
+              marginTop: '1.5rem',
+              maxWidth: '620px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            Every meal — a freshly prepared hot item, fresh fruit, and popcorn — costs just $2.50. But we don't just feed children. We sit with families, walk alongside them, and point them to lasting hope.
           </p>
 
           <div style={{ marginTop: '2.5rem' }}>
@@ -122,11 +115,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* IMPACT STATS */}
+      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }} className="reveal">
+          <ImpactStats />
+        </div>
+      </section>
+
       {/* UPCOMING EVENTS */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Outreach Ministries" />
+            <SectionHeader label="Get Involved" title="Upcoming Ministry Opportunities" />
           </div>
 
           <div
@@ -159,11 +159,63 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RECENT BLOG */}
+      {/* $2.50 FEEDS A CHILD CALLOUT */}
+      <section
+        style={{
+          padding: '5rem 1.5rem',
+          backgroundColor: 'var(--accent)',
+          color: 'white',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ maxWidth: '680px', margin: '0 auto' }} className="reveal">
+          <h2
+            style={{
+              fontWeight: 800,
+              fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
+              letterSpacing: '-0.03em',
+              lineHeight: 1.2,
+              marginBottom: '1.25rem',
+            }}
+          >
+            No Child in Amarillo Should Go to Bed Hungry
+          </h2>
+          <p
+            style={{
+              fontSize: '1.0625rem',
+              lineHeight: 1.75,
+              opacity: 0.92,
+              marginBottom: '2rem',
+              maxWidth: '560px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            $2.50 is all it takes. Each meal includes a freshly prepared hot item, fresh fruit, and popcorn — served with dignity to children and families who need it most.
+          </p>
+          <DonateButton
+            label="Feed a Child Today"
+            variant="outline"
+            icon={true}
+            className="donate-callout-btn"
+          />
+          {/* Inline style override for white-on-accent appearance */}
+          <style>{`
+            .donate-callout-btn {
+              background-color: white !important;
+              color: var(--accent) !important;
+              border: none !important;
+              font-weight: 700 !important;
+            }
+          `}</style>
+        </div>
+      </section>
+
+      {/* RECENT BLOG / STORIES */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="Stories" title="From the Field" />
+            <SectionHeader label="Impact" title="Stories From the Field" />
           </div>
 
           <div
@@ -182,7 +234,7 @@ export default function Home() {
 
           <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
             <Link
-              href="/blog"
+              href="/stories"
               style={{
                 color: 'var(--accent)',
                 fontWeight: 600,
@@ -196,6 +248,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* EMAIL SIGNUP */}
+      <section style={{ padding: '5rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '520px', margin: '0 auto' }} className="reveal">
+          <EmailSignup />
+        </div>
+      </section>
 
     </div>
   );

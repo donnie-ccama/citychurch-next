@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
 
+const DONATE_URL = 'https://aecfdssy.donorsupport.co';
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBlur, setHasBlur] = useState(false);
@@ -28,11 +30,9 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/sermons', label: 'Sermons' },
-    { href: '/ministries', label: 'Ministries' },
-    { href: '/media', label: 'Media' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/about', label: 'Our Story' },
+    { href: '/ministries', label: 'How We Help' },
+    { href: '/donate', label: 'Give' },
     { href: '/contact', label: 'Get Involved' },
   ];
 
@@ -127,7 +127,9 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="#donate"
+              href={DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -224,7 +226,9 @@ export default function Navbar() {
                 </Link>
               ))}
               <a
-                href="#donate"
+                href={DONATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={closeMenu}
                 style={{
                   display: 'flex',

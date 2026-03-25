@@ -1,67 +1,35 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import SectionHeader from '@/components/SectionHeader';
+import ImpactStats from '@/components/ImpactStats';
+import DonateButton from '@/components/DonateButton';
+import EmailSignup from '@/components/EmailSignup';
 
 export const metadata: Metadata = {
-  title: 'About — Citychurch',
-  description: "Learn about Citychurch Amarillo's mission, values, and the team serving the heart of the city through authentic outreach and documentary storytelling.",
+  title: 'Our Story — Citychurch',
+  description: "Citychurch exists to find, feed, and teach children and families in Amarillo who are most vulnerable — introducing them to Jesus Christ while meeting practical needs.",
 };
 
 export default function About() {
   const values = [
     {
-      icon: '◆',
-      title: 'Authenticity',
-      description: 'We show up as our real selves. No performance, no agenda, no sales pitch. We believe genuine presence is more powerful than polished messaging.',
+      icon: '🔍',
+      title: 'Find',
+      description: 'We go where the children are. Parks, neighborhoods, doorsteps. We don\'t wait for them to come to us.',
     },
     {
-      icon: '☙',
-      title: 'Service First',
-      description: 'We serve without strings attached. No one is asked to believe anything or join anything. We simply serve because we believe it\'s the right thing to do.',
+      icon: '🍞',
+      title: 'Feed',
+      description: '$2.50 provides a freshly prepared hot item, fresh fruit, and popcorn. Every child eats with dignity.',
     },
     {
-      icon: '◇',
-      title: 'Community',
-      description: 'We belong to each other and to Amarillo. We celebrate the dignity and stories of every person we encounter. Community is not transactional.',
+      icon: '✝',
+      title: 'Teach',
+      description: 'We introduce children and families to Jesus Christ through consistent presence, discipleship, and long-term relationship.',
     },
     {
-      icon: '▪',
-      title: 'Documentary Witness',
-      description: 'We document and share what we see. Through photographs, video, stories, and conversation — we honor the work and amplify the voices of those we serve.',
-    },
-  ];
-
-  const teamMembers = [
-    {
-      name: 'Sarah Mitchell',
-      role: 'Founder & Director',
-      bio: 'Sarah founded Citychurch in 2019 after a calling to serve downtown Amarillo. She leads with vision, humility, and a deep commitment to authentic community.',
-    },
-    {
-      name: 'Marcus Johnson',
-      role: 'Community Outreach Lead',
-      bio: 'Marcus coordinates our outreach events and works directly with neighbors in the community. His heart for service is contagious and real.',
-    },
-    {
-      name: 'Emma Rodriguez',
-      role: 'Documentary & Media',
-      bio: 'Emma captures our story through photography and video. She believes every moment and every person deserves to be honored and witnessed.',
-    },
-    {
-      name: 'David Chen',
-      role: 'Partnership & Development',
-      bio: 'David builds relationships with local organizations and helps Citychurch extend its reach. He\'s passionate about collaboration.',
-    },
-    {
-      name: 'Jennifer Lee',
-      role: 'Volunteer Coordinator',
-      bio: 'Jennifer mobilizes our volunteers and helps turn passion into action. She understands that our work is only possible because of generous people.',
-    },
-    {
-      name: 'Michael Torres',
-      role: 'Spiritual Formation',
-      bio: 'Michael leads reflection, prayer, and spiritual practices within our team. He helps us stay grounded in our why.',
+      icon: '♻',
+      title: 'Restore',
+      description: 'We don\'t just serve children. We serve whole families. Parents, grandparents, and caregivers are part of the journey toward lasting transformation.',
     },
   ];
 
@@ -81,7 +49,7 @@ export default function About() {
               marginBottom: '1rem',
             }}
           >
-            About Citychurch
+            Our Story
           </h1>
           <p
             style={{
@@ -91,8 +59,42 @@ export default function About() {
               lineHeight: 1.7,
             }}
           >
-            We are a community of people dedicated to authentic service, documentary witness, and the belief that transformation happens when we show up without agenda.
+            Citychurch exists to find, feed, and teach children and families in Amarillo who are most vulnerable — introducing them to Jesus Christ while meeting practical needs with dignity, consistency, and long-term discipleship.
           </p>
+        </div>
+      </section>
+
+      {/* SCRIPTURE ANCHOR */}
+      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto' }} className="reveal">
+          <blockquote
+            style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontSize: '1.375rem',
+              fontStyle: 'italic',
+              lineHeight: 1.8,
+              color: 'var(--text-muted)',
+              borderLeft: '3px solid var(--accent)',
+              paddingLeft: '1.5rem',
+              margin: 0,
+              textAlign: 'center',
+            }}
+          >
+            "Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these."
+            <span
+              style={{
+                display: 'block',
+                marginTop: '0.75rem',
+                fontSize: '0.9375rem',
+                fontStyle: 'normal',
+                fontWeight: 600,
+                color: 'var(--text-muted)',
+                letterSpacing: '0.02em',
+              }}
+            >
+              — Matthew 19:14
+            </span>
+          </blockquote>
         </div>
       </section>
 
@@ -111,7 +113,7 @@ export default function About() {
               }}
             >
               <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Our Mission</span>
+              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Why We Exist</span>
               <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
             </div>
           </div>
@@ -126,7 +128,7 @@ export default function About() {
               marginBottom: '1.5rem',
             }}
           >
-            We don't sell anything. We don't ask for commitments. We simply show up, serve our neighbors with genuine compassion, and document what we see.
+            It started with a simple question: What if no child in Amarillo had to go to bed hungry?
           </p>
           <p
             style={{
@@ -136,7 +138,17 @@ export default function About() {
               marginBottom: '1.25rem',
             }}
           >
-            Citychurch exists to be a present, humble witness to the work of transformation happening in Amarillo. Our approach is documentary-style and authentic. We believe the most powerful witness is not a sales pitch or a campaign — it's simply people showing up, doing the work, and letting the story speak for itself.
+            In one of the most underserved areas of the Texas Panhandle, thousands of children face food insecurity, instability, and isolation. Citychurch was born from the conviction that these children — and the families who love them — deserve more than a system that overlooks them. They deserve to be found, fed, and taught the hope of Jesus Christ.
+          </p>
+          <p
+            style={{
+              fontSize: '1.0625rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.8,
+              marginBottom: '1.25rem',
+            }}
+          >
+            Our approach is direct: we find children where they are — in parks, in neighborhoods, on doorsteps. We feed them a freshly prepared meal for just $2.50 — a hot item, fresh fruit, and popcorn — served with dignity and consistency. And we teach them, introducing children and families to Jesus Christ through long-term discipleship and faithful presence.
           </p>
           <p
             style={{
@@ -145,7 +157,7 @@ export default function About() {
               lineHeight: 1.8,
             }}
           >
-            We serve our community through outreach, prayer, presence, and storytelling. We trust that authentic compassion, without pretense or hidden agenda, can reshape a city from the inside out.
+            We believe children are the key to winning the hearts of the family. When a child is cared for, trust is built. When trust is built, doors open — to conversation, to relationship, to the gospel. And when the gospel takes root in a family, generational cycles of poverty begin to break.
           </p>
         </div>
       </section>
@@ -175,7 +187,7 @@ export default function About() {
                 letterSpacing: '-0.03em',
               }}
             >
-              How We Began
+              How It Began
             </h2>
           </div>
 
@@ -188,7 +200,7 @@ export default function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              Citychurch was founded on a simple conviction: that the heart of a city can be transformed through authentic presence and genuine service. We didn't start as an organization with a strategic plan. We started as a group of people who felt called to be present in downtown Amarillo.
+              Citychurch didn't start with a strategic plan or a building. It started at street level — with a few people who believed that showing up mattered. Weekly meals in parks. Conversations on sidewalks. Knocking on doors in neighborhoods most people drive past.
             </p>
             <p
               style={{
@@ -198,7 +210,7 @@ export default function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              What began as weekly meal services and prayer walks evolved into something larger — a movement of people committed to seeing their neighbors, celebrating their stories, and walking alongside them. Every outreach event, every conversation, every documented moment has shaped who we are.
+              What began as a few meals became a movement. The Cafe grew into a place where children and families could gather, eat, and hear the Word of God. Park ministry brought the mission outdoors — meeting children on their turf. Neighborhood visits and home visits created the kind of relationships where real discipleship happens — not in a classroom, but at a kitchen table.
             </p>
             <p
               style={{
@@ -208,7 +220,7 @@ export default function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              Today, Citychurch is composed of people from different faith traditions, different backgrounds, and different walks of life. What unites us is this: a deep love for Amarillo, a commitment to authentic witness, and the belief that small acts of service are never small when done with intention and love.
+              Over time, a family restoration strategy took shape: serve the children, and you earn the trust of the family. Disciple the caregivers — parents, grandparents, aunts, uncles — and you begin to see transformation that outlasts any single program. Help with no hope is no help at all. So we bring both.
             </p>
             <p
               style={{
@@ -217,7 +229,7 @@ export default function About() {
                 lineHeight: 1.8,
               }}
             >
-              We continue to evolve, learn, and listen. We don't have all the answers. What we do have is a commitment to showing up, documenting the work, and sharing the stories of the people and the city we love.
+              Today, Citychurch continues to grow — not because of a marketing strategy, but because faithful people keep showing up. We are a life-boat for the poorest children and families in Amarillo. And we will keep going — until they all know Him.
             </p>
           </div>
         </div>
@@ -238,10 +250,10 @@ export default function About() {
               }}
             >
               <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>What We Believe</span>
+              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>What We Do</span>
               <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
             </div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em' }}>Our Core Values</h2>
+            <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em' }}>Find. Feed. Teach. Restore.</h2>
           </div>
 
           <div
@@ -288,8 +300,15 @@ export default function About() {
         </div>
       </section>
 
+      {/* IMPACT STATS */}
+      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }} className="reveal">
+          <ImpactStats variant="hero" />
+        </div>
+      </section>
+
       {/* LEADERSHIP TEAM */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }} className="reveal">
             <div
@@ -310,52 +329,35 @@ export default function About() {
           </div>
 
           <div
+            className="reveal"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2.5rem',
+              maxWidth: '600px',
+              margin: '0 auto',
+              backgroundColor: 'var(--bg-card)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '12px',
+              padding: '3rem 2.5rem',
+              textAlign: 'center',
             }}
           >
-            {teamMembers.map((member, idx) => (
-              <div
-                key={idx}
-                className="reveal card-hover"
-                style={{
-                  backgroundColor: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                <div
-                  style={{
-                    aspectRatio: '1/1',
-                    backgroundColor: 'var(--bg-muted)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.8125rem' }}>Portrait Placeholder</span>
-                </div>
-                <div style={{ padding: '1.75rem' }}>
-                  <h3 style={{ fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>{member.name}</h3>
-                  <p
-                    style={{
-                      fontSize: '0.8125rem',
-                      color: 'var(--accent)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      marginBottom: '0.75rem',
-                    }}
-                  >
-                    {member.role}
-                  </p>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: 1.6 }}>{member.bio}</p>
-                </div>
-              </div>
-            ))}
+            <div
+              style={{
+                width: '64px',
+                height: '64px',
+                backgroundColor: 'var(--accent)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.5rem',
+              }}
+            >
+              <span style={{ color: 'white', fontSize: '1.75rem' }}>♱</span>
+            </div>
+            <h3 style={{ fontWeight: 700, fontSize: '1.25rem', letterSpacing: '-0.02em', marginBottom: '1rem' }}>Our Team</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.0625rem', lineHeight: 1.7 }}>
+              Citychurch is led by faithful servants who have given their lives to the children and families of Amarillo. Team bios coming soon.
+            </p>
           </div>
 
         </div>
@@ -375,37 +377,15 @@ export default function About() {
             }}
           >
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Get Involved</span>
+            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Come and Live the Mission</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
           </div>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: '1.5rem' }}>Join the Work</h2>
+          <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: '1.5rem' }}>Join the Mission</h2>
           <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            We're always looking for people who want to show up, serve, and be part of something real. Whether you can volunteer for a few hours, join us at an event, or simply walk alongside us in this work — you belong here.
+            Whether you give, pray, volunteer, or simply show up — you become part of something that changes lives. No child in Amarillo should go to bed hungry. Come and live the mission with us.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="/events"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.875rem 2rem',
-                backgroundColor: 'var(--accent)',
-                color: 'white',
-                textDecoration: 'none',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                borderRadius: '8px',
-                transition: 'opacity 0.2s',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              Upcoming Ministries
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </Link>
+            <DonateButton label="Feed a Child Today" />
             <Link
               href="/contact"
               style={{
@@ -423,12 +403,18 @@ export default function About() {
                 letterSpacing: '-0.01em',
               }}
             >
-              Get In Touch
+              Get Involved
             </Link>
           </div>
         </div>
       </section>
 
+      {/* EMAIL SIGNUP */}
+      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }} className="reveal">
+          <EmailSignup />
+        </div>
+      </section>
 
 
     </div>
