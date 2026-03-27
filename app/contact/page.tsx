@@ -241,10 +241,17 @@ export default function Contact() {
             <div style={{ marginTop: '4rem', textAlign: 'center' }}>
               <h3 style={{ fontSize: '1.125rem', fontWeight: 700, marginBottom: '1.5rem' }}>Follow Us</h3>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
-                {['YouTube', 'Instagram', 'Facebook', 'Vimeo'].map((social) => (
+                {[
+                  { name: 'Facebook', href: 'https://www.facebook.com/citychurchamarillo' },
+                  { name: 'Instagram', href: '#' },
+                  { name: 'YouTube', href: '#' },
+                  { name: 'Vimeo', href: '#' },
+                ].map((social) => (
                   <a
-                    key={social}
-                    href="#"
+                    key={social.name}
+                    href={social.href}
+                    target={social.href !== '#' ? '_blank' : undefined}
+                    rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
                     style={{
                       color: 'var(--text-secondary)',
                       fontSize: '0.9375rem',
@@ -252,7 +259,7 @@ export default function Contact() {
                       transition: 'color 0.2s ease',
                     }}
                   >
-                    {social}
+                    {social.name}
                   </a>
                 ))}
               </div>

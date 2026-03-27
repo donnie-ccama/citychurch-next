@@ -131,8 +131,7 @@ export default function Footer() {
                 gap: '0.5rem',
               }}
             >
-              {/* TODO: Replace # with real social URLs */}
-              <a href="#" style={footerLinkStyle}>Facebook</a>
+              <a href="https://www.facebook.com/citychurchamarillo" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Facebook</a>
               <a href="#" style={footerLinkStyle}>Instagram</a>
               <a href="#" style={footerLinkStyle}>YouTube</a>
               <a
