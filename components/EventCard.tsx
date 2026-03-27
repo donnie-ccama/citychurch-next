@@ -166,6 +166,8 @@ export default function EventCard({
       {/* Register Link */}
       <Link
         href={registration_url}
+        target={registration_url.startsWith('http') ? '_blank' : undefined}
+        rel={registration_url.startsWith('http') ? 'noopener noreferrer' : undefined}
         style={{
           display: 'inline-flex',
           alignItems: 'center',
