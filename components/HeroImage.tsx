@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 interface HeroImageProps {
   src: string;
   children: React.ReactNode;
@@ -21,12 +19,15 @@ export default function HeroImage({ src, children }: HeroImageProps) {
       }}
     >
       {/* Hero image */}
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={src}
         alt="A child smiling at Citychurch Amarillo"
-        fill
-        priority
         style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
           objectFit: 'cover',
           objectPosition: 'center 30%',
         }}
@@ -39,6 +40,7 @@ export default function HeroImage({ src, children }: HeroImageProps) {
           inset: 0,
           background: 'linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 40%, transparent 70%)',
           pointerEvents: 'none',
+          zIndex: 1,
         }}
       />
 
