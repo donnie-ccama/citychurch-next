@@ -4,7 +4,13 @@ All notable changes to the Citychurch website are documented here.
 
 ---
 
-## 2026-03-27 (evening) — Database Migration Deployed
+## 2026-03-27 (evening) — Hero Image + Database Migration
+
+### Added
+- **Static hero image** — replaced Vimeo video background with `web-hero-3-27-26.png` (1920×1080 ministry photo)
+  - New `HeroImage` component (`components/HeroImage.tsx`) with gradient overlay and CTA buttons
+  - `HeroVideo.tsx` preserved for potential future use
+  - Image stored at `public/images/web-hero-3-27-26.png`
 
 ### Completed
 - **Supabase migration `001_forms.sql` executed** — all four form tables now live in production:
