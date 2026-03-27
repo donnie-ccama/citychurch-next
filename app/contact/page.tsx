@@ -196,18 +196,18 @@ export default function Contact() {
               {[
                 {
                   label: 'Email',
-                  value: 'hello@citychurchamarillo.com',
-                  href: 'mailto:hello@citychurchamarillo.com',
+                  value: 'donnie@citykid.me',
+                  href: 'mailto:donnie@citykid.me',
                 },
                 {
                   label: 'Phone',
-                  value: '(806) 555-0123',
-                  href: 'tel:+18065550123',
+                  value: '(806) 371-0089',
+                  href: 'tel:+18063710089',
                 },
                 {
                   label: 'Location',
-                  value: 'Amarillo, Texas',
-                  href: '#',
+                  value: '205 S. Polk Street, Amarillo, TX 79101',
+                  href: 'https://maps.google.com/?q=205+S+Polk+St+Amarillo+TX+79101',
                 },
               ].map((info, idx) => (
                 <div key={idx} style={{ textAlign: 'center' }}>
