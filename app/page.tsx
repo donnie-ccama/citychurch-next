@@ -55,6 +55,56 @@ export default function Home() {
         </div>
       </HeroVideo>
 
+      {/* FIRST-TIME VISITOR BANNER */}
+      <section
+        style={{
+          padding: '1.25rem 1.5rem',
+          backgroundColor: 'var(--bg-card)',
+          borderTop: '1px solid var(--border-color)',
+          borderBottom: '1px solid var(--border-color)',
+        }}
+      >
+        <div
+          className="reveal visitor-banner"
+          style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '1.5rem',
+          }}
+        >
+          <div>
+            <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.25rem' }}>
+              First time here?
+            </p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
+              Learn what to expect and let us know you're coming.
+            </p>
+          </div>
+          <Link
+            href="/visit"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.375rem',
+              padding: '0.625rem 1.25rem',
+              backgroundColor: 'var(--accent)',
+              color: 'white',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              borderRadius: '999px',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              transition: 'opacity 0.2s ease',
+            }}
+          >
+            Plan Your Visit →
+          </Link>
+        </div>
+      </section>
+
       {/* MISSION STATEMENT */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }} className="reveal">

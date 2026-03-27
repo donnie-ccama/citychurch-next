@@ -52,3 +52,32 @@ export interface MediaItem {
   description: string;
   created_at: string;
 }
+
+export interface Visitor {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | null;
+  visit_type: 'general' | 'volunteer' | 'family' | 'online';
+  source: string;
+  created_at: string;
+}
+
+export interface Contact {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  source: string;
+  created_at: string;
+}
+
+export interface Subscriber {
+  id: string;
+  email: string;
+  first_name: string | null;
+  tag: string;
+  source: string;
+  created_at: string;
+}

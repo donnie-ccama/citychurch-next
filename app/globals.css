@@ -226,6 +226,14 @@ img, video, iframe, canvas, svg {
   background: var(--taupe-600);
 }
 
+/* --- Visitor banner responsive --- */
+@media (max-width: 640px) {
+  .visitor-banner {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+}
+
 /* --- Mobile menu --- */
 .mobile-menu {
   max-height: 0;

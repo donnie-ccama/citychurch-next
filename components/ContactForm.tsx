@@ -11,6 +11,7 @@ export default function ContactForm() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,18 +24,29 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(false);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setSubmitted(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(true);
+        setTimeout(() => setError(false), 4000);
+      }
+    } catch {
+      setError(true);
+      setTimeout(() => setError(false), 4000);
+    } finally {
       setLoading(false);
-      setFormData({ name: '', email: '', message: '' });
-
-      // Reset submitted state after 5 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 5000);
-    }, 1000);
+    }
   };
 
   return (
@@ -174,7 +186,7 @@ export default function ContactForm() {
         style={{
           width: '100%',
           padding: '1rem',
-          backgroundColor: submitted ? 'var(--accent)' : loading ? 'var(--accent)' : 'var(--accent)',
+          backgroundColor: 'var(--accent)',
           color: 'white',
           fontSize: '1rem',
           fontWeight: 600,
@@ -198,6 +210,13 @@ export default function ContactForm() {
       >
         {loading ? 'Sending...' : submitted ? 'Thanks for reaching out!' : 'Send Message'}
       </button>
+
+      {/* ERROR MESSAGE */}
+      {error && (
+        <p style={{ fontSize: '0.8125rem', color: '#ef4444', marginTop: '0.75rem', textAlign: 'center' }}>
+          Something went wrong. Please try again.
+        </p>
+      )}
 
       {/* SUCCESS MESSAGE */}
       {submitted && (

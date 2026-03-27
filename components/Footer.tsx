@@ -103,6 +103,7 @@ export default function Footer() {
                 gap: '0.5rem',
               }}
             >
+              <Link href="/visit" style={footerLinkStyle}>Plan Your Visit</Link>
               <Link href="/about" style={footerLinkStyle}>Our Story</Link>
               <Link href="/ministries" style={footerLinkStyle}>How We Help</Link>
               <Link href="/donate" style={footerLinkStyle}>Give</Link>
