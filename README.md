@@ -1,36 +1,250 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Citychurch — ...for the heart of the city.
 
-## Getting Started
+The website for Citychurch Amarillo, a non-profit ministry that finds, feeds, and teaches children and families who are most vulnerable. Built with Next.js 16, Supabase, and Tailwind CSS v4.
 
-First, run the development server:
+**Live site:** [citychurch-next.vercel.app](https://citychurch-next.vercel.app)  
+**Repository:** [github.com/donnie-ccama/citychurch-next](https://github.com/donnie-ccama/citychurch-next)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router, Turbopack, React 19) |
+| Styling | Tailwind CSS v4 + inline styles with CSS custom properties |
+| Database | Supabase (PostgreSQL with Row-Level Security) |
+| Donations | FundraiseUp (portal: aecfdssy.donorsupport.co) |
+| Email list | Mailchimp (Audience ID: 4fed0cb6a0, Server: us21) |
+| Sheets sync | Google Sheets API via googleapis (service account) |
+| Hosting | Vercel |
+| Language | TypeScript |
+| Fonts | Inter (body), Source Serif 4 (editorial/accent) |
+
+## Project Structure
+
+```
+citychurch-next/
+├── app/                          # Next.js App Router pages
+│   ├── page.tsx                  # Homepage
+│   ├── visit/page.tsx            # First-time visitor landing page
+│   ├── about/page.tsx            # Our Story
+│   ├── ministries/page.tsx       # How We Help
+│   ├── donate/page.tsx           # Give / Donate
+│   ├── contact/page.tsx          # Get Involved
+│   ├── blog/                     # Blog listing + [slug] detail pages
+│   ├── sermons/page.tsx          # Sermon archive
+│   ├── media/page.tsx            # Media gallery
+│   ├── register/[slug]/page.tsx  # Event registration (dynamic)
+│   ├── admin/                    # Admin dashboard (protected)
+│   ├── api/                      # API routes
+│   │   ├── visitors/route.ts     # Visitor sign-up form handler
+│   │   ├── contact/route.ts      # Contact form handler
+│   │   ├── subscribe/route.ts    # Email signup (Mailchimp + Supabase + Sheets)
+│   │   └── register/route.ts     # Event registration handler
+│   ├── layout.tsx                # Root layout (Navbar, Footer, ScrollReveal)
+│   └── globals.css               # Tailwind v4 + custom CSS (taupe palette, dark mode)
+│
+├── components/                   # Shared React components
+│   ├── Navbar.tsx                # Sticky nav with mobile hamburger
+│   ├── Footer.tsx                # Site footer with links + email signup
+│   ├── HeroVideo.tsx             # Vimeo background video hero
+│   ├── DonateButton.tsx          # FundraiseUp donation link
+│   ├── EmailSignup.tsx           # Mailchimp email list signup
+│   ├── ContactForm.tsx           # Contact form (→ /api/contact)
+│   ├── VisitorSignupForm.tsx     # Visitor sign-up form (→ /api/visitors)
+│   ├── EventRegistrationForm.tsx # Event registration form (→ /api/register)
+│   ├── EventCard.tsx             # Ministry event card with registration link
+│   ├── BlogCard.tsx              # Blog post preview card
+│   ├── BlogClient.tsx            # Blog detail client component
+│   ├── SermonCard.tsx            # Sermon card with video embed
+│   ├── SectionHeader.tsx         # Reusable section label + title
+│   ├── ImpactStats.tsx           # Impact metrics display
+│   ├── ScrollReveal.tsx          # Intersection observer scroll animations
+│   ├── ThemeToggle.tsx           # Light/dark mode toggle
+│   ├── VideoEmbed.tsx            # Responsive video embed wrapper
+│   ├── MediaClient.tsx           # Media gallery client component
+│   └── AdminSidebar.tsx          # Admin navigation sidebar
+│
+├── lib/                          # Shared utilities
+│   ├── supabase-browser.ts       # Client-side Supabase client
+│   ├── supabase-server.ts        # Server-side Supabase client + demo data
+│   ├── google-sheets.ts          # Google Sheets sync helper
+│   ├── types.ts                  # TypeScript interfaces for all data models
+│   └── useScrollReveal.ts        # Scroll reveal React hook
+│
+├── supabase/                     # Database schema & migrations
+│   ├── schema.sql                # Base schema (blog_posts, sermons, events, media_items)
+│   └── migrations/
+│       ├── 20260311000000_initial_schema.sql  # Initial tables
+│       └── 001_forms.sql                      # Form tables (visitors, contacts, subscribers, registrations)
+│
+└── public/                       # Static assets (logo, icons)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages & Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Type | Description |
+|---|---|---|
+| `/` | Static | Homepage — hero video, visitor banner, mission, impact stats, events, stories, email signup |
+| `/visit` | Static | First-time visitor landing page — what to expect, $2.50 callout, photo gallery, sign-up form, location |
+| `/about` | Static | Our Story |
+| `/ministries` | Static | How We Help — ministry event cards |
+| `/donate` | Static | Give — donation tiers with FundraiseUp |
+| `/contact` | Static | Get Involved — ways to connect, contact form, church info |
+| `/blog` | Static | Blog listing |
+| `/blog/[slug]` | SSG | Blog detail pages |
+| `/sermons` | Static | Sermon archive |
+| `/media` | Static | Media gallery |
+| `/register/[slug]` | SSG | Event registration (sunday-mornings, family-night, volunteer) |
+| `/admin` | Static | Admin dashboard |
+| `/api/visitors` | Dynamic | POST — visitor sign-up submissions |
+| `/api/contact` | Dynamic | POST — contact form submissions |
+| `/api/subscribe` | Dynamic | POST — email list signups |
+| `/api/register` | Dynamic | POST — event registration submissions |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Unified Form Architecture
 
-## Learn More
+All forms follow the same pattern:
 
-To learn more about Next.js, take a look at the following resources:
+```
+User submits form → API route → Supabase (primary) + Google Sheets (sync) + Mailchimp (email signups only)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Data Flow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Form | API Route | Supabase Table | Sheets Tab | Mailchimp |
+|---|---|---|---|---|
+| Visitor sign-up | `/api/visitors` | `visitors` | Visitors | — |
+| Contact form | `/api/contact` | `contacts` | Contacts | — |
+| Email signup | `/api/subscribe` | `subscribers` | Subscribers | Yes |
+| Event registration | `/api/register` | `registrations` | Registrations | — |
 
-## Deploy on Vercel
+### Google Sheets Sync
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Spreadsheet: [Citychurch Form Submissions](https://docs.google.com/spreadsheets/d/10Fm3rkvzCEn6bv6SNIyZFjjG-auLoVzpqP1pk0DLlEA/edit)
+- Auth: GCP service account (`citychurch-sheets@citychurch-website-491521.iam.gserviceaccount.com`)
+- The sync is non-blocking (fire-and-forget) — if Sheets is unavailable, form submission still succeeds via Supabase
+- Shared helper: `lib/google-sheets.ts`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Sheets Tab Columns
+
+| Tab | Columns |
+|---|---|
+| Visitors | First Name, Last Name, Email, Phone, Visit Type, Date |
+| Contacts | Name, Email, Message, Date |
+| Subscribers | Email, First Name, Tag, Date |
+| Registrations | Event, Name, Email, Phone, Number of People, Comments, Date |
+
+## Environment Variables
+
+All variables are set on Vercel for Production and Development environments.
+
+| Variable | Purpose | Where to find |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | Supabase Dashboard → Settings → API |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous/public key | Supabase Dashboard → Settings → API |
+| `MAILCHIMP_API_KEY` | Mailchimp API key | Mailchimp → Account → Extras → API keys |
+| `GOOGLE_SHEETS_SPREADSHEET_ID` | Target Google Sheets spreadsheet | `10Fm3rkvzCEn6bv6SNIyZFjjG-auLoVzpqP1pk0DLlEA` |
+| `GOOGLE_SHEETS_CLIENT_EMAIL` | GCP service account email | `citychurch-sheets@citychurch-website-491521.iam.gserviceaccount.com` |
+| `GOOGLE_SHEETS_PRIVATE_KEY` | GCP service account private key | Downloaded JSON key file |
+
+### Mailchimp Settings
+
+- Audience: Citychurch Website Subscribers
+- Audience ID: `4fed0cb6a0`
+- Server: `us21`
+- Tag for website signups: `website-signup-2026`
+
+### FundraiseUp Settings
+
+- Portal URL: `https://aecfdssy.donorsupport.co`
+- Donors are redirected back to the site upon completion (no JS modal)
+- Cost per meal: $2.50 (hot item + fresh fruit + popcorn)
+- Suggested tiers: $2.50 (1 meal), $17.50 (1 week), $75 (1 month)
+
+### GCP Service Account
+
+- Project: `citychurch-website-491521`
+- Service account: `citychurch-sheets@citychurch-website-491521.iam.gserviceaccount.com`
+- Required API: Google Sheets API (enabled in GCP console)
+- The service account must be shared as an Editor on the Citychurch Form Submissions spreadsheet
+
+## Design System
+
+### Color Palette (Taupe / Oatmeal)
+
+Uses CSS custom properties with oklch values. Light and dark mode via `.dark` class on `<html>`.
+
+- `--accent`: oklch(63% 0.2 360) — brand red from logo
+- `--bg-primary`, `--bg-secondary`, `--bg-card`, `--bg-muted` — surface colors
+- `--text-primary`, `--text-secondary`, `--text-muted` — text hierarchy
+- `--border-color`, `--border-subtle` — borders
+
+### Typography
+
+- Body: Inter (system-ui fallback)
+- Editorial: Source Serif 4 (Georgia fallback)
+- Headings: Inter, weight 700-800, tight letter-spacing (-0.02em to -0.04em)
+
+### Components
+
+- Inputs: 0.875rem padding, 8px border-radius, bg-card background, accent border on focus
+- Buttons: accent background, white text, 600 weight, 8px radius, opacity hover
+- Cards: bg-card, 1px border, 12px radius, 2rem padding, card-hover class for lift effect
+- Sections: 6rem/1.5rem padding (5rem for callouts), max-width 1000px/720px/520px
+- Scroll animations: `.reveal` class + `.animate-in` via IntersectionObserver
+
+### Styling Convention
+
+All components use **inline styles with CSS custom properties** — not Tailwind utility classes in JSX. This is the established pattern throughout the entire codebase.
+
+## Database Schema
+
+### Content Tables (initial schema)
+
+- `blog_posts` — title, slug, content, excerpt, category, author, featured_image, published
+- `sermons` — title, speaker, series, sermon_date, video_url, description, featured
+- `events` — title, event_date, event_time, description, location, registration_url, featured, active
+- `media_items` — title, media_type, url, thumbnail_url, description
+
+### Form Tables (001_forms.sql — needs to be run)
+
+- `visitors` — first_name, last_name, email, phone, visit_type, source
+- `contacts` — name, email, message, source
+- `subscribers` — email (unique), first_name, tag, source
+- `registrations` — event_slug, event_title, name, email, phone, num_people, comments, source
+
+All form tables have:
+- UUID primary key
+- `created_at` timestamp
+- RLS: anonymous inserts, authenticated reads
+- Indexes on email and created_at
+
+## Running Locally
+
+```bash
+npm install
+npm run dev       # Starts dev server on port 5000
+npm run build     # Production build
+npm run start     # Production server on port 5000
+```
+
+Without Supabase env vars, the app falls back to demo data defined in `lib/supabase-server.ts`.
+
+## Deployment
+
+Hosted on Vercel. Every push to `main` triggers an automatic deployment.
+
+- Vercel project: `donnies-projects-02859c02/citychurch-next`
+- Production URL: [citychurch-next.vercel.app](https://citychurch-next.vercel.app)
+- Domain: Will be pointed from Squarespace when ready to launch
+
+## Pending Tasks
+
+- [ ] Run `supabase/migrations/001_forms.sql` against Supabase database
+- [ ] Replace photo placeholders on /visit page with real ministry photos
+- [ ] Replace demo data in `lib/supabase-server.ts` with live Supabase queries
+- [ ] Update real impact numbers in ImpactStats component
+- [ ] Add real ministry photos to event cards
+- [ ] Point production domain from Squarespace to Vercel
