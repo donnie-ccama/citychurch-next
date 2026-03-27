@@ -34,6 +34,8 @@ export interface Event {
   event_time: string;
   description: string;
   location: string;
+  google_maps_url?: string;
+  apple_maps_url?: string;
   registration_url: string;
   image_url: string | null;
   featured: boolean;

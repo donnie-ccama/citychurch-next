@@ -10,6 +10,9 @@ export default function EventCard({
   event_date,
   event_time,
   description,
+  location,
+  google_maps_url,
+  apple_maps_url,
   registration_url,
 }: EventCardProps) {
   const date = new Date(event_date);
@@ -99,10 +102,66 @@ export default function EventCard({
           fontSize: '0.9375rem',
           lineHeight: 1.6,
           flex: 1,
+          whiteSpace: 'pre-line',
         }}
       >
         {description}
       </p>
+
+      {/* Location & Map Links */}
+      {location && (
+        <div style={{ marginTop: '1rem' }}>
+          <p
+            style={{
+              fontSize: '0.8125rem',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              color: 'var(--text-muted)',
+              marginBottom: '0.375rem',
+            }}
+          >
+            Location
+          </p>
+          <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+            {location}
+          </p>
+          {(google_maps_url || apple_maps_url) && (
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              {google_maps_url && (
+                <a
+                  href={google_maps_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: '0.8125rem',
+                    fontWeight: 600,
+                    color: 'var(--accent)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Google Maps ↗
+                </a>
+              )}
+              {apple_maps_url && (
+                <a
+                  href={apple_maps_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: '0.8125rem',
+                    fontWeight: 600,
+                    color: 'var(--accent)',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Apple Maps ↗
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Register Link */}
       <Link
