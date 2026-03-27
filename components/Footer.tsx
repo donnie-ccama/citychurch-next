@@ -134,6 +134,7 @@ export default function Footer() {
               <a href="https://www.facebook.com/citychurchamarillo" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Facebook</a>
               <a href="https://www.instagram.com/citychurchamarillo" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Instagram</a>
               <a href="https://www.youtube.com/@AmarilloCitychurch" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>YouTube</a>
+              <a href="https://vimeo.com/heartofthecity" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Vimeo</a>
               <a
                 href={DONATE_URL}
                 target="_blank"

@@ -245,7 +245,7 @@ export default function Contact() {
                   { name: 'Facebook', href: 'https://www.facebook.com/citychurchamarillo' },
                   { name: 'Instagram', href: 'https://www.instagram.com/citychurchamarillo' },
                   { name: 'YouTube', href: 'https://www.youtube.com/@AmarilloCitychurch' },
-                  { name: 'Vimeo', href: '#' },
+                  { name: 'Vimeo', href: 'https://vimeo.com/heartofthecity' },
                 ].map((social) => (
                   <a
                     key={social.name}
