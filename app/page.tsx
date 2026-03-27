@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SectionHeader from '@/components/SectionHeader';
-import HeroVideo from '@/components/HeroVideo';
+import HeroImage from '@/components/HeroImage';
 import EventCard from '@/components/EventCard';
 import BlogCard from '@/components/BlogCard';
 import DonateButton from '@/components/DonateButton';
@@ -21,8 +21,8 @@ export default function Home() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
 
-      {/* HERO SECTION — Video Background */}
-      <HeroVideo videoId="1172206088">
+      {/* HERO SECTION — Static Image */}
+      <HeroImage src="/images/web-hero-3-27-26.png">
         <div
           className="reveal"
           style={{
@@ -53,7 +53,7 @@ export default function Home() {
             See How $2.50 Changes a Life
           </Link>
         </div>
-      </HeroVideo>
+      </HeroImage>
 
       {/* FIRST-TIME VISITOR BANNER */}
       <section
