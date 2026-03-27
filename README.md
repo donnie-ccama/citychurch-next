@@ -208,7 +208,7 @@ All components use **inline styles with CSS custom properties** — not Tailwind
 - `events` — title, event_date, event_time, description, location, registration_url, featured, active
 - `media_items` — title, media_type, url, thumbnail_url, description
 
-### Form Tables (001_forms.sql — needs to be run)
+### Form Tables (001_forms.sql — deployed 2026-03-27)
 
 - `visitors` — first_name, last_name, email, phone, visit_type, source
 - `contacts` — name, email, message, source
@@ -242,7 +242,7 @@ Hosted on Vercel. Every push to `main` triggers an automatic deployment.
 
 ## Pending Tasks
 
-- [ ] Run `supabase/migrations/001_forms.sql` against Supabase database
+- [x] Run `supabase/migrations/001_forms.sql` against Supabase database (completed 2026-03-27)
 - [ ] Replace photo placeholders on /visit page with real ministry photos
 - [ ] Replace demo data in `lib/supabase-server.ts` with live Supabase queries
 - [ ] Update real impact numbers in ImpactStats component

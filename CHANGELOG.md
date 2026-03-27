@@ -4,6 +4,19 @@ All notable changes to the Citychurch website are documented here.
 
 ---
 
+## 2026-03-27 (evening) — Database Migration Deployed
+
+### Completed
+- **Supabase migration `001_forms.sql` executed** — all four form tables now live in production:
+  - `visitors` — first-time visitor sign-ups
+  - `contacts` — contact form submissions
+  - `subscribers` — email signups (local record, supplements Mailchimp)
+  - `registrations` — event registrations
+- All tables include UUID primary keys, `created_at` timestamps, email + created_at indexes, and RLS policies (anonymous inserts, authenticated reads)
+- Database password reset after migration
+
+---
+
 ## 2026-03-27 — Unified Form Architecture + Visitor Page
 
 ### Added
