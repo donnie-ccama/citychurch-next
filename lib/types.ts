@@ -81,3 +81,16 @@ export interface Subscriber {
   source: string;
   created_at: string;
 }
+
+export interface Registration {
+  id: string;
+  event_slug: string;
+  event_title: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  num_people: number;
+  comments: string | null;
+  source: string;
+  created_at: string;
+}

@@ -54,3 +54,25 @@ CREATE INDEX IF NOT EXISTS idx_subscribers_created ON subscribers (created_at DE
 ALTER TABLE subscribers ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow anonymous inserts" ON subscribers FOR INSERT TO anon WITH CHECK (true);
 CREATE POLICY "Allow authenticated reads" ON subscribers FOR SELECT TO authenticated USING (true);
+
+-- 4. Event registrations
+CREATE TABLE IF NOT EXISTS registrations (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  event_slug text NOT NULL,
+  event_title text NOT NULL,
+  name text NOT NULL,
+  email text NOT NULL,
+  phone text,
+  num_people integer NOT NULL DEFAULT 1,
+  comments text,
+  source text DEFAULT 'website',
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_registrations_event ON registrations (event_slug);
+CREATE INDEX IF NOT EXISTS idx_registrations_email ON registrations (email);
+CREATE INDEX IF NOT EXISTS idx_registrations_created ON registrations (created_at DESC);
+
+ALTER TABLE registrations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow anonymous inserts" ON registrations FOR INSERT TO anon WITH CHECK (true);
+CREATE POLICY "Allow authenticated reads" ON registrations FOR SELECT TO authenticated USING (true);
