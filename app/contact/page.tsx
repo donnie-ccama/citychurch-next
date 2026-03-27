@@ -243,7 +243,7 @@ export default function Contact() {
               <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem' }}>
                 {[
                   { name: 'Facebook', href: 'https://www.facebook.com/citychurchamarillo' },
-                  { name: 'Instagram', href: '#' },
+                  { name: 'Instagram', href: 'https://www.instagram.com/citychurchamarillo' },
                   { name: 'YouTube', href: '#' },
                   { name: 'Vimeo', href: '#' },
                 ].map((social) => (

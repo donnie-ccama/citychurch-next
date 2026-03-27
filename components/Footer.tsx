@@ -132,7 +132,7 @@ export default function Footer() {
               }}
             >
               <a href="https://www.facebook.com/citychurchamarillo" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Facebook</a>
-              <a href="#" style={footerLinkStyle}>Instagram</a>
+              <a href="https://www.instagram.com/citychurchamarillo" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Instagram</a>
               <a href="#" style={footerLinkStyle}>YouTube</a>
               <a
                 href={DONATE_URL}
