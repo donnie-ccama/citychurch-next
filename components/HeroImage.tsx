@@ -38,7 +38,7 @@ export default function HeroImage({ src, children }: HeroImageProps) {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.15) 60%, transparent 80%)',
+          background: 'linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.55) 30%, rgba(0, 0, 0, 0.2) 55%, transparent 75%)',
           pointerEvents: 'none',
           zIndex: 1,
         }}
