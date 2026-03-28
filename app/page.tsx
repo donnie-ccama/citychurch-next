@@ -7,6 +7,7 @@ import BlogCard from '@/components/BlogCard';
 import DonateButton from '@/components/DonateButton';
 import ImpactStats from '@/components/ImpactStats';
 import EmailSignup from '@/components/EmailSignup';
+import ProofOfLifeHomepagePreview from '@/components/ProofOfLifeHomepagePreview';
 import { demoEvents, demoBlogPosts } from '@/lib/supabase-server';
 
 export const metadata: Metadata = {
@@ -293,6 +294,33 @@ export default function Home() {
               }}
             >
               Read More Stories →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* PROOF OF LIFE — Community Photos */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="reveal">
+            <SectionHeader label="Community" title="Proof of Life" />
+          </div>
+
+          <div className="reveal">
+            <ProofOfLifeHomepagePreview />
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
+            <Link
+              href="/proof-of-life"
+              style={{
+                color: 'var(--accent)',
+                fontWeight: 600,
+                fontSize: '0.9375rem',
+                textDecoration: 'none',
+              }}
+            >
+              View the Bulletin Board &rarr;
             </Link>
           </div>
         </div>
