@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import PhotoDropZone from './PhotoDropZone';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
@@ -21,20 +22,58 @@ export default function ProofOfLifeSubmitForm() {
     setErrorMessage('');
 
     try {
-      const formData = new FormData();
-      formData.append('photo', file);
-      if (description.trim()) {
-        formData.append('description', description.trim());
+      // Step 1: Upload photo directly to Supabase Storage from the client
+      // This bypasses Vercel's 4.5MB serverless body size limit
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error('Upload service is not configured');
       }
 
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const ext = file.name.split('.').pop() || 'jpg';
+      const filename = `${crypto.randomUUID()}.${ext}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('proof-of-life-photos')
+        .upload(filename, file, {
+          contentType: file.type,
+          cacheControl: '3600',
+        });
+
+      if (uploadError) {
+        throw new Error('Failed to upload photo. Please try again.');
+      }
+
+      // Get the public URL
+      const { data: urlData } = supabase.storage
+        .from('proof-of-life-photos')
+        .getPublicUrl(filename);
+
+      const photoUrl = urlData.publicUrl;
+
+      // Step 2: Send metadata to API route (just the URL + description, no file)
       const res = await fetch('/api/proof-of-life', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          photo_url: photoUrl,
+          description: description.trim() || null,
+        }),
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Something went wrong');
+        let errMsg = 'Something went wrong';
+        try {
+          const data = await res.json();
+          errMsg = data.error || errMsg;
+        } catch {
+          // Response wasn't JSON — use status text
+          errMsg = res.statusText || errMsg;
+        }
+        throw new Error(errMsg);
       }
 
       setFormState('success');

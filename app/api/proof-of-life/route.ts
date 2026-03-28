@@ -1,37 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase-admin';
 
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic'];
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
 const ADMIN_EMAIL = 'donnie@citykid.me';
+
+// This route now receives only metadata (photo_url + description).
+// The actual file upload happens client-side directly to Supabase Storage,
+// bypassing Vercel's 4.5MB serverless body size limit.
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData();
-    const photo = formData.get('photo') as File | null;
-    const description = (formData.get('description') as string)?.trim() || null;
+    const { photo_url, description } = await request.json();
 
-    // Validate photo
-    if (!photo || !(photo instanceof File)) {
-      return NextResponse.json({ error: 'A photo is required' }, { status: 400 });
+    if (!photo_url || typeof photo_url !== 'string') {
+      return NextResponse.json({ error: 'A photo URL is required' }, { status: 400 });
     }
 
-    if (!ALLOWED_TYPES.includes(photo.type)) {
-      return NextResponse.json(
-        { error: 'Invalid file type. Accepted: JPEG, PNG, WebP, HEIC' },
-        { status: 400 }
-      );
-    }
+    const trimmedDesc = description?.trim() || null;
 
-    if (photo.size > MAX_FILE_SIZE) {
-      return NextResponse.json(
-        { error: 'File too large. Maximum size is 20MB.' },
-        { status: 400 }
-      );
-    }
-
-    // Validate description
-    if (description && description.length > 300) {
+    if (trimmedDesc && trimmedDesc.length > 300) {
       return NextResponse.json(
         { error: 'Description must be 300 characters or fewer' },
         { status: 400 }
@@ -40,37 +26,12 @@ export async function POST(request: NextRequest) {
 
     const supabaseAdmin = createAdminClient();
 
-    // Generate unique filename
-    const ext = photo.name.split('.').pop() || 'jpg';
-    const filename = `${crypto.randomUUID()}.${ext}`;
-
-    // Upload to Supabase Storage
-    const buffer = Buffer.from(await photo.arrayBuffer());
-    const { error: uploadError } = await supabaseAdmin.storage
-      .from('proof-of-life-photos')
-      .upload(filename, buffer, {
-        contentType: photo.type,
-        cacheControl: '3600',
-      });
-
-    if (uploadError) {
-      console.error('[Upload Error]', uploadError);
-      return NextResponse.json({ error: 'Failed to upload photo' }, { status: 500 });
-    }
-
-    // Get public URL
-    const { data: urlData } = supabaseAdmin.storage
-      .from('proof-of-life-photos')
-      .getPublicUrl(filename);
-
-    const photoUrl = urlData.publicUrl;
-
     // Insert submission row
     const { data: submission, error: dbError } = await supabaseAdmin
       .from('proof_of_life')
       .insert({
-        photo_url: photoUrl,
-        description,
+        photo_url,
+        description: trimmedDesc,
       })
       .select('approval_token')
       .single();
@@ -101,8 +62,8 @@ export async function POST(request: NextRequest) {
             <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto;">
               <h2 style="color: #333;">New Photo Submission</h2>
               <p>A new photo has been submitted to the Proof of Life bulletin board.</p>
-              ${description ? `<p><strong>Description:</strong> ${description}</p>` : ''}
-              <p><a href="${photoUrl}" target="_blank">View Photo</a></p>
+              ${trimmedDesc ? `<p><strong>Description:</strong> ${trimmedDesc}</p>` : ''}
+              <p><a href="${photo_url}" target="_blank">View Photo</a></p>
               <br />
               <a href="${approveUrl}" style="display: inline-block; padding: 12px 24px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
                 Approve Submission
