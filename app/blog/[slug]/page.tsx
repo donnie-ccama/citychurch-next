@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import BlogCard from '@/components/BlogCard';
 import { demoBlogPosts } from '@/lib/supabase-server';
 import ReactMarkdown from 'react-markdown';
@@ -150,9 +151,25 @@ export default async function BlogPost({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            overflow: 'hidden',
           }}
         >
-          <span style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Article Feature Image</span>
+          {post.featured_image ? (
+            <Image
+              src={post.featured_image}
+              alt={post.title}
+              width={1200}
+              height={675}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+              priority
+            />
+          ) : (
+            <span style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>Article Feature Image</span>
+          )}
         </div>
       </section>
 
