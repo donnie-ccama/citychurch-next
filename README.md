@@ -48,7 +48,8 @@ citychurch-next/
 ├── components/                   # Shared React components
 │   ├── Navbar.tsx                # Sticky nav with mobile hamburger
 │   ├── Footer.tsx                # Site footer with links + email signup
-│   ├── HeroVideo.tsx             # Vimeo background video hero
+│   ├── HeroImage.tsx             # Static hero image with gradient overlay (homepage)
+│   ├── HeroVideo.tsx             # Vimeo background video hero (preserved, not active)
 │   ├── DonateButton.tsx          # FundraiseUp donation link
 │   ├── EmailSignup.tsx           # Mailchimp email list signup
 │   ├── ContactForm.tsx           # Contact form (→ /api/contact)
@@ -79,14 +80,22 @@ citychurch-next/
 │       ├── 20260311000000_initial_schema.sql  # Initial tables
 │       └── 001_forms.sql                      # Form tables (visitors, contacts, subscribers, registrations)
 │
-└── public/                       # Static assets (logo, icons)
+└── public/                       # Static assets
+    └── images/
+        ├── web-hero-3-27-26.png  # Homepage hero image (1920×1080)
+        ├── ministry-01.jpg       # Visit page gallery photos
+        ├── ministry-02.jpg
+        ├── ministry-03.jpg
+        ├── ministry-04.jpg
+        ├── ministry-05.jpg
+        └── ministry-06.jpg
 ```
 
 ## Pages & Routes
 
 | Route | Type | Description |
 |---|---|---|
-| `/` | Static | Homepage — hero video, visitor banner, mission, impact stats, events, stories, email signup |
+| `/` | Static | Homepage — hero image, visitor banner, mission, impact stats, events, stories, email signup |
 | `/visit` | Static | First-time visitor landing page — what to expect, $2.50 callout, photo gallery, sign-up form, location |
 | `/about` | Static | Our Story |
 | `/ministries` | Static | How We Help — ministry event cards |
