@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import BlogCard from '@/components/BlogCard';
+import SocialShare from '@/components/SocialShare';
 import { demoBlogPosts } from '@/lib/supabase-server';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -265,44 +266,8 @@ export default async function BlogPost({
 
       {/* SOCIAL SHARE */}
       <section style={{ padding: '2rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: '780px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <p
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '0.875rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Share this story
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            {['Twitter', 'Facebook', 'Email', 'Link'].map((platform, idx) => (
-              <a
-                key={idx}
-                href="#"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '40px',
-                  height: '40px',
-                  backgroundColor: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  color: 'var(--text-secondary)',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s',
-                }}
-                title={`Share on ${platform}`}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                </svg>
-              </a>
-            ))}
-          </div>
+        <div style={{ maxWidth: '780px', margin: '0 auto' }}>
+          <SocialShare title={post.title} slug={post.slug} />
         </div>
       </section>
 
