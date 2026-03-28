@@ -14,6 +14,7 @@ export default function EventCard({
   google_maps_url,
   apple_maps_url,
   registration_url,
+  image_url,
 }: EventCardProps) {
   const date = new Date(event_date);
   const day = date.getDate();
@@ -26,12 +27,36 @@ export default function EventCard({
         backgroundColor: `var(--bg-card)`,
         border: `1px solid var(--border-color)`,
         borderRadius: '12px',
-        padding: '2rem',
+        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         transition: 'all 0.3s ease',
       }}
     >
+      {/* Event Image */}
+      {image_url && (
+        <div
+          style={{
+            width: '100%',
+            height: '200px',
+            overflow: 'hidden',
+          }}
+        >
+          <img
+            src={image_url}
+            alt={title}
+            loading="lazy"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+          />
+        </div>
+      )}
+
+      <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
       <div
         style={{
           display: 'flex',
@@ -202,6 +227,7 @@ export default function EventCard({
           <polyline points="12 5 19 12 12 19" />
         </svg>
       </Link>
+      </div>
 
       <style jsx>{`
         .card-hover:hover {
