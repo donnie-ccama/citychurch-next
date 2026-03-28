@@ -194,7 +194,7 @@ export default function Visit() {
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
-            <SectionHeader label="See Our Ministry" title="Photos From the Field" />
+            <SectionHeader label="See Our Ministry" title="Family Photos" />
           </div>
 
           <div
