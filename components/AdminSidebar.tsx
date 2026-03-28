@@ -81,6 +81,9 @@ export default function AdminSidebar() {
         <Link href="/admin/media" style={linkStyle('/admin/media')}>
           Media
         </Link>
+        <Link href="/admin/proof-of-life" style={linkStyle('/admin/proof-of-life')}>
+          Proof of Life
+        </Link>
       </nav>
 
       {/* Back to Site Link */}

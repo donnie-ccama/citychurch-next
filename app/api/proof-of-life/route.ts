@@ -41,9 +41,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 });
     }
 
-    // Build approval link
+    // Build approval + rejection links
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://citychurch.com';
     const approveUrl = `${baseUrl}/api/proof-of-life/approve?token=${submission.approval_token}`;
+    const rejectUrl = `${baseUrl}/api/proof-of-life/reject?token=${submission.approval_token}`;
 
     // Send approval email via Resend REST API
     const resendKey = process.env.RESEND_API_KEY;
@@ -66,10 +67,15 @@ export async function POST(request: NextRequest) {
                 ${trimmedDesc ? `<p><strong>Description:</strong> ${trimmedDesc}</p>` : ''}
                 <p><a href="${photo_url}" target="_blank">View Photo</a></p>
                 <br />
-                <a href="${approveUrl}" style="display: inline-block; padding: 12px 24px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
-                  Approve Submission
-                </a>
-                <br /><br />
+                <div style="display: flex; gap: 12px;">
+                  <a href="${approveUrl}" style="display: inline-block; padding: 12px 24px; background-color: #16a34a; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
+                    Approve
+                  </a>
+                  <a href="${rejectUrl}" style="display: inline-block; padding: 12px 24px; background-color: #dc2626; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
+                    Reject &amp; Delete
+                  </a>
+                </div>
+                <br />
                 <p style="font-size: 13px; color: #888;">If you didn't expect this, you can ignore this email.</p>
               </div>
             `,
