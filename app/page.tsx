@@ -166,6 +166,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SERMONS */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }} className="reveal">
+          <div
+            style={{
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '1rem',
+              marginBottom: '2.5rem',
+            }}
+          >
+            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Sermons</span>
+            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+          </div>
+
+          <p
+            style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontSize: 'clamp(1.25rem, 3vw, 1.625rem)',
+              lineHeight: 1.75,
+              color: 'var(--text-primary)',
+              fontWeight: 300,
+            }}
+          >
+            Weekly messages about authentic presence, serving our neighbors, and the transformation that happens when we simply show up.
+          </p>
+
+          <p
+            style={{
+              fontSize: '1rem',
+              lineHeight: 1.75,
+              color: 'var(--text-secondary)',
+              marginTop: '1.5rem',
+              maxWidth: '620px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            Listen to the latest teaching from Citychurch and explore our full sermon archive.
+          </p>
+
+          <div style={{ marginTop: '2.5rem' }}>
+            <Link
+              href="/sermons"
+              style={{
+                color: 'var(--accent)',
+                fontWeight: 600,
+                fontSize: '0.9375rem',
+                textDecoration: 'none',
+              }}
+            >
+              Watch & Listen to Sermons →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* IMPACT STATS */}
       <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }} className="reveal">
