@@ -180,7 +180,7 @@ export default function Home() {
             }}
           >
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Sermons</span>
+            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Message</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
           </div>
 
