@@ -13,17 +13,89 @@ export function createServerClient() {
 export const demoBlogPosts = [
   {
     id: '1',
-    title: 'What We Saw at the Downtown Meal Service',
-    slug: 'downtown-meal-service',
-    content: `It started the way most Saturday mornings do around here — quietly. A few of us arrived early to set up tables on the sidewalk outside the community center, the March wind picking up dust from the street.\n\nBy 10:30, the line stretched around the corner.\n\n## More Than a Meal\n\nWe've learned that showing up consistently matters more than showing up perfectly. The food was simple — rice, beans, grilled chicken, fresh tortillas — but the conversations that happened over those plates were anything but.\n\nOne man told us he'd been sleeping in his truck for three weeks. He didn't ask for money or a place to stay. He asked if he could help serve. So we handed him a ladle.\n\n> "I don't need someone to fix my life. I just need someone to see me."\n\nThat line has stayed with us all week.\n\n## What the Camera Saw\n\nOur documentary team was there, as always, not to produce content but to bear witness. The photos from Saturday tell a story that words struggle to capture: hands breaking bread, children laughing while adults wiped tears, strangers becoming neighbors.\n\nWe don't stage these moments. We don't direct them. We simply point the camera at what's happening and trust that the truth is compelling enough on its own.\n\n## The Numbers (Because People Ask)\n\nWe served 214 meals. Twenty-three volunteers showed up — some from Citychurch, some from other churches, some from no church at all. Four local businesses donated supplies. Zero dollars were charged.\n\nBut the numbers don't tell you about the woman who sat alone at the end of a table and was joined by a volunteer who simply sat with her in silence for twenty minutes. They don't tell you about the teenager who came to eat and stayed to help clean up.`,
-    excerpt: 'A quiet Saturday morning turned into something none of us expected. Here\'s what happened when 200 people showed up.',
+    title: 'Feeding the Greatest Hunger',
+    slug: 'feeding-the-greatest-hunger',
+    content: `> "If you pour yourself out for the hungry and satisfy the desire of the afflicted, then shall your light rise in the darkness." — Isaiah 58:10
+
+Most of us already know that hungry children matter. We feel it when we picture a child struggling to focus in class on an empty stomach, or a little boy acting out because he is tired, worried, and hungry—not rebellious. Real change starts with awareness, but it takes compassion that leads to action.
+
+In Amarillo, hunger often goes unnoticed. It can be hidden by a school backpack, a quiet smile, or a family doing their best to get by. Children still go to class, parents still work, and grandparents do all they can to make groceries last. But behind these efforts, there is often a real need and worry.
+
+This is why we need more empathy and compassion for Amarillo's children facing hunger. Not distant pity or brief concern, but real compassion that notices, responds, and remains present.
+
+## A Story from the Beginning
+
+When we started Citychurch in 1997, I didn't realize how serious the problem was. I remember driving to a run-down apartment complex with some donated toys and groceries, hoping to invite children to Citychurch. As soon as I took out the food, the children rushed over and grabbed it before I reached the first door. Their hunger surprised me. I was a stranger, but they didn't care—they were desperate.
+
+I quickly went back to Citychurch, filled my truck with all the food we had, and returned to the complex. The food was gone right away. Later that week, we came back to offer the children a ride to our weekly Bible club. That night, we picked up 80 children from that one place and started a new van route.
+
+## Why It Matters for Our City
+
+When Scripture tells us to help the hungry, it is not asking for mere feelings. It calls us to live differently. God does not ignore those in need, and neither should we. For the Church, feeding children is not just about food. It is about dignity and showing each child, through our actions, that "You matter to God, and you matter to us."
+
+This is very important for our city.
+
+According to The Texas Tribune, 71.6% of students in Amarillo ISD are considered economically disadvantaged. This means most children in the district already live with financial stress. When rent goes up, work hours are cut, a car breaks down, or a parent gets sick, food is often the first thing families struggle to afford.
+
+Hunger data shows us how big the problem is. Feeding America's estimates reveal that child food insecurity exists in every county in the country. Earlier data showed that Potter County had a food insecurity rate of 15.5% and Randall County had a rate of 11.3%. These numbers remind us that hunger is not rare in Amarillo—it is present in the neighborhoods where children live and grow.
+
+And children really feel it.
+
+They feel it in class when it's hard to focus. They feel it emotionally when worry sets in. They feel it physically when their bodies don't get enough food. They feel it socially when they start to think they are different or left behind. Hunger is never just about food—it affects confidence, energy, family peace, and hope.
+
+## How Citychurch Responds
+
+This is why Citychurch believes children are the key to reaching families. If we can find, feed, and teach children with love and consistency, we do more than meet a single need. We break cycles, open doors for families to heal, and introduce children and caregivers to Jesus while meeting their needs with dignity.
+
+This work is not just a dream for us. It is making a real difference in families' lives.
+
+Citychurch's mission is to find, feed, and teach Amarillo's most vulnerable children. Last year, we served over 150,000 meals and welcomed more than 1,400 children into our ministries. These numbers matter because they stand for real children, real neighborhoods, and real stories. They show the doors we've knocked on, the meals we've delivered, and the conversations that lead to prayer and long-term care.
+
+Just as important, Citychurch believes that help without hope is no help at all. We do not want to treat children and families like projects. We want to welcome them with love, consistency, and the hope of Christ. Every meal served, every resource shared, is meant to show that the Shepherd has not forgotten His sheep.
+
+## The Need for Partnership
+
+This kind of ministry needs compassion, but it also needs partnership.
+
+Some people in Amarillo might think hunger is someone else's problem. Others may believe that with all our churches, schools, and charities, every child who needs a meal is already helped. But that's not the case. Hunger is still there on weekends, during school breaks, and when a family is just one paycheck or bill away from empty shelves.
+
+This is where more empathy can make all the difference.
+
+Empathy helps us stop asking, "Why don't they just fix it?" and start asking, "What burden are they carrying that I've never had to carry?" Compassion helps us see hunger not as a number, but as a child made in God's image. It reminds us that families under stress are not problems—they are neighbors to love.
+
+For parents and grandparents in Amarillo, this hits close to home. If it were your child, grandchild, niece, or the kid next door, you'd want someone to notice and act. For young professionals, this is part of faithful stewardship and Christian discipleship. God put us here not just to build our own lives, but to share His grace with others. If God's grace stops with us, it hasn't reached its full purpose.
+
+## How You Can Help
+
+The good news is Amarillo doesn't have to respond with apathy. We can choose to respond with love and obedience.
+
+**We can pray.** We can ask God for wisdom, provision, open doors, protection for the children, and spiritual renewal in the homes Citychurch serves. We can pray for strong volunteers, more resources, and for every act of service to help introduce children and families to Jesus. Prayer is not the least we can do—it is one of the most important things, because this ministry depends on more than just human effort.
+
+**We can give.** Citychurch relies on private donors and partner churches, not government funding. This means your support has lasting value and goes straight to helping children and families now. Your giving helps provide resources, prepare meals, stock supplies, support outreach, and strengthen the daily work of restoring families in Amarillo. If God has given you resources, this is a meaningful way to use them.
+
+**We can serve.** There are real opportunities right now for individuals, families, groups, businesses, and churches to volunteer. Some can help us get organized for ministry. Some can prepare meals that nourish children with care and dignity. Some can deliver meals to neighborhoods, building trust through practical help. Others can serve in the Citychurch Cafe, turning a meal into a moment of welcome. Every role matters. Every act of service adds to our story.
+
+This kind of work can change a child's whole future. Isn't this at the heart of our mission as followers of Christ?
+
+## A Final Word
+
+Amarillo's children don't need our judgment—they need our compassion. They shouldn't have to prove their worth to be valued. God gave them value long before we saw their need. Christ died for them. The real question is whether we will live as if that's true.
+
+So let's not look away.
+
+Let's ask God to give us more empathy for the children in Amarillo who are hungry. Let's move toward them with Christ's love. Let's support Citychurch as a lifeboat for the city's poorest children and families.
+
+Because the Good Shepherd gave His life for us,
+
+Donnie Lane Jr.`,
+    excerpt: 'A pastoral call for Amarillo to see child hunger with greater empathy and respond with prayer, generosity, and service through Citychurch.',
     category: 'Outreach' as const,
-    author: 'Citychurch Team',
+    author: 'Donnie Lane Jr.',
     featured_image: null,
     published: true,
-    reading_time: 4,
-    created_at: '2026-03-05T10:00:00Z',
-    updated_at: '2026-03-05T10:00:00Z',
+    reading_time: 7,
+    created_at: '2026-03-27T10:00:00Z',
+    updated_at: '2026-03-27T10:00:00Z',
   },
   {
     id: '2',
