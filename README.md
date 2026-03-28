@@ -32,7 +32,7 @@ citychurch-next/
 │   ├── ministries/page.tsx       # How We Help
 │   ├── donate/page.tsx           # Give / Donate
 │   ├── contact/page.tsx          # Get Involved
-│   ├── blog/                     # Blog listing + [slug] detail pages
+│   ├── blog/                     # Blog listing + [slug] detail pages (featured: Feeding the Greatest Hunger)
 │   ├── sermons/page.tsx          # Sermon archive
 │   ├── media/page.tsx            # Media gallery
 │   ├── register/[slug]/page.tsx  # Event registration (dynamic)
@@ -41,7 +41,8 @@ citychurch-next/
 │   │   ├── visitors/route.ts     # Visitor sign-up form handler
 │   │   ├── contact/route.ts      # Contact form handler
 │   │   ├── subscribe/route.ts    # Email signup (Mailchimp + Supabase + Sheets)
-│   │   └── register/route.ts     # Event registration handler
+│   │   ├── register/route.ts     # Event registration handler
+│   │   └── blog-share/route.ts   # Blog social share logging (→ Google Sheets)
 │   ├── layout.tsx                # Root layout (Navbar, Footer, ScrollReveal)
 │   └── globals.css               # Tailwind v4 + custom CSS (taupe palette, dark mode)
 │
@@ -57,7 +58,8 @@ citychurch-next/
 │   ├── EventRegistrationForm.tsx # Event registration form (→ /api/register)
 │   ├── EventCard.tsx             # Ministry event card with registration link
 │   ├── BlogCard.tsx              # Blog post preview card
-│   ├── BlogClient.tsx            # Blog detail client component
+│   ├── BlogClient.tsx            # Blog listing client component with category filter
+│   ├── SocialShare.tsx           # Social share buttons (Facebook, LinkedIn, Copy Link) + handle capture
 │   ├── SermonCard.tsx            # Sermon card with video embed
 │   ├── SectionHeader.tsx         # Reusable section label + title
 │   ├── ImpactStats.tsx           # Impact metrics display
@@ -83,6 +85,7 @@ citychurch-next/
 └── public/                       # Static assets
     └── images/
         ├── web-hero-3-27-26.png  # Homepage hero image (1920×1080)
+        ├── blog-01-feeding-the-greatest-hunger.jpg  # Featured image for first blog post
         ├── ministry-01.jpg       # Visit page gallery photos
         ├── ministry-02.jpg
         ├── ministry-03.jpg
@@ -101,8 +104,8 @@ citychurch-next/
 | `/ministries` | Static | How We Help — ministry event cards |
 | `/donate` | Static | Give — donation tiers with FundraiseUp |
 | `/contact` | Static | Get Involved — ways to connect, contact form, church info |
-| `/blog` | Static | Blog listing |
-| `/blog/[slug]` | SSG | Blog detail pages |
+| `/blog` | Static | Blog listing — featured story + category filter grid |
+| `/blog/[slug]` | SSG | Blog article — featured image, markdown body, social share, related posts |
 | `/sermons` | Static | Sermon archive |
 | `/media` | Static | Media gallery |
 | `/register/[slug]` | SSG | Event registration (sunday-mornings, family-night, volunteer) |
@@ -111,6 +114,7 @@ citychurch-next/
 | `/api/contact` | Dynamic | POST — contact form submissions |
 | `/api/subscribe` | Dynamic | POST — email list signups |
 | `/api/register` | Dynamic | POST — event registration submissions |
+| `/api/blog-share` | Dynamic | POST — blog social share logging |
 
 ## Unified Form Architecture
 
@@ -128,6 +132,7 @@ User submits form → API route → Supabase (primary) + Google Sheets (sync) + 
 | Contact form | `/api/contact` | `contacts` | Contacts | — |
 | Email signup | `/api/subscribe` | `subscribers` | Subscribers | Yes |
 | Event registration | `/api/register` | `registrations` | Registrations | — |
+| Blog social share | `/api/blog-share` | — | Blog Shares | — |
 
 ### Google Sheets Sync
 
@@ -144,6 +149,7 @@ User submits form → API route → Supabase (primary) + Google Sheets (sync) + 
 | Contacts | Name, Email, Message, Date |
 | Subscribers | Email, First Name, Tag, Date |
 | Registrations | Event, Name, Email, Phone, Number of People, Comments, Date |
+| Blog Shares | Article Title, Article Slug, Platform, Social Handle, Date |
 
 ## Environment Variables
 
@@ -253,7 +259,11 @@ Hosted on Vercel. Every push to `main` triggers an automatic deployment.
 
 - [x] Run `supabase/migrations/001_forms.sql` against Supabase database (completed 2026-03-27)
 - [x] Replace photo placeholders on /visit page with real ministry photos (completed 2026-03-27)
+- [x] Add first blog post: "Feeding the Greatest Hunger" by Donnie Lane Jr. (completed 2026-03-27)
+- [x] Add featured image for first blog post (completed 2026-03-27)
+- [x] Wire up social share buttons with handle capture + Google Sheets logging (completed 2026-03-27)
 - [ ] Replace demo data in `lib/supabase-server.ts` with live Supabase queries
 - [ ] Update real impact numbers in ImpactStats component
 - [ ] Add real ministry photos to event cards
+- [ ] Replace remaining two placeholder blog posts with real articles
 - [ ] Point production domain from Squarespace to Vercel
