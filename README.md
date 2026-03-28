@@ -243,7 +243,7 @@ Hosted on Vercel. Every push to `main` triggers an automatic deployment.
 ## Pending Tasks
 
 - [x] Run `supabase/migrations/001_forms.sql` against Supabase database (completed 2026-03-27)
-- [ ] Replace photo placeholders on /visit page with real ministry photos
+- [x] Replace photo placeholders on /visit page with real ministry photos (completed 2026-03-27)
 - [ ] Replace demo data in `lib/supabase-server.ts` with live Supabase queries
 - [ ] Update real impact numbers in ImpactStats component
 - [ ] Add real ministry photos to event cards

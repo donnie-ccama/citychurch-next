@@ -11,6 +11,9 @@ All notable changes to the Citychurch website are documented here.
   - New `HeroImage` component (`components/HeroImage.tsx`) with gradient overlay and CTA buttons
   - `HeroVideo.tsx` preserved for potential future use
   - Image stored at `public/images/web-hero-3-27-26.png`
+- **Visit page photo gallery** — replaced 6 "Photo Coming Soon" placeholders with real ministry photos
+  - `ministry-01.jpg` through `ministry-06.jpg` in `public/images/`
+  - Photos displayed in responsive 3-column grid with 4:3 aspect ratio, rounded corners, and lazy loading
 
 ### Completed
 - **Supabase migration `001_forms.sql` executed** — all four form tables now live in production:
