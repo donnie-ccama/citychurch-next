@@ -30,29 +30,21 @@ export default function ProofOfLifeCard({
         borderRadius: '12px',
         overflow: 'hidden',
         cursor: 'pointer',
+        breakInside: 'avoid',
       }}
     >
-      {/* Photo */}
-      <div
+      {/* Photo — natural aspect ratio, no cropping */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={photo_url}
+        alt={description || 'Community photo'}
+        loading="lazy"
         style={{
-          aspectRatio: '4/3',
-          overflow: 'hidden',
-          backgroundColor: 'var(--bg-muted)',
+          width: '100%',
+          height: 'auto',
+          display: 'block',
         }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={photo_url}
-          alt={description || 'Community photo'}
-          loading="lazy"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            display: 'block',
-          }}
-        />
-      </div>
+      />
 
       {/* Content */}
       <div style={{ padding: '1rem 1.25rem' }}>

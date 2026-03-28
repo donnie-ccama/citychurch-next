@@ -74,16 +74,10 @@ export default function ProofOfLifeGrid({ initialSubmissions }: ProofOfLifeGridP
 
   return (
     <>
-      {/* Grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          gap: '1.5rem',
-        }}
-      >
+      {/* Masonry Layout */}
+      <div className="pol-masonry">
         {submissions.map((submission) => (
-          <div key={submission.id} className="reveal">
+          <div key={submission.id} className="reveal pol-masonry-item">
             <ProofOfLifeCard
               {...submission}
               onClick={() => openModal(submission.id)}
@@ -91,6 +85,31 @@ export default function ProofOfLifeGrid({ initialSubmissions }: ProofOfLifeGridP
           </div>
         ))}
       </div>
+
+      <style>{`
+        .pol-masonry {
+          columns: 3;
+          column-gap: 1.5rem;
+        }
+        .pol-masonry-item {
+          break-inside: avoid;
+          margin-bottom: 1.5rem;
+        }
+
+        /* Tablet: 2 columns */
+        @media (max-width: 1024px) {
+          .pol-masonry {
+            columns: 2;
+          }
+        }
+
+        /* Phone: single column */
+        @media (max-width: 640px) {
+          .pol-masonry {
+            columns: 1;
+          }
+        }
+      `}</style>
 
       {/* Modal Overlay */}
       {selectedId && selected && (
@@ -122,6 +141,7 @@ export default function ProofOfLifeGrid({ initialSubmissions }: ProofOfLifeGridP
               transform: isAnimating ? 'scale(1)' : 'scale(0.9)',
               opacity: isAnimating ? 1 : 0,
               transition: 'transform 0.3s ease, opacity 0.3s ease',
+              position: 'relative',
             }}
           >
             {/* Close Button */}
@@ -149,15 +169,14 @@ export default function ProofOfLifeGrid({ initialSubmissions }: ProofOfLifeGridP
               &times;
             </button>
 
-            {/* Image */}
+            {/* Image — full natural size */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={selected.photo_url}
               alt={selected.description || 'Community photo'}
               style={{
                 width: '100%',
-                maxHeight: '60vh',
-                objectFit: 'contain',
+                height: 'auto',
                 display: 'block',
                 backgroundColor: 'var(--bg-muted)',
               }}
