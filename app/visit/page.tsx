@@ -190,14 +190,13 @@ export default function Visit() {
         </div>
       </section>
 
-      {/* PHOTO GALLERY (Placeholder) */}
+      {/* PHOTO GALLERY */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div className="reveal">
             <SectionHeader label="See Our Ministry" title="Photos From the Field" />
           </div>
 
-          {/* TODO: Replace placeholders with ministry photos from Donnie */}
           <div
             style={{
               display: 'grid',
@@ -205,29 +204,34 @@ export default function Visit() {
               gap: '1.5rem',
             }}
           >
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+            {[
+              { src: '/images/ministry-01.jpg', alt: 'Citychurch ministry in action' },
+              { src: '/images/ministry-02.jpg', alt: 'Serving families at Citychurch' },
+              { src: '/images/ministry-03.jpg', alt: 'Community gathering at Citychurch' },
+              { src: '/images/ministry-04.jpg', alt: 'Children at Citychurch Amarillo' },
+              { src: '/images/ministry-05.jpg', alt: 'Volunteers serving at Citychurch' },
+              { src: '/images/ministry-06.jpg', alt: 'Citychurch neighborhood outreach' },
+            ].map((photo) => (
               <div
-                key={i}
+                key={photo.src}
                 className="reveal"
                 style={{
                   aspectRatio: '4 / 3',
-                  backgroundColor: 'var(--bg-muted)',
                   borderRadius: '12px',
-                  border: '1px dashed var(--border-color)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  overflow: 'hidden',
                 }}
               >
-                <p
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
                   style={{
-                    color: 'var(--text-muted)',
-                    fontSize: '0.875rem',
-                    fontWeight: 500,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
                   }}
-                >
-                  Photo Coming Soon
-                </p>
+                />
               </div>
             ))}
           </div>
