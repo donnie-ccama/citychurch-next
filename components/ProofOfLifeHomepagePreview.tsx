@@ -31,7 +31,7 @@ export default function ProofOfLifeHomepagePreview() {
           .select('id, photo_url, description, created_at')
           .eq('status', 'approved')
           .order('created_at', { ascending: false })
-          .limit(4);
+          .limit(6);
 
         setSubmissions(data || []);
       } catch {
@@ -49,33 +49,23 @@ export default function ProofOfLifeHomepagePreview() {
   return (
     <div>
       {submissions.length > 0 ? (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '1.25rem',
-          }}
-        >
-          {submissions.map((s) => (
-            <Link
-              key={s.id}
-              href="/proof-of-life"
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <div
-                className="card-hover"
-                style={{
-                  backgroundColor: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                }}
+        <>
+          <div className="pol-homepage-masonry">
+            {submissions.map((s) => (
+              <Link
+                key={s.id}
+                href="/proof-of-life"
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                className="pol-homepage-item"
               >
                 <div
+                  className="card-hover"
                   style={{
-                    aspectRatio: '4/3',
+                    backgroundColor: 'var(--bg-card)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '12px',
                     overflow: 'hidden',
-                    backgroundColor: 'var(--bg-muted)',
+                    breakInside: 'avoid',
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -85,33 +75,56 @@ export default function ProofOfLifeHomepagePreview() {
                     loading="lazy"
                     style={{
                       width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
+                      height: 'auto',
                       display: 'block',
                     }}
                   />
+                  {s.description && (
+                    <div style={{ padding: '0.75rem 1rem' }}>
+                      <p
+                        style={{
+                          fontSize: '0.8125rem',
+                          color: 'var(--text-secondary)',
+                          lineHeight: 1.4,
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {s.description}
+                      </p>
+                    </div>
+                  )}
                 </div>
-                {s.description && (
-                  <div style={{ padding: '0.75rem 1rem' }}>
-                    <p
-                      style={{
-                        fontSize: '0.8125rem',
-                        color: 'var(--text-secondary)',
-                        lineHeight: 1.4,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      {s.description}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+
+          <style>{`
+            .pol-homepage-masonry {
+              columns: 3;
+              column-gap: 1.25rem;
+            }
+            .pol-homepage-item {
+              break-inside: avoid;
+              display: block;
+              margin-bottom: 1.25rem;
+            }
+
+            @media (max-width: 1024px) {
+              .pol-homepage-masonry {
+                columns: 2;
+              }
+            }
+
+            @media (max-width: 640px) {
+              .pol-homepage-masonry {
+                columns: 1;
+              }
+            }
+          `}</style>
+        </>
       ) : (
         <div
           style={{
