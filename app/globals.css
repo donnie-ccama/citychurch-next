@@ -399,6 +399,222 @@ img, video, iframe, canvas, svg {
   }
 }
 
+/* ============================================
+   PHOTO CAROUSEL
+   ============================================ */
+
+/* Skeleton loader while fetching */
+.carousel-skeleton {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 520px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-muted);
+}
+
+.carousel-skeleton-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--bg-muted) 25%,
+    var(--border-color) 50%,
+    var(--bg-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Container */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Viewport holds the slides */
+.carousel-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 520px;
+  overflow: hidden;
+}
+
+/* Individual slide */
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.carousel-slide-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Caption overlay at bottom */
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 1.5rem 1.25rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.carousel-caption span {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: capitalize;
+}
+
+/* Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--taupe-800);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.carousel-container:hover .carousel-arrow,
+.carousel-container:focus-within .carousel-arrow {
+  opacity: 1;
+}
+
+.carousel-arrow:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.carousel-arrow-prev {
+  left: 12px;
+}
+
+.carousel-arrow-next {
+  right: 12px;
+}
+
+.dark .carousel-arrow {
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--taupe-100);
+}
+
+.dark .carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Dot indicators */
+.carousel-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.carousel-dot-active {
+  background: white;
+  transform: scale(1.25);
+}
+
+.dark .carousel-dot {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dark .carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.dark .carousel-dot-active {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile: always show arrows, make them larger touch targets */
+@media (max-width: 640px) {
+  .carousel-arrow {
+    opacity: 1;
+    width: 36px;
+    height: 36px;
+  }
+
+  .carousel-arrow-prev {
+    left: 8px;
+  }
+
+  .carousel-arrow-next {
+    right: 8px;
+  }
+
+  .carousel-caption {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .carousel-caption span {
+    font-size: 0.8125rem;
+  }
+}
+
 /* --- Touch device enhancements --- */
 @media (hover: none) and (pointer: coarse) {
   /* Disable hover effects on touch devices */

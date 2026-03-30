@@ -8,6 +8,7 @@ import DonateButton from '@/components/DonateButton';
 import ImpactStats from '@/components/ImpactStats';
 import EmailSignup from '@/components/EmailSignup';
 import ProofOfLifeHomepagePreview from '@/components/ProofOfLifeHomepagePreview';
+import PhotoCarousel from '@/components/PhotoCarousel';
 import { demoEvents, demoBlogPosts } from '@/lib/supabase-server';
 
 export const metadata: Metadata = {
@@ -103,6 +104,31 @@ export default function Home() {
           >
             Plan Your Visit →
           </Link>
+        </div>
+      </section>
+
+      {/* PHOTO CAROUSEL — pulled live from Google Drive */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="reveal">
+            <div
+              style={{
+                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1rem',
+                marginBottom: '2.5rem',
+              }}
+            >
+              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Community</span>
+              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+            </div>
+          </div>
+          <div className="reveal">
+            <PhotoCarousel />
+          </div>
         </div>
       </section>
 
