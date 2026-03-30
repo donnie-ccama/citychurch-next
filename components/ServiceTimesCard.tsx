@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 const schedule = [
   {
@@ -41,7 +42,7 @@ const labelStyle: React.CSSProperties = {
 };
 
 const timeStyle: React.CSSProperties = {
-  color: 'var(--accent)',
+  color: '#ffffff',
   fontSize: '0.8125rem',
   fontWeight: 600,
   whiteSpace: 'nowrap',
@@ -67,12 +68,12 @@ export default function ServiceTimesCard() {
           alignItems: 'center',
           gap: '0.5rem',
           padding: '0.5rem 1.25rem',
-          background: 'rgba(255, 255, 255, 0.1)',
+          background: 'rgba(0, 0, 0, 0.6)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255, 255, 255, 0.35)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
           borderRadius: open ? '10px 10px 0 0' : '10px',
-          color: 'var(--accent)',
+          color: '#ffffff',
           fontWeight: 600,
           fontSize: '0.875rem',
           cursor: 'pointer',
@@ -127,10 +128,10 @@ export default function ServiceTimesCard() {
       >
         <div
           style={{
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'rgba(0, 0, 0, 0.6)',
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.35)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
             borderTop: 'none',
             borderRadius: '0 0 10px 10px',
             padding: '0.75rem 1.25rem 1rem',
@@ -177,6 +178,41 @@ export default function ServiceTimesCard() {
                 </ul>
               </div>
             ))}
+
+            <hr
+              style={{
+                border: 'none',
+                borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+                margin: '0',
+              }}
+            />
+            <Link
+              href="/visit"
+              style={{
+                display: 'block',
+                textAlign: 'center',
+                padding: '0.5rem 1rem',
+                background: 'rgba(255, 255, 255, 0.15)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '8px',
+                color: '#ffffff',
+                fontSize: '0.8125rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                letterSpacing: '0.02em',
+                transition: 'background 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background =
+                  'rgba(255, 255, 255, 0.25)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background =
+                  'rgba(255, 255, 255, 0.15)';
+              }}
+            >
+              Plan Your Visit &rarr;
+            </Link>
           </div>
         </div>
       </div>
