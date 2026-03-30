@@ -132,6 +132,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* UPCOMING EVENTS */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="reveal">
+            <SectionHeader label="Get Involved" title="Upcoming Ministry Opportunities" />
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '1.5rem',
+            }}
+          >
+            {upcomingEvents.map((event) => (
+              <div key={event.id} className="reveal">
+                <EventCard {...event} />
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
+            <Link
+              href="/ministries"
+              style={{
+                color: 'var(--accent)',
+                fontWeight: 600,
+                fontSize: '0.9375rem',
+                textDecoration: 'none',
+              }}
+            >
+              View All Ministries & Register →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* MISSION STATEMENT */}
       <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }} className="reveal">
@@ -256,43 +293,6 @@ export default function Home() {
       <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }} className="reveal">
           <ImpactStats />
-        </div>
-      </section>
-
-      {/* UPCOMING EVENTS */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Ministry Opportunities" />
-          </div>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
-            {upcomingEvents.map((event) => (
-              <div key={event.id} className="reveal">
-                <EventCard {...event} />
-              </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
-            <Link
-              href="/ministries"
-              style={{
-                color: 'var(--accent)',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                textDecoration: 'none',
-              }}
-            >
-              View All Ministries & Register →
-            </Link>
-          </div>
         </div>
       </section>
 
