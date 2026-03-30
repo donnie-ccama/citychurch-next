@@ -10,6 +10,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const fileId = request.nextUrl.searchParams.get('id');
+  const download = request.nextUrl.searchParams.get('download') === '1';
+  const filename = request.nextUrl.searchParams.get('name') || 'citychurch-photo';
 
   if (!fileId) {
     return NextResponse.json({ error: 'Missing file id' }, { status: 400 });
@@ -47,12 +49,17 @@ export async function GET(request: NextRequest) {
     const contentType =
       response.headers['content-type'] || 'image/jpeg';
 
-    return new NextResponse(buffer, {
-      headers: {
-        'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
-      },
-    });
+    const ext = contentType.includes('png') ? '.png' : contentType.includes('webp') ? '.webp' : '.jpg';
+    const headers: Record<string, string> = {
+      'Content-Type': contentType,
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+    };
+
+    if (download) {
+      headers['Content-Disposition'] = `attachment; filename="${filename}${ext}"`;
+    }
+
+    return new NextResponse(buffer, { headers });
   } catch (err) {
     console.error('[Carousel Image Proxy] Error:', err);
     return NextResponse.json(
