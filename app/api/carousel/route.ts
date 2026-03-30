@@ -64,8 +64,8 @@ export async function GET() {
     const photos = files.map((file) => ({
       id: file.id,
       name: file.name,
-      // Use the Drive thumbnail URL with a larger size parameter
-      src: `https://drive.google.com/thumbnail?id=${file.id}&sz=w1200`,
+      // Proxy through our own API so images load on all devices
+      src: `/api/carousel/image?id=${file.id}`,
       alt: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
       width: file.imageMediaMetadata?.width || 1200,
       height: file.imageMediaMetadata?.height || 800,
