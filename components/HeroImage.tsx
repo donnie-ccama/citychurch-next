@@ -1,3 +1,5 @@
+import ServiceTimesCard from './ServiceTimesCard';
+
 interface HeroImageProps {
   src: string;
   children: React.ReactNode;
@@ -18,6 +20,9 @@ export default function HeroImage({ src, children }: HeroImageProps) {
         maxWidth: '100vw',
       }}
     >
+      {/* Service Times overlay card */}
+      <ServiceTimesCard />
+
       {/* Hero image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
