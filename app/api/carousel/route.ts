@@ -28,7 +28,7 @@ interface DriveFile {
 
 export async function GET() {
   const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
-  const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
+  const clientEmail = (process.env.GOOGLE_SHEETS_CLIENT_EMAIL || '').replace(/\n/g, '').trim();
   const folderId =
     process.env.GOOGLE_DRIVE_CAROUSEL_FOLDER_ID ||
     '10mpnGFSKI0GDdAt4Gcgtk5vVVQN3qNNI';
