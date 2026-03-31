@@ -384,7 +384,7 @@ export default async function Home() {
 
           <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
             <Link
-              href="/stories"
+              href="/blog"
               style={{
                 color: 'var(--accent)',
                 fontWeight: 600,
