@@ -202,7 +202,7 @@ export default function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              Citychurch didn't start with a strategic plan or a building. It started at street level — with a few people who believed that showing up mattered. Weekly meals in parks. Conversations on sidewalks. Knocking on doors in neighborhoods most people drive past.
+              Citychurch started in 1997 when the Lane family moved into an old warehouse in downtown Amarillo. Don and Diana Lane, along with their children Donnie, James, and Anna, were recovering from a difficult time. Don had just received a liver transplant, and the family had lost their church, home, cars, and financial security. Through it all, they stuck together and believed God had protected them for a special purpose.
             </p>
             <p
               style={{
@@ -212,7 +212,7 @@ export default function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              What began as a few meals became a movement. The Cafe grew into a place where children and families could gather, eat, and hear the Word of God. Park ministry brought the mission outdoors — meeting children on their turf. Neighborhood visits and home visits created the kind of relationships where real discipleship happens — not in a classroom, but at a kitchen table.
+              Don and Diana always cared deeply for families often overlooked by churches, whether because of where they lived, their struggles, or the color of their skin.
             </p>
             <p
               style={{
@@ -222,7 +222,27 @@ export default function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              Over time, a family restoration strategy took shape: serve the children, and you earn the trust of the family. Disciple the caregivers — parents, grandparents, aunts, uncles — and you begin to see transformation that outlasts any single program. Help with no hope is no help at all. So we bring both.
+              Citychurch started in a simple way: talking with people on sidewalks and knocking on doors in neighborhoods that many others ignored.
+            </p>
+            <p
+              style={{
+                fontSize: '1.0625rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.8,
+                marginBottom: '1.5rem',
+              }}
+            >
+              What started with a few meals turned into a movement. Over the years, Citychurch has become a welcoming place for families, churches, and neighbors who care about helping those in need, especially children. The Cafe is now a spot where children and families can eat together and hear the Word of God. Park Ministry took the mission outside, meeting children where they are. Visiting neighborhoods and homes has built real relationships, where discipleship happens not in a classroom, but around a kitchen table.
+            </p>
+            <p
+              style={{
+                fontSize: '1.0625rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.8,
+                marginBottom: '1.5rem',
+              }}
+            >
+              Over time, we found a way to help families heal: serve the children first to earn the family&#39;s trust. When we support and guide caregivers, parents, grandparents, aunts, and uncles, real change happens that lasts beyond any program. We believe that help without hope is not enough, so we offer both.
             </p>
             <p
               style={{
@@ -231,7 +251,7 @@ export default function About() {
                 lineHeight: 1.8,
               }}
             >
-              Today, Citychurch continues to grow — not because of a marketing strategy, but because faithful people keep showing up. We are a life-boat for the poorest children and families in Amarillo. And we will keep going — until they all know Him.
+              Today, Citychurch keeps growing, not because of advertising, but because faithful people continue to show up. We are a lifeboat for the poorest children and families in Amarillo, and we will keep going until everyone knows Him.
             </p>
           </div>
         </div>
