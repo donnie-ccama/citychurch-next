@@ -485,6 +485,7 @@ img, video, iframe, canvas, svg {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
   pointer-events: none;
   z-index: 2;
+  text-align: right;
 }
 
 .carousel-caption span {
