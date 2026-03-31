@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
 
-const DONATE_URL = 'https://aecfdssy.donorsupport.co';
+const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

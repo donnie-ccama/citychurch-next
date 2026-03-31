@@ -1,18 +1,18 @@
 'use client';
 
 /**
- * DonateButton — Links to FundraiseUp donation portal.
+ * DonateButton — Links to CityKid donation portal.
  *
  * Usage:
  *   <DonateButton />                              — default "Donate" button
  *   <DonateButton label="Feed a Child Today" />   — custom label
  *   <DonateButton variant="nav" />                — compact nav style
  *
- * Opens https://aecfdssy.donorsupport.co in a new tab.
+ * Opens https://www.citykid.online/?form=FUNAFYBLTAV in a new tab.
  * The portal redirects donors back to the main site upon completion.
  */
 
-const DONATE_URL = 'https://aecfdssy.donorsupport.co';
+const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
 
 interface DonateButtonProps {
   label?: string;
