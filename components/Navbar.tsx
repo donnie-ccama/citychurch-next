@@ -263,12 +263,12 @@ export default function Navbar() {
 
       <style jsx>{`
         #desktop-nav {
-          @media (min-width: 768px) {
+          @media (min-width: 1024px) {
             display: flex !important;
           }
         }
         #hamburger-btn {
-          @media (min-width: 768px) {
+          @media (min-width: 1024px) {
             display: none !important;
           }
         }
