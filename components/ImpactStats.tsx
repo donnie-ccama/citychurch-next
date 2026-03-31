@@ -17,10 +17,10 @@ interface ImpactStatsProps {
 }
 
 const defaultStats: Stat[] = [
-  { value: '50,000+', label: 'Meals Served' },
-  { value: '1,200+', label: 'Children Fed' },
-  { value: '300+', label: 'Volunteers' },
-  { value: '6+', label: 'Years Serving' },
+  { value: '150,000', label: 'Meals Served Each Year' },
+  { value: '1,400+', label: 'Children' },
+  { value: '600', label: 'Volunteers' },
+  { value: '29', label: 'Years Serving' },
 ];
 
 export default function ImpactStats({ stats = defaultStats, variant = 'default' }: ImpactStatsProps) {
