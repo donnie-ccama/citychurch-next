@@ -132,35 +132,37 @@ export default function About() {
           >
             It all began with a simple question: What if the Gospel were as free as the air we breathe?
           </p>
-          <p
-            style={{
-              fontSize: '1.0625rem',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.8,
-              marginBottom: '1.25rem',
-            }}
-          >
-            It sounds like an easy question, but in reality, churches were often started everywhere except the poorest parts of the city. In one of the most underserved areas of the Texas Panhandle, thousands of children struggle with hunger, instability, and loneliness. Citychurch began because we believe these children and their families deserve more than just sympathy. They deserve real pastoral care. They deserve to be found, fed, and shown the hope of Jesus Christ.
-          </p>
-          <p
-            style={{
-              fontSize: '1.0625rem',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.8,
-              marginBottom: '1.25rem',
-            }}
-          >
-            Our approach is straightforward. We meet children where they are—whether in parks, neighborhoods, or at their doorsteps. We provide meals with dignity and reliability. We also teach, introducing children and families to Jesus Christ through ongoing discipleship and a steady presence.
-          </p>
-          <p
-            style={{
-              fontSize: '1.0625rem',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.8,
-            }}
-          >
-            We believe children are the key to reaching families. When a child feels cared for, trust grows. With trust, families become open to conversation, relationships, and the gospel. As the gospel takes root, families can begin to break the cycle of poverty for future generations.
-          </p>
+          <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+            <p
+              style={{
+                fontSize: '1.0625rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.8,
+                marginBottom: '1.25rem',
+              }}
+            >
+              It sounds like an easy question, but in reality, churches were often started everywhere except the poorest parts of the city. In one of the most underserved areas of the Texas Panhandle, thousands of children struggle with hunger, instability, and loneliness. Citychurch began because we believe these children and their families deserve more than just sympathy. They deserve real pastoral care. They deserve to be found, fed, and shown the hope of Jesus Christ.
+            </p>
+            <p
+              style={{
+                fontSize: '1.0625rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.8,
+                marginBottom: '1.25rem',
+              }}
+            >
+              Our approach is straightforward. We meet children where they are—whether in parks, neighborhoods, or at their doorsteps. We provide meals with dignity and reliability. We also teach, introducing children and families to Jesus Christ through ongoing discipleship and a steady presence.
+            </p>
+            <p
+              style={{
+                fontSize: '1.0625rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.8,
+              }}
+            >
+              We believe children are the key to reaching families. When a child feels cared for, trust grows. With trust, families become open to conversation, relationships, and the gospel. As the gospel takes root, families can begin to break the cycle of poverty for future generations.
+            </p>
+          </div>
         </div>
       </section>
 
