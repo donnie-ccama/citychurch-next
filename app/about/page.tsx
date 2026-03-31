@@ -127,6 +127,7 @@ export default function About() {
               color: 'var(--text-primary)',
               fontWeight: 300,
               marginBottom: '1.5rem',
+              textAlign: 'center',
             }}
           >
             It all began with a simple question: What if the Gospel were as free as the air we breathe?
