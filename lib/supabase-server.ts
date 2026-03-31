@@ -112,6 +112,42 @@ Donnie Lane Jr.`,
     updated_at: '2026-02-28T10:00:00Z',
   },
   {
+    id: '4',
+    title: 'Citychurch Music Academy',
+    slug: 'citychurch-music-academy',
+    content: `It is well known how important music is to everyone. Music can help people in many ways throughout their lives. It stimulates multiple regions of the brain and can improve cognitive, emotional, and even physical functioning.
+
+Especially for children, music is a powerful tool that brings numerous benefits, including intellectual, social-emotional, motor, and language development.
+
+Here at Citychurch, we understand the importance of music and recognize it as a beautiful way to express faith, praise, and worship to God.
+
+So, why am I saying all this? Because we're about to launch the "Citychurch Music Academy"!
+
+We believe this new initiative will bless many children, teenagers, and young people in our community. Completely free of charge, we want to give them the opportunity to learn how to play an instrument or take vocal lessons. Can you imagine what a blessing this could be for those who don't have the financial means to afford music classes — and now will have a place that offers it to them?
+
+We're excited, but we're also facing some challenges. We'll be starting in a small room in our facility, which will work for now — but as the program grows, we'll need more space and may even need to remodel.
+
+To get started, we'll need to purchase at least two acoustic guitars, one electric keyboard, guitar stands, electronic drums, and other equipment.
+
+## Would You Consider Helping Us?
+
+One way you can support this ministry is by praying — asking God to guide us and bless every child who will be impacted by this project.
+
+Secondly, if you feel led to support us financially or through donations of instruments or equipment, it would make a big difference and be deeply appreciated.
+
+May God bless you richly.
+
+> "Praise him with the sounding of the trumpet, praise him with the harp and lyre, praise him with timbrel and dancing, praise him with the strings and pipe, praise him with the clash of cymbals, praise him with resounding cymbals. Let everything that has breath praise the Lord. Praise the Lord." — Psalm 150:4-6`,
+    excerpt: 'We\'re launching the Citychurch Music Academy — free music lessons for children, teenagers, and young people in our community. Learn how you can help.',
+    category: 'Community' as const,
+    author: 'Renato Silva',
+    featured_image: null,
+    published: true,
+    reading_time: 4,
+    created_at: '2025-05-28T10:00:00Z',
+    updated_at: '2025-05-28T10:00:00Z',
+  },
+  {
     id: '3',
     title: 'Faces of Amarillo: A Photo Essay',
     slug: 'faces-of-amarillo',
