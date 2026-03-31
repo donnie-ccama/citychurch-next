@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-admin';
 
 // GET /api/admin/blog — fetch all blog posts (published and drafts)
@@ -41,6 +42,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  revalidatePath('/blog');
+  revalidatePath('/');
+
   return NextResponse.json(data, { status: 201 });
 }
 
@@ -65,6 +69,12 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  revalidatePath('/blog');
+  revalidatePath('/');
+  if (data?.slug) {
+    revalidatePath(`/blog/${data.slug}`);
+  }
+
   return NextResponse.json(data);
 }
 
@@ -78,6 +88,14 @@ export async function DELETE(request: NextRequest) {
   }
 
   const supabase = createAdminClient();
+
+  // Fetch the slug before deleting so we can revalidate its cached page
+  const { data: post } = await supabase
+    .from('blog_posts')
+    .select('slug')
+    .eq('id', id)
+    .single();
+
   const { error } = await supabase
     .from('blog_posts')
     .delete()
@@ -85,6 +103,12 @@ export async function DELETE(request: NextRequest) {
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  revalidatePath('/blog');
+  revalidatePath('/');
+  if (post?.slug) {
+    revalidatePath(`/blog/${post.slug}`);
   }
 
   return NextResponse.json({ success: true });
