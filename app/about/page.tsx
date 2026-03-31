@@ -129,7 +129,7 @@ export default function About() {
               marginBottom: '1.5rem',
             }}
           >
-            It started with a simple question: What if no child in Amarillo had to go to bed hungry?
+            It all began with a simple question: What if the Gospel were as free as the air we breathe?
           </p>
           <p
             style={{
@@ -139,7 +139,7 @@ export default function About() {
               marginBottom: '1.25rem',
             }}
           >
-            In one of the most underserved areas of the Texas Panhandle, thousands of children face food insecurity, instability, and isolation. Citychurch was born from the conviction that these children — and the families who love them — deserve more than a system that overlooks them. They deserve to be found, fed, and taught the hope of Jesus Christ.
+            It sounds like an easy question, but in reality, churches were often started everywhere except the poorest parts of the city. In one of the most underserved areas of the Texas Panhandle, thousands of children struggle with hunger, instability, and loneliness. Citychurch began because we believe these children and their families deserve more than just sympathy. They deserve real pastoral care. They deserve to be found, fed, and shown the hope of Jesus Christ.
           </p>
           <p
             style={{
@@ -149,7 +149,7 @@ export default function About() {
               marginBottom: '1.25rem',
             }}
           >
-            Our approach is direct: we find children where they are — in parks, in neighborhoods, on doorsteps. We feed them a freshly prepared meal for just $2.50 — a hot item, fresh fruit, and popcorn — served with dignity and consistency. And we teach them, introducing children and families to Jesus Christ through long-term discipleship and faithful presence.
+            Our approach is straightforward. We meet children where they are—whether in parks, neighborhoods, or at their doorsteps. We provide meals with dignity and reliability. We also teach, introducing children and families to Jesus Christ through ongoing discipleship and a steady presence.
           </p>
           <p
             style={{
@@ -158,7 +158,7 @@ export default function About() {
               lineHeight: 1.8,
             }}
           >
-            We believe children are the key to winning the hearts of the family. When a child is cared for, trust is built. When trust is built, doors open — to conversation, to relationship, to the gospel. And when the gospel takes root in a family, generational cycles of poverty begin to break.
+            We believe children are the key to reaching families. When a child feels cared for, trust grows. With trust, families become open to conversation, relationships, and the gospel. As the gospel takes root, families can begin to break the cycle of poverty for future generations.
           </p>
         </div>
       </section>
