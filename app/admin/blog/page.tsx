@@ -1,66 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BlogPost } from '@/lib/types';
 
-const demoBlogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'The Power of Community Service',
-    slug: 'power-community-service',
-    content: 'Community service strengthens our bonds and transforms lives...',
-    excerpt: 'Discover how serving others enriches our faith community.',
-    category: 'Outreach',
-    author: 'Pastor John',
-    featured_image: null,
-    published: true,
-    reading_time: 5,
-    created_at: '2024-03-01',
-    updated_at: '2024-03-01',
-  },
-  {
-    id: '2',
-    title: 'Growing in Leadership',
-    slug: 'growing-in-leadership',
-    content: 'True leadership starts with humility and service...',
-    excerpt: 'Learn the principles of effective Christian leadership.',
-    category: 'Leadership',
-    author: 'Pastor Sarah',
-    featured_image: null,
-    published: true,
-    reading_time: 7,
-    created_at: '2024-02-28',
-    updated_at: '2024-02-28',
-  },
-  {
-    id: '3',
-    title: 'Faith Stories: Testimonies of Grace',
-    slug: 'faith-stories-testimonies',
-    content: 'Members of our congregation share their transformative experiences...',
-    excerpt: 'Powerful stories of God\'s grace in our community.',
-    category: 'Documentary',
-    author: 'Communications Team',
-    featured_image: null,
-    published: false,
-    reading_time: 10,
-    created_at: '2024-03-05',
-    updated_at: '2024-03-05',
-  },
-];
-
 export default function BlogAdminPage() {
-  const [posts, setPosts] = useState<BlogPost[]>(demoBlogPosts);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
+  const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+  const [formData, setFormData] = useState<{
+    title: string;
+    slug: string;
+    category: 'Outreach' | 'Documentary' | 'Leadership' | 'Community';
+    author: string;
+    content: string;
+    excerpt: string;
+    reading_time: string;
+    published: boolean;
+  }>({
     title: '',
     slug: '',
-    category: 'Outreach' as const,
+    category: 'Outreach',
     author: '',
     content: '',
     excerpt: '',
     reading_time: '',
     published: false,
   });
+
+  const fetchPosts = async () => {
+    try {
+      const res = await fetch('/api/admin/blog');
+      if (res.ok) {
+        const data = await res.json();
+        setPosts(data);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   const generateSlug = (title: string) => {
     return title
@@ -76,27 +58,11 @@ export default function BlogAdminPage() {
     setFormData({
       ...formData,
       title,
-      slug: generateSlug(title),
+      slug: editingPost ? formData.slug : generateSlug(title),
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newPost: BlogPost = {
-      id: String(posts.length + 1),
-      title: formData.title,
-      slug: formData.slug,
-      content: formData.content,
-      excerpt: formData.excerpt,
-      category: formData.category,
-      author: formData.author,
-      featured_image: null,
-      published: formData.published,
-      reading_time: parseInt(formData.reading_time) || 0,
-      created_at: new Date().toISOString().split('T')[0],
-      updated_at: new Date().toISOString().split('T')[0],
-    };
-    setPosts([newPost, ...posts]);
+  const resetForm = () => {
     setFormData({
       title: '',
       slug: '',
@@ -107,21 +73,97 @@ export default function BlogAdminPage() {
       reading_time: '',
       published: false,
     });
+    setEditingPost(null);
     setShowForm(false);
-    console.log('Blog post created:', newPost);
   };
 
-  const handleDelete = (id: string) => {
-    setPosts(posts.filter((post) => post.id !== id));
-    console.log('Blog post deleted:', id);
+  const handleEdit = (post: BlogPost) => {
+    setEditingPost(post);
+    setFormData({
+      title: post.title,
+      slug: post.slug,
+      category: post.category,
+      author: post.author,
+      content: post.content,
+      excerpt: post.excerpt,
+      reading_time: String(post.reading_time),
+      published: post.published,
+    });
+    setShowForm(true);
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const payload = {
+      title: formData.title,
+      slug: formData.slug,
+      content: formData.content,
+      excerpt: formData.excerpt,
+      category: formData.category,
+      author: formData.author,
+      published: formData.published,
+      reading_time: parseInt(formData.reading_time) || 0,
+    };
+
+    if (editingPost) {
+      // Update existing post
+      const res = await fetch('/api/admin/blog', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: editingPost.id, ...payload }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setPosts(posts.map((p) => (p.id === updated.id ? updated : p)));
+        resetForm();
+      }
+    } else {
+      // Create new post
+      const res = await fetch('/api/admin/blog', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        const created = await res.json();
+        setPosts([created, ...posts]);
+        resetForm();
+      }
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    const res = await fetch('/api/admin/blog', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    if (res.ok) {
+      setPosts(posts.filter((post) => post.id !== id));
+    }
+  };
+
+  if (loading) {
+    return (
+      <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
+        Loading blog posts...
+      </div>
+    );
+  }
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <h1 style={{ fontSize: '2rem', fontWeight: '700', margin: 0 }}>Blog Posts</h1>
         <button
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            if (showForm) {
+              resetForm();
+            } else {
+              setShowForm(true);
+            }
+          }}
           style={{
             padding: '0.75rem 1.5rem',
             backgroundColor: 'var(--accent)',
@@ -154,7 +196,9 @@ export default function BlogAdminPage() {
             marginBottom: '2rem',
           }}
         >
-          <h2 style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.25rem' }}>Create New Blog Post</h2>
+          <h2 style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.25rem' }}>
+            {editingPost ? 'Edit Blog Post' : 'Create New Blog Post'}
+          </h2>
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '1.5rem' }}>
               <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
@@ -356,11 +400,11 @@ export default function BlogAdminPage() {
                   e.currentTarget.style.opacity = '1';
                 }}
               >
-                Save Post
+                {editingPost ? 'Update Post' : 'Save Post'}
               </button>
               <button
                 type="button"
-                onClick={() => setShowForm(false)}
+                onClick={resetForm}
                 style={{
                   padding: '0.75rem 1.5rem',
                   backgroundColor: 'transparent',
@@ -494,7 +538,7 @@ export default function BlogAdminPage() {
                   </span>
                 </td>
                 <td style={{ padding: '1rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                  {post.created_at}
+                  {new Date(post.created_at).toLocaleDateString()}
                 </td>
                 <td
                   style={{
@@ -506,7 +550,7 @@ export default function BlogAdminPage() {
                   }}
                 >
                   <button
-                    onClick={() => console.log('Edit:', post.id)}
+                    onClick={() => handleEdit(post)}
                     style={{
                       padding: '0.5rem 1rem',
                       backgroundColor: 'transparent',

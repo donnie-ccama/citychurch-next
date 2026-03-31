@@ -9,16 +9,29 @@ import ImpactStats from '@/components/ImpactStats';
 import EmailSignup from '@/components/EmailSignup';
 import ProofOfLifeHomepagePreview from '@/components/ProofOfLifeHomepagePreview';
 import PhotoCarousel from '@/components/PhotoCarousel';
-import { demoEvents, demoBlogPosts } from '@/lib/supabase-server';
+import { demoEvents } from '@/lib/supabase-server';
+import { createServerClient } from '@/lib/supabase-server';
+import { BlogPost } from '@/lib/types';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Citychurch — ...for the heart of the city.',
   description: 'Citychurch Amarillo — Finding, feeding, and teaching children and families who are most vulnerable. $2.50 feeds a child a hot meal, fresh fruit, and popcorn.',
 };
 
-export default function Home() {
+export default async function Home() {
   const upcomingEvents = demoEvents.slice(0, 3);
-  const recentPosts = demoBlogPosts.slice(0, 3);
+
+  const supabase = createServerClient();
+  const { data: blogPosts } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('published', true)
+    .order('created_at', { ascending: false })
+    .limit(3);
+  const recentPosts: BlogPost[] = blogPosts ?? [];
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden' }}>

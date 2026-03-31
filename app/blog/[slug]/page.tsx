@@ -3,9 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import BlogCard from '@/components/BlogCard';
 import SocialShare from '@/components/SocialShare';
-import { demoBlogPosts } from '@/lib/supabase-server';
+import { createServerClient } from '@/lib/supabase-server';
+import { BlogPost } from '@/lib/types';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+
+export const revalidate = 3600; // ISR: revalidate every hour
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -15,7 +18,13 @@ export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = demoBlogPosts.find((p) => p.slug === slug);
+  const supabase = createServerClient();
+  const { data: post } = await supabase
+    .from('blog_posts')
+    .select('title, excerpt')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single();
 
   if (!post) {
     return {
@@ -31,16 +40,31 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return demoBlogPosts.map((post) => ({
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return [];
+
+  const supabase = createServerClient();
+  const { data: posts } = await supabase
+    .from('blog_posts')
+    .select('slug')
+    .eq('published', true);
+
+  return (posts ?? []).map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default async function BlogPost({
+export default async function BlogPostPage({
   params,
 }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = demoBlogPosts.find((p) => p.slug === slug);
+  const supabase = createServerClient();
+
+  const { data: post } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single<BlogPost>();
 
   if (!post) {
     return (
@@ -60,12 +84,28 @@ export default async function BlogPost({
     );
   }
 
-  const relatedPosts = demoBlogPosts.filter(
-    (p) => p.id !== post.id && p.category === post.category
-  ).slice(0, 3);
+  // Related posts: same category, excluding current post
+  const { data: relatedPosts } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('published', true)
+    .eq('category', post.category)
+    .neq('id', post.id)
+    .order('created_at', { ascending: false })
+    .limit(3);
 
-  const allOtherPosts = demoBlogPosts.filter((p) => p.id !== post.id).slice(0, 3);
-  const postsToShow = relatedPosts.length > 0 ? relatedPosts : allOtherPosts;
+  // Fallback: if no same-category posts, show other recent posts
+  let postsToShow: BlogPost[] = relatedPosts ?? [];
+  if (postsToShow.length === 0) {
+    const { data: otherPosts } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('published', true)
+      .neq('id', post.id)
+      .order('created_at', { ascending: false })
+      .limit(3);
+    postsToShow = otherPosts ?? [];
+  }
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
