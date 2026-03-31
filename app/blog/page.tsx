@@ -3,16 +3,39 @@ import Link from 'next/link';
 import SectionHeader from '@/components/SectionHeader';
 import BlogCard from '@/components/BlogCard';
 import BlogClient from '@/components/BlogClient';
-import { demoBlogPosts } from '@/lib/supabase-server';
+import { createServerClient } from '@/lib/supabase-server';
+import { BlogPost } from '@/lib/types';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // ISR: revalidate every hour
 
 export const metadata: Metadata = {
   title: 'Blog — Citychurch',
   description: 'Stories from the field. Articles about outreach, documentary work, leadership, and community from Citychurch Amarillo.',
 };
 
-export default function Blog() {
-  const featuredPost = demoBlogPosts[0];
-  const remainingPosts = demoBlogPosts.slice(1);
+export default async function Blog() {
+  const supabase = createServerClient();
+  const { data: posts } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('published', true)
+    .order('created_at', { ascending: false });
+
+  const allPosts: BlogPost[] = posts ?? [];
+  const featuredPost = allPosts[0];
+  const remainingPosts = allPosts.slice(1);
+
+  if (!featuredPost) {
+    return (
+      <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+        <section style={{ padding: '6rem 1.5rem', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem' }}>No Posts Yet</h1>
+          <p style={{ color: 'var(--text-secondary)' }}>Check back soon for stories from the field.</p>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
