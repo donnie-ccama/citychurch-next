@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BlogPost } from '@/lib/types';
 
 export default function BlogAdminPage() {
@@ -17,6 +17,7 @@ export default function BlogAdminPage() {
     excerpt: string;
     reading_time: string;
     published: boolean;
+    featured_image: string;
   }>({
     title: '',
     slug: '',
@@ -26,7 +27,14 @@ export default function BlogAdminPage() {
     excerpt: '',
     reading_time: '',
     published: false,
+    featured_image: '',
   });
+
+  const [featuredUploading, setFeaturedUploading] = useState(false);
+  const [inlineUploading, setInlineUploading] = useState(false);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const featuredInputRef = useRef<HTMLInputElement>(null);
+  const inlineInputRef = useRef<HTMLInputElement>(null);
 
   const fetchPosts = async () => {
     try {
@@ -72,6 +80,7 @@ export default function BlogAdminPage() {
       excerpt: '',
       reading_time: '',
       published: false,
+      featured_image: '',
     });
     setEditingPost(null);
     setShowForm(false);
@@ -88,8 +97,78 @@ export default function BlogAdminPage() {
       excerpt: post.excerpt,
       reading_time: String(post.reading_time),
       published: post.published,
+      featured_image: post.featured_image || '',
     });
     setShowForm(true);
+  };
+
+  const uploadImage = async (file: File): Promise<string | null> => {
+    const body = new FormData();
+    body.append('file', file);
+
+    const res = await fetch('/api/admin/upload', { method: 'POST', body });
+    if (!res.ok) {
+      const err = await res.json();
+      alert(err.error || 'Upload failed');
+      return null;
+    }
+    const data = await res.json();
+    return data.url;
+  };
+
+  const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setFeaturedUploading(true);
+    const url = await uploadImage(file);
+    if (url) {
+      setFormData((prev) => ({ ...prev, featured_image: url }));
+    }
+    setFeaturedUploading(false);
+    // Reset input so the same file can be re-selected
+    e.target.value = '';
+  };
+
+  const handleInlineImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setInlineUploading(true);
+    const url = await uploadImage(file);
+    if (url) {
+      const textarea = contentRef.current;
+      if (textarea) {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = formData.content;
+        const markdown = `![${file.name}](${url})`;
+        const newContent = text.substring(0, start) + markdown + text.substring(end);
+        setFormData((prev) => ({ ...prev, content: newContent }));
+
+        // Restore cursor position after the inserted markdown
+        requestAnimationFrame(() => {
+          textarea.focus();
+          const newPos = start + markdown.length;
+          textarea.setSelectionRange(newPos, newPos);
+        });
+      }
+    }
+    setInlineUploading(false);
+    e.target.value = '';
+  };
+
+  const handleFeaturedDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+
+    setFeaturedUploading(true);
+    const url = await uploadImage(file);
+    if (url) {
+      setFormData((prev) => ({ ...prev, featured_image: url }));
+    }
+    setFeaturedUploading(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -102,6 +181,7 @@ export default function BlogAdminPage() {
       excerpt: formData.excerpt,
       category: formData.category,
       author: formData.author,
+      featured_image: formData.featured_image || null,
       published: formData.published,
       reading_time: parseInt(formData.reading_time) || 0,
     };
@@ -142,6 +222,18 @@ export default function BlogAdminPage() {
     if (res.ok) {
       setPosts(posts.filter((post) => post.id !== id));
     }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '0.75rem 1rem',
+    border: '1px solid var(--border-color)',
+    borderRadius: '8px',
+    backgroundColor: 'var(--bg-primary)',
+    color: 'var(--text-primary)',
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '1rem',
+    boxSizing: 'border-box' as const,
   };
 
   if (loading) {
@@ -209,17 +301,7 @@ export default function BlogAdminPage() {
                 value={formData.title}
                 onChange={handleTitleChange}
                 required
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  backgroundColor: 'var(--bg-primary)',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '1rem',
-                  boxSizing: 'border-box',
-                }}
+                style={inputStyle}
               />
             </div>
 
@@ -232,15 +314,11 @@ export default function BlogAdminPage() {
                 value={formData.slug}
                 readOnly
                 style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
+                  ...inputStyle,
                   backgroundColor: 'var(--bg-secondary)',
                   color: 'var(--text-secondary)',
                   fontFamily: 'monospace',
                   fontSize: '0.875rem',
-                  boxSizing: 'border-box',
                 }}
               />
             </div>
@@ -255,20 +333,10 @@ export default function BlogAdminPage() {
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      category: e.target.value as any,
+                      category: e.target.value as 'Outreach' | 'Documentary' | 'Leadership' | 'Community',
                     })
                   }
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: '8px',
-                    backgroundColor: 'var(--bg-primary)',
-                    color: 'var(--text-primary)',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '1rem',
-                    boxSizing: 'border-box',
-                  }}
+                  style={inputStyle}
                 >
                   <option>Outreach</option>
                   <option>Documentary</option>
@@ -285,19 +353,106 @@ export default function BlogAdminPage() {
                   value={formData.author}
                   onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: '8px',
-                    backgroundColor: 'var(--bg-primary)',
-                    color: 'var(--text-primary)',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '1rem',
-                    boxSizing: 'border-box',
-                  }}
+                  style={inputStyle}
                 />
               </div>
+            </div>
+
+            {/* Featured Image Upload */}
+            <div style={{ marginBottom: '1.5rem' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
+                Featured Image
+              </label>
+              <input
+                ref={featuredInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                onChange={handleFeaturedImageUpload}
+                style={{ display: 'none' }}
+              />
+              {formData.featured_image ? (
+                <div style={{ position: 'relative' }}>
+                  <img
+                    src={formData.featured_image}
+                    alt="Featured preview"
+                    style={{
+                      width: '100%',
+                      maxHeight: '240px',
+                      objectFit: 'cover',
+                      borderRadius: '8px',
+                      border: '1px solid var(--border-color)',
+                    }}
+                  />
+                  <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => featuredInputRef.current?.click()}
+                      style={{
+                        padding: '0.5rem 1rem',
+                        backgroundColor: 'transparent',
+                        color: 'var(--text-secondary)',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Replace Image
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, featured_image: '' })}
+                      style={{
+                        padding: '0.5rem 1rem',
+                        backgroundColor: 'transparent',
+                        color: '#EF4444',
+                        border: '1px solid #EF4444',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  onClick={() => !featuredUploading && featuredInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={handleFeaturedDrop}
+                  style={{
+                    border: '2px dashed var(--border-color)',
+                    borderRadius: '8px',
+                    padding: '2rem',
+                    textAlign: 'center',
+                    cursor: featuredUploading ? 'wait' : 'pointer',
+                    transition: 'border-color 0.2s ease',
+                    backgroundColor: 'var(--bg-primary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!featuredUploading) e.currentTarget.style.borderColor = 'var(--accent)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border-color)';
+                  }}
+                >
+                  {featuredUploading ? (
+                    <div style={{ color: 'var(--text-secondary)' }}>
+                      <div style={{ marginBottom: '0.5rem', fontSize: '1.5rem' }}>...</div>
+                      Uploading...
+                    </div>
+                  ) : (
+                    <div style={{ color: 'var(--text-secondary)' }}>
+                      <div style={{ marginBottom: '0.5rem', fontSize: '1.5rem' }}>+</div>
+                      Click or drag an image here
+                      <div style={{ fontSize: '0.75rem', marginTop: '0.25rem' }}>
+                        JPEG, PNG, WebP, or GIF (max 5MB)
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div style={{ marginBottom: '1.5rem' }}>
@@ -308,39 +463,66 @@ export default function BlogAdminPage() {
                 value={formData.excerpt}
                 onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                 style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  backgroundColor: 'var(--bg-primary)',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '1rem',
+                  ...inputStyle,
                   minHeight: '80px',
-                  boxSizing: 'border-box',
                 }}
               />
             </div>
 
+            {/* Content with Insert Image button */}
             <div style={{ marginBottom: '1.5rem' }}>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>
-                Content (Markdown)
-              </label>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                <label style={{ fontWeight: '500' }}>
+                  Content (Markdown)
+                </label>
+                <div>
+                  <input
+                    ref={inlineInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onChange={handleInlineImageUpload}
+                    style={{ display: 'none' }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => !inlineUploading && inlineInputRef.current?.click()}
+                    disabled={inlineUploading}
+                    style={{
+                      padding: '0.4rem 0.75rem',
+                      backgroundColor: 'transparent',
+                      color: inlineUploading ? 'var(--text-secondary)' : 'var(--accent)',
+                      border: `1px solid ${inlineUploading ? 'var(--border-color)' : 'var(--accent)'}`,
+                      borderRadius: '6px',
+                      cursor: inlineUploading ? 'wait' : 'pointer',
+                      fontSize: '0.8rem',
+                      fontWeight: '500',
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!inlineUploading) {
+                        e.currentTarget.style.backgroundColor = 'var(--accent)';
+                        e.currentTarget.style.color = 'white';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = inlineUploading ? 'var(--text-secondary)' : 'var(--accent)';
+                    }}
+                  >
+                    {inlineUploading ? 'Uploading...' : 'Insert Image'}
+                  </button>
+                </div>
+              </div>
               <textarea
+                ref={contentRef}
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                 required
                 style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  backgroundColor: 'var(--bg-primary)',
-                  color: 'var(--text-primary)',
+                  ...inputStyle,
                   fontFamily: 'monospace',
                   fontSize: '0.875rem',
                   minHeight: '200px',
-                  boxSizing: 'border-box',
                 }}
               />
             </div>
@@ -354,17 +536,7 @@ export default function BlogAdminPage() {
                   type="number"
                   value={formData.reading_time}
                   onChange={(e) => setFormData({ ...formData, reading_time: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem 1rem',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: '8px',
-                    backgroundColor: 'var(--bg-primary)',
-                    color: 'var(--text-primary)',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '1rem',
-                    boxSizing: 'border-box',
-                  }}
+                  style={inputStyle}
                 />
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-end' }}>
