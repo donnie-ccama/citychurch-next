@@ -14,7 +14,7 @@ The website for Citychurch Amarillo, a non-profit ministry that finds, feeds, an
 | Framework | Next.js 16 (App Router, Turbopack, React 19) |
 | Styling | Tailwind CSS v4 + inline styles with CSS custom properties |
 | Database | Supabase (PostgreSQL with Row-Level Security) |
-| Donations | FundraiseUp (portal: aecfdssy.donorsupport.co) |
+| Donations | CityKid Online (citykid.online) |
 | Email list | Mailchimp (Audience ID: 4fed0cb6a0, Server: us21) |
 | Sheets sync | Google Sheets API via googleapis (service account) |
 | Hosting | Vercel |
@@ -51,7 +51,7 @@ citychurch-next/
 │   ├── Footer.tsx                # Site footer with links + email signup
 │   ├── HeroImage.tsx             # Static hero image with gradient overlay (homepage)
 │   ├── HeroVideo.tsx             # Vimeo background video hero (preserved, not active)
-│   ├── DonateButton.tsx          # FundraiseUp donation link
+│   ├── DonateButton.tsx          # CityKid Online donation link
 │   ├── EmailSignup.tsx           # Mailchimp email list signup
 │   ├── ContactForm.tsx           # Contact form (→ /api/contact)
 │   ├── VisitorSignupForm.tsx     # Visitor sign-up form (→ /api/visitors)
@@ -102,7 +102,7 @@ citychurch-next/
 | `/visit` | Static | First-time visitor landing page — what to expect, $2.50 callout, photo gallery, sign-up form, location |
 | `/about` | Static | Our Story |
 | `/ministries` | Static | How We Help — ministry event cards |
-| `/donate` | Static | Give — donation tiers with FundraiseUp |
+| `/donate` | Static | Give — donation tiers with CityKid Online |
 | `/contact` | Static | Get Involved — ways to connect, contact form, church info |
 | `/blog` | Static | Blog listing — featured story + category filter grid |
 | `/blog/[slug]` | SSG | Blog article — featured image, markdown body, social share, related posts |
@@ -171,9 +171,9 @@ All variables are set on Vercel for Production and Development environments.
 - Server: `us21`
 - Tag for website signups: `website-signup-2026`
 
-### FundraiseUp Settings
+### CityKid Online Settings
 
-- Portal URL: `https://aecfdssy.donorsupport.co`
+- Portal URL: `https://www.citykid.online/?form=FUNAFYBLTAV`
 - Donors are redirected back to the site upon completion (no JS modal)
 - Cost per meal: $2.50 (hot item + fresh fruit + popcorn)
 - Suggested tiers: $2.50 (1 meal), $17.50 (1 week), $75 (1 month)
