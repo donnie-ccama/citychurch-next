@@ -141,7 +141,7 @@ May God bless you richly.
     excerpt: 'We\'re launching the Citychurch Music Academy — free music lessons for children, teenagers, and young people in our community. Learn how you can help.',
     category: 'Community' as const,
     author: 'Renato Silva',
-    featured_image: null,
+    featured_image: '/images/blog-04-citychurch-music-academy.jpg',
     published: true,
     reading_time: 4,
     created_at: '2025-05-28T10:00:00Z',
