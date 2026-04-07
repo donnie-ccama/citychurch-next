@@ -33,7 +33,7 @@ async function getApprovedSubmissions() {
 }
 
 async function generateQRCodeSVG() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://citychurch.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.citykid.online';
   const url = `${baseUrl}/proof-of-life/submit`;
 
   try {
