@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import ImpactStats from '@/components/ImpactStats';
 import DonateButton from '@/components/DonateButton';
 import EmailSignup from '@/components/EmailSignup';
@@ -193,6 +194,35 @@ export default function About() {
             >
               How It Began
             </h2>
+          </div>
+
+          {/* How It Began Photo */}
+          <div
+            className="reveal"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: '2.5rem',
+            }}
+          >
+            <div
+              style={{
+                width: '50%',
+                maxWidth: '360px',
+                border: '1px solid var(--border-color)',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                backgroundColor: 'var(--bg-card)',
+              }}
+            >
+              <Image
+                src="/images/how-it-began.jpg"
+                alt="Citychurch in its early days"
+                width={720}
+                height={540}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+            </div>
           </div>
 
           <div className="reveal" style={{ maxWidth: '720px', margin: '0 auto' }}>
