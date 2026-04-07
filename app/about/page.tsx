@@ -5,6 +5,7 @@ import ImpactStats from '@/components/ImpactStats';
 import DonateButton from '@/components/DonateButton';
 import EmailSignup from '@/components/EmailSignup';
 import GuidingPrinciples from '@/components/GuidingPrinciples';
+import WhatWeBelieve from '@/components/WhatWeBelieve';
 
 export const metadata: Metadata = {
   title: 'Our Story — Citychurch',
@@ -312,6 +313,33 @@ export default function About() {
 
           <div className="reveal">
             <GuidingPrinciples />
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT WE BELIEVE */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }} className="reveal">
+            <div
+              style={{
+                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1rem',
+                marginBottom: '2rem',
+              }}
+            >
+              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--text-muted)' }}>Our Beliefs</span>
+              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+            </div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em' }}>What We Believe</h2>
+          </div>
+
+          <div className="reveal">
+            <WhatWeBelieve />
           </div>
         </div>
       </section>
