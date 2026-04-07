@@ -42,7 +42,7 @@ async function generateQRCodeSVG() {
       margin: 1,
       color: {
         dark: '#000000',
-        light: '#00000000', // transparent background
+        light: '#ffffff', // white background for contrast
       },
     });
     return svg;
@@ -150,9 +150,6 @@ export default async function ProofOfLifePage() {
                 .qr-container svg {
                   width: 100%;
                   height: 100%;
-                }
-                .dark .qr-container svg path {
-                  fill: var(--text-primary);
                 }
               `}</style>
             </div>
