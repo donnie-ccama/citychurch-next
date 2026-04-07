@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Build approval + rejection links
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://citychurch.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.citykid.online';
     const approveUrl = `${baseUrl}/api/proof-of-life/approve?token=${submission.approval_token}`;
     const rejectUrl = `${baseUrl}/api/proof-of-life/reject?token=${submission.approval_token}`;
 
