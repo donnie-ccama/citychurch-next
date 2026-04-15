@@ -106,6 +106,7 @@ export default function Footer() {
               <Link href="/visit" style={footerLinkStyle}>Plan Your Visit</Link>
               <Link href="/about" style={footerLinkStyle}>Our Story</Link>
               <Link href="/ministries" style={footerLinkStyle}>How We Help</Link>
+              <Link href="/resources" style={footerLinkStyle}>Free Resources</Link>
               <Link href="/donate" style={footerLinkStyle}>Give</Link>
               <Link href="/contact" style={footerLinkStyle}>Get Involved</Link>
             </div>

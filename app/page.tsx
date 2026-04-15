@@ -95,7 +95,7 @@ export default async function Home() {
               First time here?
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
-              Learn what to expect and let us know you're coming.
+              Learn what to expect and let us know you&apos;re coming.
             </p>
           </div>
           <Link
@@ -223,7 +223,7 @@ export default async function Home() {
               marginRight: 'auto',
             }}
           >
-            Every meal — a freshly prepared hot item, fresh fruit, and popcorn — costs just $2.50. But we don't just feed children. We sit with families, walk alongside them, and point them to lasting hope.
+            Every meal — a freshly prepared hot item, fresh fruit, and popcorn — costs just $2.50. But we don&apos;t just feed children. We sit with families, walk alongside them, and point them to lasting hope.
           </p>
 
           <div style={{ marginTop: '2.5rem' }}>
@@ -238,6 +238,146 @@ export default async function Home() {
             >
               Learn More About Our Mission →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FREE RESOURCES */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="reveal">
+            <SectionHeader label="Free Resources" title="A New Resource App You Can Open Today" />
+          </div>
+
+          <div
+            className="reveal"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.5rem',
+              padding: 'clamp(1.5rem, 4vw, 2.25rem)',
+              borderRadius: '24px',
+              border: '1px solid var(--border-color)',
+              background:
+                'linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, white) 0%, var(--bg-card) 55%, color-mix(in srgb, var(--bg-muted) 72%, white) 100%)',
+              boxShadow: '0 24px 60px rgba(15, 23, 42, 0.08)',
+            }}
+          >
+            <div>
+              <p
+                style={{
+                  fontSize: '0.8125rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                CityBooks
+              </p>
+              <h3
+                style={{
+                  fontSize: 'clamp(1.7rem, 4vw, 2.5rem)',
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.03em',
+                  marginBottom: '1rem',
+                }}
+              >
+                Free reading and growth resources, now in a dedicated app.
+              </h3>
+              <p
+                style={{
+                  color: 'var(--text-secondary)',
+                  lineHeight: 1.8,
+                  marginBottom: '1rem',
+                }}
+              >
+                We launched CityBooks at <strong>citybooks.me</strong> and added a dedicated resource
+                page here so people can discover it from the front page without losing the look and
+                feel of the main site.
+              </p>
+              <p
+                style={{
+                  color: 'var(--text-secondary)',
+                  lineHeight: 1.8,
+                  marginBottom: 0,
+                }}
+              >
+                The app opens in a separate tab and stays on its own DigitalOcean deployment, which
+                keeps the handoff simple and avoids routing the resource through this Next.js app.
+              </p>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                padding: '1.25rem',
+                borderRadius: '20px',
+                border: '1px solid var(--border-color)',
+                backgroundColor: 'color-mix(in srgb, var(--bg-card) 90%, white)',
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--text-muted)',
+                    marginBottom: '0.5rem',
+                  }}
+                >
+                  Quick Access
+                </p>
+                <p style={{ fontWeight: 700, marginBottom: '0.5rem' }}>citybooks.me</p>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0 }}>
+                  Open the full resource page for context, then launch the app directly from there.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
+                <Link
+                  href="/resources"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0.875rem 1.4rem',
+                    borderRadius: '999px',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-card)',
+                    color: 'var(--text-primary)',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  View Free Resources
+                </Link>
+                <a
+                  href="https://citybooks.me"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0.875rem 1.4rem',
+                    borderRadius: '999px',
+                    backgroundColor: 'var(--accent)',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    fontWeight: 600,
+                  }}
+                >
+                  Open CityBooks
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
