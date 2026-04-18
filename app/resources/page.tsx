@@ -4,6 +4,7 @@ import SectionHeader from '@/components/SectionHeader';
 import EmailSignup from '@/components/EmailSignup';
 
 const CITYBOOKS_URL = 'https://citybooks.me';
+const MISSION_TRIP_PLANNER_URL = 'https://planner.citykid.me';
 
 export const metadata: Metadata = {
   title: 'Free Resources | Citychurch',
@@ -21,6 +22,16 @@ const resources = [
     href: CITYBOOKS_URL,
     external: true,
     subtitle: 'citybooks.me',
+  },
+  {
+    icon: '◉',
+    title: 'Citychurch Mission Trip Planner',
+    description:
+      'A free planning tool that allows visiting groups to organize their student teams, adult sponsors, calendar, and budget. It even facilitates communication between adult sponsors and the parents of students. Completely free to use.',
+    cta: 'Open Mission Trip Planner',
+    href: MISSION_TRIP_PLANNER_URL,
+    external: true,
+    subtitle: 'planner.citykid.me',
   },
 ];
 
