@@ -7,8 +7,9 @@
  *   <DonateButton />                              — default "Donate" button
  *   <DonateButton label="Feed a Child Today" />   — custom label
  *   <DonateButton variant="nav" />                — compact nav style
+ *   <DonateButton href="...?utm_source=ig" />     — campaign-tracked URL
  *
- * Opens https://www.citykid.online/?form=FUNAFYBLTAV in a new tab.
+ * Opens https://www.citykid.online/?form=FUNAFYBLTAV in a new tab by default.
  * The portal redirects donors back to the main site upon completion.
  */
 
@@ -20,6 +21,8 @@ interface DonateButtonProps {
   icon?: boolean;
   fullWidth?: boolean;
   className?: string;
+  /** Optional override URL (e.g. with UTM params). Defaults to the main donate URL. */
+  href?: string;
 }
 
 export default function DonateButton({
@@ -28,6 +31,7 @@ export default function DonateButton({
   icon = true,
   fullWidth = false,
   className,
+  href,
 }: DonateButtonProps) {
   const isPrimary = variant === 'primary';
   const isOutline = variant === 'outline';
@@ -35,7 +39,7 @@ export default function DonateButton({
 
   return (
     <a
-      href={DONATE_URL}
+      href={href || DONATE_URL}
       target="_blank"
       rel="noopener noreferrer"
       className={className}
