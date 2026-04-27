@@ -13,22 +13,26 @@ const mealTiers = [
     amount: '$2.50',
     label: 'Feed a Child',
     description: '1 meal — a hot item, fresh fruit, and popcorn',
+    utmContent: 'tier1_feed_child',
   },
   {
     amount: '$17.50',
     label: 'Feed a Child for a Week',
     description: '7 meals for one child',
+    utmContent: 'tier2_feed_week',
   },
   {
     amount: '$75',
     label: 'Feed a Child for a Month',
     description: '30 meals for one child',
+    utmContent: 'tier3_feed_month',
   },
   {
     amount: '$25/mo',
     label: 'Monthly Partner',
     description: '10 meals every month — ongoing impact',
     featured: true,
+    utmContent: 'tier4_monthly',
   },
 ];
 
@@ -81,7 +85,7 @@ export default function DonatePage() {
               fontStyle: 'italic',
             }}
           >
-            "No child in Amarillo should go to bed hungry."
+            &quot;No child in Amarillo should go to bed hungry.&quot;
           </p>
         </div>
       </section>
@@ -167,6 +171,7 @@ export default function DonatePage() {
                 <DonateButton
                   label={tier.featured ? 'Give Monthly' : 'Give Now'}
                   fullWidth
+                  utmContent={tier.utmContent}
                 />
               </div>
             ))}
@@ -177,6 +182,7 @@ export default function DonatePage() {
               label="Give a Custom Amount"
               variant="outline"
               icon={false}
+              utmContent="custom_amount"
             />
           </div>
         </div>
@@ -203,7 +209,7 @@ export default function DonatePage() {
             Where Your Gift Goes
           </h2>
           <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1rem' }}>
-            100% of your donation goes directly to feeding children and families in Amarillo. Every meal is freshly prepared by our volunteers and served with care. We don't just hand out food — we sit with families, build relationships, and walk alongside them toward lasting change.
+            100% of your donation goes directly to feeding children and families in Amarillo. Every meal is freshly prepared by our volunteers and served with care. We don&apos;t just hand out food — we sit with families, build relationships, and walk alongside them toward lasting change.
           </p>
           <p
             style={{
@@ -214,7 +220,7 @@ export default function DonatePage() {
               marginTop: '2rem',
             }}
           >
-            "Help with no hope is no help at all."
+            &quot;Help with no hope is no help at all.&quot;
           </p>
         </div>
       </section>

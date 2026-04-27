@@ -47,7 +47,11 @@ export default async function Home() {
             flexWrap: 'wrap',
           }}
         >
-          <DonateButton label="Feed a Child Today" />
+          <DonateButton
+            label="Feed a Child Today"
+            utmContent="home_hero_give"
+            utmMedium="homepage"
+          />
           <Link
             href="/donate"
             style={{
@@ -488,6 +492,8 @@ export default async function Home() {
             variant="outline"
             icon={true}
             className="donate-callout-btn"
+            utmContent="home_stats_give"
+            utmMedium="homepage"
           />
           {/* Inline style override for white-on-accent appearance */}
           <style>{`
