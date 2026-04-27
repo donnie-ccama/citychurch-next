@@ -3,13 +3,35 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 
-const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+const BASE_DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+
+/** Returns a UTM-tagged donate URL based on the current page path. */
+function getNavDonateUrl(pathname: string): string {
+  const pageMap: Record<string, string> = {
+    '/': 'home_donate_nav',
+    '/about': 'about_give_nav',
+    '/ministries': 'ministries_give_nav',
+    '/proof-of-life': 'proof_give_nav',
+    '/donate': 'donate_page_nav',
+  };
+  const utmContent = pageMap[pathname] ?? 'nav_donate';
+  const params = new URLSearchParams({
+    utm_source: 'citykid_site',
+    utm_medium: 'nav',
+    utm_campaign: 'summer25',
+    utm_content: utmContent,
+  });
+  return `${BASE_DONATE_URL}&${params.toString()}`;
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBlur, setHasBlur] = useState(false);
+  const pathname = usePathname();
+  const donateUrl = getNavDonateUrl(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,7 +152,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href={DONATE_URL}
+              href={donateUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -229,7 +251,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <a
-                href={DONATE_URL}
+                href={donateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeMenu}
