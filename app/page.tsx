@@ -34,109 +34,41 @@ export default async function Home() {
   const recentPosts: BlogPost[] = blogPosts ?? [];
 
   return (
-    <div style={{ fontFamily: "'Inter', system-ui, sans-serif", backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
+    <div className="home-shell">
 
       {/* HERO SECTION — Static Image */}
       <HeroImage src="/images/web-hero-3-27-26.png">
-        <div
-          className="reveal"
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-          }}
-        >
+        <div className="reveal hero-actions">
           <DonateButton label="Feed a Child Today" />
-          <Link
-            href="/donate"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.875rem 2rem',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              color: '#fff',
-              textDecoration: 'none',
-              fontWeight: 600,
-              fontSize: '0.9375rem',
-              borderRadius: '8px',
-              transition: 'all 0.2s',
-              letterSpacing: '-0.01em',
-            }}
-          >
+          <Link href="/donate" className="hero-secondary-link">
             See How $2.50 Changes a Life
           </Link>
         </div>
       </HeroImage>
 
       {/* FIRST-TIME VISITOR BANNER */}
-      <section
-        style={{
-          padding: '1.25rem 1.5rem',
-          backgroundColor: 'var(--bg-card)',
-          borderTop: '1px solid var(--border-color)',
-          borderBottom: '1px solid var(--border-color)',
-        }}
-      >
-        <div
-          className="reveal visitor-banner"
-          style={{
-            maxWidth: '900px',
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '1.5rem',
-          }}
-        >
+      <section className="home-section-card">
+        <div className="reveal visitor-banner">
           <div>
-            <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.25rem' }}>
+            <p className="visitor-banner-copy-title">
               First time here?
             </p>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9375rem' }}>
+            <p className="visitor-banner-copy-text">
               Learn what to expect and let us know you&apos;re coming.
             </p>
           </div>
-          <Link
-            href="/visit"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.375rem',
-              padding: '0.625rem 1.25rem',
-              backgroundColor: 'var(--accent)',
-              color: 'white',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              borderRadius: '999px',
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              transition: 'opacity 0.2s ease',
-            }}
-          >
+          <Link href="/visit" className="pill-button pill-button-accent visitor-cta">
             Plan Your Visit →
           </Link>
         </div>
       </section>
 
       {/* PHOTO CAROUSEL — pulled live from Google Drive */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <section className="home-section home-section-primary">
+        <div className="home-container">
           <div className="reveal">
-            <div
-              style={{
-                textAlign: 'center',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '1rem',
-                marginBottom: '2.5rem',
-              }}
-            >
-              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-              <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Community</span>
-              <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+            <div className="divider-ornament">
+              <span>Our Community</span>
             </div>
           </div>
           <div className="reveal">
@@ -146,19 +78,13 @@ export default async function Home() {
       </section>
 
       {/* UPCOMING EVENTS */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <section className="home-section home-section-secondary">
+        <div className="home-container">
           <div className="reveal">
             <SectionHeader label="Get Involved" title="Upcoming Ministry Opportunities" />
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
+          <div className="home-grid">
             {upcomingEvents.map((event) => (
               <div key={event.id} className="reveal">
                 <EventCard {...event} />
@@ -166,16 +92,8 @@ export default async function Home() {
             ))}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
-            <Link
-              href="/ministries"
-              style={{
-                color: 'var(--accent)',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                textDecoration: 'none',
-              }}
-            >
+          <div className="home-view-all reveal">
+            <Link href="/ministries" className="home-text-link">
               View All Ministries & Register →
             </Link>
           </div>
@@ -183,59 +101,22 @@ export default async function Home() {
       </section>
 
       {/* MISSION STATEMENT */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }} className="reveal">
-          <div
-            style={{
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '1rem',
-              marginBottom: '2.5rem',
-            }}
-          >
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Mission</span>
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+      <section className="home-section home-section-mission">
+        <div className="home-container-narrow reveal">
+          <div className="divider-ornament">
+            <span>Our Mission</span>
           </div>
 
-          <p
-            style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
-              fontSize: 'clamp(1.25rem, 3vw, 1.625rem)',
-              lineHeight: 1.75,
-              color: 'var(--text-primary)',
-              fontWeight: 300,
-            }}
-          >
+          <p className="home-serif-statement">
             Citychurch exists to find, feed, and teach children and families in Amarillo who are most vulnerable, introducing them to Jesus Christ while meeting practical needs with dignity, consistency, and long-term discipleship.
           </p>
 
-          <p
-            style={{
-              fontSize: '1rem',
-              lineHeight: 1.75,
-              color: 'var(--text-secondary)',
-              marginTop: '1.5rem',
-              maxWidth: '620px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
+          <p className="home-supporting-copy">
             Every meal — a freshly prepared hot item, fresh fruit, and popcorn — costs just $2.50. But we don&apos;t just feed children. We sit with families, walk alongside them, and point them to lasting hope.
           </p>
 
-          <div style={{ marginTop: '2.5rem' }}>
-            <Link
-              href="/about"
-              style={{
-                color: 'var(--accent)',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                textDecoration: 'none',
-              }}
-            >
+          <div className="home-view-all">
+            <Link href="/about" className="home-text-link">
               Learn More About Our Mission →
             </Link>
           </div>
@@ -243,136 +124,51 @@ export default async function Home() {
       </section>
 
       {/* FREE RESOURCES */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <section className="home-section home-section-secondary">
+        <div className="home-container">
           <div className="reveal">
             <SectionHeader label="Free Resources" title="A New Resource App You Can Open Today" />
           </div>
 
-          <div
-            className="reveal"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1.5rem',
-              padding: 'clamp(1.5rem, 4vw, 2.25rem)',
-              borderRadius: '24px',
-              border: '1px solid var(--border-color)',
-              background:
-                'linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, white) 0%, var(--bg-card) 55%, color-mix(in srgb, var(--bg-muted) 72%, white) 100%)',
-              boxShadow: '0 24px 60px rgba(15, 23, 42, 0.08)',
-            }}
-          >
+          <div className="reveal free-resource-card">
             <div>
-              <p
-                style={{
-                  fontSize: '0.8125rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent)',
-                  marginBottom: '0.75rem',
-                }}
-              >
+              <p className="free-resource-eyebrow">
                 CityBooks
               </p>
-              <h3
-                style={{
-                  fontSize: 'clamp(1.7rem, 4vw, 2.5rem)',
-                  lineHeight: 1.08,
-                  letterSpacing: '-0.03em',
-                  marginBottom: '1rem',
-                }}
-              >
-                Free reading and growth resources, now in a dedicated app.
+              <h3 className="free-resource-title">
+                Free reading and growth resources for everyday discipleship.
               </h3>
-              <p
-                style={{
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.8,
-                  marginBottom: '1rem',
-                }}
-              >
-                We launched CityBooks at <strong>citybooks.me</strong> and added a dedicated resource
-                page here so people can discover it from the front page without losing the look and
-                feel of the main site.
+              <p className="free-resource-copy">
+                CityBooks gathers simple, practical resources for families, volunteers, and anyone
+                growing in faith alongside the people of Amarillo.
               </p>
-              <p
-                style={{
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.8,
-                  marginBottom: 0,
-                }}
-              >
-                The app opens in a separate tab and stays on its own DigitalOcean deployment, which
-                keeps the handoff simple and avoids routing the resource through this Next.js app.
+              <p className="free-resource-copy">
+                Browse short reads and helpful tools you can use at home, in ministry, or in
+                conversation with someone who needs hope today.
               </p>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                gap: '1rem',
-                padding: '1.25rem',
-                borderRadius: '20px',
-                border: '1px solid var(--border-color)',
-                backgroundColor: 'color-mix(in srgb, var(--bg-card) 90%, white)',
-              }}
-            >
+            <div className="free-resource-panel">
               <div>
-                <p
-                  style={{
-                    fontSize: '0.75rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-muted)',
-                    marginBottom: '0.5rem',
-                  }}
-                >
+                <p className="free-resource-panel-label">
                   Quick Access
                 </p>
-                <p style={{ fontWeight: 700, marginBottom: '0.5rem' }}>citybooks.me</p>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0 }}>
-                  Open the full resource page for context, then launch the app directly from there.
+                <p className="free-resource-panel-title">citybooks.me</p>
+                <p className="free-resource-panel-copy">
+                  Start with the resource page for context, or open CityBooks directly when you
+                  already know what you need.
                 </p>
               </div>
 
-              <div style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
-                <Link
-                  href="/resources"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '0.875rem 1.4rem',
-                    borderRadius: '999px',
-                    border: '1px solid var(--border-color)',
-                    backgroundColor: 'var(--bg-card)',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                  }}
-                >
+              <div className="free-resource-actions">
+                <Link href="/resources" className="pill-button pill-button-quiet">
                   View Free Resources
                 </Link>
                 <a
                   href="https://citybooks.me"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '0.875rem 1.4rem',
-                    borderRadius: '999px',
-                    backgroundColor: 'var(--accent)',
-                    color: '#fff',
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                  }}
+                  className="pill-button pill-button-accent"
                 >
                   Open CityBooks
                 </a>
@@ -383,59 +179,22 @@ export default async function Home() {
       </section>
 
       {/* SERMONS */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }} className="reveal">
-          <div
-            style={{
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '1rem',
-              marginBottom: '2.5rem',
-            }}
-          >
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
-            <span style={{ fontFamily: "'Source Serif 4', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.875rem' }}>Our Message</span>
-            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+      <section className="home-section home-section-primary">
+        <div className="home-container-narrow reveal">
+          <div className="divider-ornament">
+            <span>Our Message</span>
           </div>
 
-          <p
-            style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
-              fontSize: 'clamp(1.25rem, 3vw, 1.625rem)',
-              lineHeight: 1.75,
-              color: 'var(--text-primary)',
-              fontWeight: 300,
-            }}
-          >
+          <p className="home-serif-statement">
             Weekly messages about authentic presence, serving our neighbors, and the transformation that happens when we simply show up.
           </p>
 
-          <p
-            style={{
-              fontSize: '1rem',
-              lineHeight: 1.75,
-              color: 'var(--text-secondary)',
-              marginTop: '1.5rem',
-              maxWidth: '620px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
+          <p className="home-supporting-copy">
             Listen to the latest teaching from Citychurch and explore our full sermon archive.
           </p>
 
-          <div style={{ marginTop: '2.5rem' }}>
-            <Link
-              href="/sermons"
-              style={{
-                color: 'var(--accent)',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                textDecoration: 'none',
-              }}
-            >
+          <div className="home-view-all">
+            <Link href="/sermons" className="home-text-link">
               Watch & Listen to Sermons →
             </Link>
           </div>
@@ -443,44 +202,20 @@ export default async function Home() {
       </section>
 
       {/* IMPACT STATS */}
-      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }} className="reveal">
+      <section className="home-section-compact home-section-secondary">
+        <div className="home-container-impact reveal">
           <ImpactStats />
         </div>
       </section>
 
       {/* $2.50 FEEDS A CHILD CALLOUT */}
-      <section
-        style={{
-          padding: '5rem 1.5rem',
-          backgroundColor: 'var(--accent)',
-          color: 'white',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ maxWidth: '680px', margin: '0 auto' }} className="reveal">
-          <h2
-            style={{
-              fontWeight: 800,
-              fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
-              letterSpacing: '-0.03em',
-              lineHeight: 1.2,
-              marginBottom: '1.25rem',
-            }}
-          >
-            No Child in Amarillo Should Go to Bed Hungry
+      <section className="meal-callout">
+        <div className="meal-callout-inner reveal">
+          <p className="meal-callout-kicker">This week matters</p>
+          <h2 className="meal-callout-title">
+            This week, 47 kids got a hot meal. Next week, we need your help.
           </h2>
-          <p
-            style={{
-              fontSize: '1.0625rem',
-              lineHeight: 1.75,
-              opacity: 0.92,
-              marginBottom: '2rem',
-              maxWidth: '560px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
+          <p className="meal-callout-copy">
             $2.50 is all it takes. Each meal includes a freshly prepared hot item, fresh fruit, and popcorn — served with dignity to children and families who need it most.
           </p>
           <DonateButton
@@ -489,32 +224,17 @@ export default async function Home() {
             icon={true}
             className="donate-callout-btn"
           />
-          {/* Inline style override for white-on-accent appearance */}
-          <style>{`
-            .donate-callout-btn {
-              background-color: white !important;
-              color: var(--accent) !important;
-              border: none !important;
-              font-weight: 700 !important;
-            }
-          `}</style>
         </div>
       </section>
 
       {/* RECENT BLOG / STORIES */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <section className="home-section home-section-primary">
+        <div className="home-container">
           <div className="reveal">
             <SectionHeader label="Impact" title="Stories From the Field" />
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
+          <div className="home-grid">
             {recentPosts.map((post) => (
               <div key={post.id} className="reveal">
                 <BlogCard {...post} />
@@ -522,16 +242,8 @@ export default async function Home() {
             ))}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
-            <Link
-              href="/blog"
-              style={{
-                color: 'var(--accent)',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                textDecoration: 'none',
-              }}
-            >
+          <div className="home-view-all reveal">
+            <Link href="/blog" className="home-text-link">
               Read More Stories →
             </Link>
           </div>
@@ -539,8 +251,8 @@ export default async function Home() {
       </section>
 
       {/* PROOF OF LIFE — Community Photos */}
-      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <section className="home-section home-section-secondary">
+        <div className="home-container">
           <div className="reveal">
             <SectionHeader label="Community" title="Proof of Life" />
           </div>
@@ -549,16 +261,8 @@ export default async function Home() {
             <ProofOfLifeHomepagePreview />
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }} className="reveal">
-            <Link
-              href="/proof-of-life"
-              style={{
-                color: 'var(--accent)',
-                fontWeight: 600,
-                fontSize: '0.9375rem',
-                textDecoration: 'none',
-              }}
-            >
+          <div className="home-view-all reveal">
+            <Link href="/proof-of-life" className="home-text-link">
               View the Bulletin Board &rarr;
             </Link>
           </div>
@@ -566,8 +270,14 @@ export default async function Home() {
       </section>
 
       {/* EMAIL SIGNUP */}
-      <section style={{ padding: '5rem 1.5rem', backgroundColor: 'var(--bg-secondary)' }}>
-        <div style={{ maxWidth: '520px', margin: '0 auto' }} className="reveal">
+      <section className="home-section home-section-primary">
+        <div className="home-container-form reveal">
+          <div className="signup-intro">
+            <h2 className="signup-intro-title">Stories & updates, once a month</h2>
+            <p className="signup-intro-copy">
+              Get a short note with field stories, prayer needs, and practical ways to serve Amarillo families.
+            </p>
+          </div>
           <EmailSignup />
         </div>
       </section>
