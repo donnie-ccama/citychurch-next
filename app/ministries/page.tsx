@@ -5,6 +5,7 @@ import EventCard from '@/components/EventCard';
 import DonateButton from '@/components/DonateButton';
 import EmailSignup from '@/components/EmailSignup';
 import { demoEvents } from '@/lib/supabase-server';
+import { ministries } from '@/lib/ministries';
 
 export const metadata: Metadata = {
   title: 'Programs — How We Help | Citychurch',
@@ -38,8 +39,119 @@ export default function Ministries() {
               lineHeight: 1.7,
             }}
           >
-            Every week, Citychurch finds, feeds, and teaches children and families across Amarillo. Here's how we do it — and how you can be part of it.
+            Every week, Citychurch finds, feeds, and teaches children and families across Amarillo. Here’s how we do it — and how you can be part of it.
           </p>
+        </div>
+      </section>
+
+      {/* OUR MINISTRIES — main ministry efforts showcase */}
+      <section style={{ padding: '6rem 1.5rem', backgroundColor: 'var(--bg-primary)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div className="reveal">
+            <SectionHeader label="Our Ministries" title="Where We Show Up" />
+          </div>
+
+          <p
+            className="reveal"
+            style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontSize: '1.0625rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.7,
+              textAlign: 'center',
+              maxWidth: '720px',
+              margin: '0 auto 3.5rem',
+            }}
+          >
+            {/* TODO: Replace this intro with a 1–2 sentence framing of Citychurch's full ministry scope. */}
+            From Sunday worship to weekday outreach, our ministries are the places where presence becomes practice.
+          </p>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.5rem',
+            }}
+          >
+            {ministries.map((m) => (
+              <div
+                key={m.slug}
+                className="reveal card-hover"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '12px',
+                  padding: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: '1.75rem',
+                    color: 'var(--accent)',
+                    marginBottom: '1rem',
+                    lineHeight: 1,
+                  }}
+                  aria-hidden="true"
+                >
+                  {m.icon}
+                </div>
+                <h3
+                  style={{
+                    fontWeight: 700,
+                    fontSize: '1.125rem',
+                    letterSpacing: '-0.02em',
+                    marginBottom: '0.75rem',
+                  }}
+                >
+                  {m.title}
+                </h3>
+                <p
+                  style={{
+                    color: 'var(--text-secondary)',
+                    fontSize: '0.9375rem',
+                    lineHeight: 1.6,
+                    flex: 1,
+                    marginBottom: '1.5rem',
+                  }}
+                >
+                  {m.description}
+                </p>
+                <Link
+                  href={`/ministries/${m.slug}`}
+                  style={{
+                    color: 'var(--accent)',
+                    fontWeight: 600,
+                    fontSize: '0.875rem',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.375rem',
+                  }}
+                >
+                  Learn more
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

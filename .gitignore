@@ -23,6 +23,9 @@
 # local Supabase CLI state
 /supabase/.temp/
 
+# nested working projects (kept local)
+/.tmp-mission-trip-planner/
+
 # misc
 .DS_Store
 *.pem

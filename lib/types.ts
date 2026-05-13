@@ -25,6 +25,13 @@ export interface Sermon {
   description: string;
   featured: boolean;
   created_at: string;
+  slug: string | null;
+  vimeo_id: string | null;
+  thumbnail_url: string | null;
+  transcript_markdown: string | null;
+  scripture_reference: string | null;
+  duration_seconds: number | null;
+  published: boolean;
 }
 
 export interface Event {

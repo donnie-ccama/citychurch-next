@@ -2,8 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from '@/app/admin/actions';
 
-export default function AdminSidebar() {
+interface AdminSidebarProps {
+  userEmail: string;
+}
+
+export default function AdminSidebar({ userEmail }: AdminSidebarProps) {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
@@ -19,7 +24,7 @@ export default function AdminSidebar() {
     borderLeft: isActive(href) ? '4px solid var(--accent)' : '4px solid transparent',
     paddingLeft: '1.25rem',
     transition: 'all 0.2s ease',
-    fontWeight: isActive(href) ? '600' : '400',
+    fontWeight: isActive(href) ? 600 : 400,
   });
 
   return (
@@ -35,7 +40,6 @@ export default function AdminSidebar() {
         top: 0,
       }}
     >
-      {/* Logo/Title */}
       <div
         style={{
           padding: '1.5rem',
@@ -47,7 +51,7 @@ export default function AdminSidebar() {
           style={{
             margin: 0,
             fontSize: '1.25rem',
-            fontWeight: '700',
+            fontWeight: 700,
             color: 'var(--accent)',
           }}
         >
@@ -64,7 +68,6 @@ export default function AdminSidebar() {
         </p>
       </div>
 
-      {/* Navigation Links */}
       <nav style={{ flex: 1 }}>
         <Link href="/admin" style={linkStyle('/admin')}>
           Dashboard
@@ -86,7 +89,6 @@ export default function AdminSidebar() {
         </Link>
       </nav>
 
-      {/* Back to Site Link */}
       <div
         style={{
           padding: '1rem 1.5rem',
@@ -94,28 +96,51 @@ export default function AdminSidebar() {
           marginTop: 'auto',
         }}
       >
+        <p
+          style={{
+            margin: '0 0 0.75rem 0',
+            fontSize: '0.75rem',
+            color: 'var(--text-muted)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+          title={userEmail}
+        >
+          Signed in as <strong style={{ color: 'var(--text-secondary)' }}>{userEmail}</strong>
+        </p>
+        <form action={signOut}>
+          <button
+            type="submit"
+            style={{
+              width: '100%',
+              padding: '0.5rem 0.75rem',
+              backgroundColor: 'transparent',
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '0.8125rem',
+              fontWeight: 500,
+              marginBottom: '0.75rem',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            Sign out
+          </button>
+        </form>
         <Link
           href="/"
           style={{
             display: 'block',
-            padding: '0.75rem 1.5rem',
-            backgroundColor: 'var(--bg-primary)',
-            color: 'var(--text-secondary)',
+            padding: '0.5rem 0.75rem',
+            color: 'var(--text-muted)',
             textDecoration: 'none',
-            borderRadius: '8px',
             textAlign: 'center',
-            fontSize: '0.875rem',
-            fontWeight: '500',
-            transition: 'all 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--accent)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--text-secondary)';
+            fontSize: '0.8125rem',
           }}
         >
-          ← Back to Site
+          ← Back to site
         </Link>
       </div>
     </aside>

@@ -1,29 +1,52 @@
-'use client';
-
 import Link from 'next/link';
+import { createSupabaseSSR } from '@/lib/supabase-ssr';
 
-export default function AdminDashboard() {
-  const stats = [
-    { label: 'Blog Posts', count: 12, color: '#4F46E5' },
-    { label: 'Sermons', count: 24, color: '#7C3AED' },
-    { label: 'Ministries', count: 8, color: '#EC4899' },
-    { label: 'Media Items', count: 45, color: '#F59E0B' },
+export const dynamic = 'force-dynamic';
+
+async function countRows(
+  supabase: Awaited<ReturnType<typeof createSupabaseSSR>>,
+  table: 'blog_posts' | 'sermons' | 'events' | 'media_items'
+): Promise<number | null> {
+  const { count, error } = await supabase
+    .from(table)
+    .select('*', { count: 'exact', head: true });
+  if (error) {
+    console.warn(`admin dashboard: failed to count ${table}:`, error.message);
+    return null;
+  }
+  return count ?? 0;
+}
+
+export default async function AdminDashboard() {
+  const supabase = await createSupabaseSSR();
+
+  const [blogCount, sermonCount, eventCount, mediaCount] = await Promise.all([
+    countRows(supabase, 'blog_posts'),
+    countRows(supabase, 'sermons'),
+    countRows(supabase, 'events'),
+    countRows(supabase, 'media_items'),
+  ]);
+
+  const stats: { label: string; count: number | null; color: string }[] = [
+    { label: 'Blog Posts', count: blogCount, color: '#4F46E5' },
+    { label: 'Sermons', count: sermonCount, color: '#7C3AED' },
+    { label: 'Ministries', count: eventCount, color: '#EC4899' },
+    { label: 'Media Items', count: mediaCount, color: '#F59E0B' },
   ];
 
   const quickActions = [
     { label: 'New Blog Post', href: '/admin/blog', color: '#4F46E5' },
     { label: 'New Sermon', href: '/admin/sermons', color: '#7C3AED' },
-    { label: 'New Ministry', href: '/admin/events', color: '#EC4899' },
+    { label: 'New Ministry', href: '/admin/ministries', color: '#EC4899' },
     { label: 'New Media', href: '/admin/media', color: '#F59E0B' },
   ];
 
   return (
     <div>
-      <h1 style={{ fontSize: '2rem', marginBottom: '2rem', fontWeight: '700' }}>
+      <h1 style={{ fontSize: '2rem', marginBottom: '2rem', fontWeight: 700 }}>
         Dashboard
       </h1>
 
-      {/* Stats Grid */}
       <div
         style={{
           display: 'grid',
@@ -40,81 +63,70 @@ export default function AdminDashboard() {
               border: '1px solid var(--border-color)',
               borderRadius: '12px',
               padding: '1.5rem',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
             }}
           >
-            <div
+            <p
               style={{
-                fontSize: '0.875rem',
                 color: 'var(--text-secondary)',
-                marginBottom: '0.75rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                fontWeight: '500',
+                fontSize: '0.875rem',
+                margin: 0,
+                marginBottom: '0.5rem',
+                fontWeight: 500,
               }}
             >
               {stat.label}
-            </div>
-            <div
+            </p>
+            <p
               style={{
                 fontSize: '2.5rem',
-                fontWeight: '700',
+                fontWeight: 700,
+                margin: 0,
                 color: stat.color,
               }}
             >
-              {stat.count}
-            </div>
+              {stat.count === null ? '—' : stat.count}
+            </p>
           </div>
         ))}
       </div>
 
-      {/* Quick Actions */}
-      <div>
-        <h2
-          style={{
-            fontSize: '1.25rem',
-            marginBottom: '1rem',
-            fontWeight: '600',
-          }}
-        >
-          Quick Actions
-        </h2>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '1rem',
-          }}
-        >
-          {quickActions.map((action) => (
-            <Link
-              key={action.label}
-              href={action.href}
-              style={{
-                display: 'block',
-                padding: '1rem 1.5rem',
-                backgroundColor: action.color,
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '500',
-                textAlign: 'center',
-                transition: 'all 0.2s ease',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '0.9';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              {action.label}
-            </Link>
-          ))}
-        </div>
+      <h2
+        style={{
+          fontSize: '1.25rem',
+          fontWeight: 600,
+          marginBottom: '1rem',
+        }}
+      >
+        Quick Actions
+      </h2>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '1rem',
+        }}
+      >
+        {quickActions.map((action) => (
+          <Link
+            key={action.label}
+            href={action.href}
+            style={{
+              display: 'block',
+              padding: '1rem 1.25rem',
+              backgroundColor: 'var(--bg-card)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              color: 'var(--text-primary)',
+              fontWeight: 500,
+              fontSize: '0.9375rem',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            <span style={{ color: action.color, marginRight: '0.5rem' }}>+</span>
+            {action.label}
+          </Link>
+        ))}
       </div>
     </div>
   );
