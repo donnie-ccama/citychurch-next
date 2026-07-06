@@ -232,7 +232,7 @@ export default function ContactForm() {
             textAlign: 'center',
           }}
         >
-          We've received your message! We'll get back to you soon.
+          We&apos;ve received your message! We&apos;ll get back to you soon.
         </div>
       )}
     </form>

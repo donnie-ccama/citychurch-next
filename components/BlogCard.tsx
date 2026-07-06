@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { BlogPost } from '@/lib/types';
 
-interface BlogCardProps extends BlogPost {}
+type BlogCardProps = BlogPost;
 
 export default function BlogCard({
   title,

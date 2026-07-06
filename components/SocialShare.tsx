@@ -36,7 +36,6 @@ export default function SocialShare({ title, slug }: SocialShareProps) {
 
   const handleShare = (platform: string) => {
     const url = getArticleUrl();
-    const text = encodeURIComponent(title);
     const encodedUrl = encodeURIComponent(url);
 
     switch (platform) {

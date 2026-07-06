@@ -73,7 +73,7 @@ export default async function BlogPostPage({
         <section style={{ padding: '6rem 1.5rem', textAlign: 'center' }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '1rem' }}>Post Not Found</h1>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-            The blog post you're looking for doesn't exist.
+            The blog post you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link href="/blog" style={{ color: 'var(--accent)', fontWeight: 600, textDecoration: 'none' }}>
             Back to Blog

@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
 import DonateButton from '@/components/DonateButton';
 import EmailSignup from '@/components/EmailSignup';
@@ -36,7 +35,7 @@ export default function Contact() {
               lineHeight: 1.7,
             }}
           >
-            No child in Amarillo should go to bed hungry. Whether you give, serve, pray, or show up — there's a place for you in this mission.
+            No child in Amarillo should go to bed hungry. Whether you give, serve, pray, or show up — there&apos;s a place for you in this mission.
           </p>
         </div>
       </section>
@@ -155,10 +154,10 @@ export default function Contact() {
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <h2 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: '1rem' }}>
-              Let's Connect
+              Let&apos;s Connect
             </h2>
             <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-              Fill out the form below and we'll get back to you soon.
+              Fill out the form below and we&apos;ll get back to you soon.
             </p>
           </div>
 

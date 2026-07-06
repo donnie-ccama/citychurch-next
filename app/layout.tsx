@@ -51,6 +51,7 @@ export default function RootLayout({
           }}
         />
         {/* End Fundraise Up */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- App Router root layout applies to every page; next/font would rename the 'Source Serif 4' family referenced in inline styles */}
         <link
           href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap"
           rel="stylesheet"

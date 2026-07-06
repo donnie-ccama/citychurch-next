@@ -81,7 +81,7 @@ export default function DonatePage() {
               fontStyle: 'italic',
             }}
           >
-            "No child in Amarillo should go to bed hungry."
+            &quot;No child in Amarillo should go to bed hungry.&quot;
           </p>
         </div>
       </section>
@@ -203,7 +203,7 @@ export default function DonatePage() {
             Where Your Gift Goes
           </h2>
           <p style={{ fontSize: '1.0625rem', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1rem' }}>
-            100% of your donation goes directly to feeding children and families in Amarillo. Every meal is freshly prepared by our volunteers and served with care. We don't just hand out food — we sit with families, build relationships, and walk alongside them toward lasting change.
+            100% of your donation goes directly to feeding children and families in Amarillo. Every meal is freshly prepared by our volunteers and served with care. We don&apos;t just hand out food — we sit with families, build relationships, and walk alongside them toward lasting change.
           </p>
           <p
             style={{
@@ -214,7 +214,7 @@ export default function DonatePage() {
               marginTop: '2rem',
             }}
           >
-            "Help with no hope is no help at all."
+            &quot;Help with no hope is no help at all.&quot;
           </p>
         </div>
       </section>

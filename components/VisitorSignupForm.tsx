@@ -97,7 +97,7 @@ export default function VisitorSignupForm() {
           Welcome to Citychurch!
         </p>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-          We're so glad you're here. You'll hear from us soon.
+          We&apos;re so glad you&apos;re here. You&apos;ll hear from us soon.
         </p>
       </div>
     );

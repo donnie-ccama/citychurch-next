@@ -74,8 +74,8 @@ export default function Visit() {
               marginRight: 'auto',
             }}
           >
-            Whether you're walking through our doors for the first time or
-            discovering us online, we're glad you're here. Here's what to
+            Whether you&apos;re walking through our doors for the first time or
+            discovering us online, we&apos;re glad you&apos;re here. Here&apos;s what to
             expect.
           </p>
         </div>
@@ -250,7 +250,7 @@ export default function Visit() {
                 marginBottom: '0.75rem',
               }}
             >
-              We'd Love to Meet You
+              We&apos;d Love to Meet You
             </h2>
             <p
               style={{
@@ -260,7 +260,7 @@ export default function Visit() {
                 marginBottom: '2rem',
               }}
             >
-              Fill out the form below and we'll reach out to welcome you
+              Fill out the form below and we&apos;ll reach out to welcome you
               personally.
             </p>
           </div>
