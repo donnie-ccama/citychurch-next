@@ -19,9 +19,9 @@ export async function notifyAdminsOfDtkRequest(
       body: JSON.stringify({
         from: 'Citychurch <onboarding@resend.dev>',
         to: adminEmails,
-        subject: `Discipleship kit access request: ${request.name}`,
+        subject: `Discipleship kit access request: ${request.name}${request.language === 'es' ? ' (Spanish)' : ''}`,
         text: [
-          `${request.name} (${request.email}) asked for access to the Discipleship Training Kit.`,
+          `${request.name} (${request.email}) asked for access to the Discipleship Training Kit in ${request.language === 'es' ? 'Spanish' : 'English'}.`,
           '',
           `Note: ${request.note ?? '(none)'}`,
           '',
