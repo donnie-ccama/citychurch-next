@@ -13,7 +13,7 @@ const expectCards = [
   {
     icon: '🙏',
     title: 'Worship & Teaching',
-    text: 'Sunday mornings start with breakfast at 9:30 AM, Bible Study at 10:00 AM, and worship at 11:00 AM (English) or 12:30 PM (Spanish). Come as you are — all are welcome.',
+    text: 'Sunday mornings start with breakfast at 9:30 AM and worship at 10:30 AM (English) or 12:30 PM (Spanish). Come as you are — all are welcome.',
   },
   {
     icon: '👨‍👩‍👧‍👦',
@@ -28,7 +28,7 @@ const expectCards = [
 ];
 
 const serviceTimes = [
-  'Sunday: Breakfast 9:30 AM · Bible Study 10:00 AM · Worship 11:00 AM (EN) / 12:30 PM (ES)',
+  'Sunday: Breakfast 9:30 AM · Worship 10:30 AM (EN) / 12:30 PM (ES)',
   'Wednesday: Family Night — Dinner 5:30 PM · Groups 6:15 PM',
   'Mon–Thu: Volunteer — 9:00 AM to 5:00 PM',
 ];
