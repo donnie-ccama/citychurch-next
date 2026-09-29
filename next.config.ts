@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  // Kit pages are read from disk at request time, so ship them with the
+  // server function. They are never placed in public/.
+  outputFileTracingIncludes: {
+    '/discipleship/*': ['./content/discipleship/**/*'],
+  },
   images: {
     remotePatterns: [
       {

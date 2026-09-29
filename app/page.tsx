@@ -201,6 +201,22 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* DISCIPLESHIP TRAINING KIT */}
+      <section className="home-section-compact home-section-secondary">
+        <div className="home-container reveal" style={{ textAlign: 'center' }}>
+          <div className="divider-ornament">
+            <span>For Staff &amp; Volunteers</span>
+          </div>
+          <h2 style={{ marginBottom: '0.5rem' }}>Discipleship Training Kit</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
+            Training for leading discipleship groups. Request access to get started.
+          </p>
+          <Link href="/discipleship" className="nav-link" style={{ color: 'var(--accent)', fontWeight: 600 }}>
+            Open the kit →
+          </Link>
+        </div>
+      </section>
+
       {/* IMPACT STATS */}
       <section className="home-section-compact home-section-secondary">
         <div className="home-container-impact reveal">
