@@ -3,6 +3,7 @@ import DtkAdminSubmitButton from '@/components/DtkAdminSubmitButton';
 import { createAdminClient } from '@/lib/supabase-admin';
 import { requireAdmin } from '@/lib/dtk/server';
 import type { DtkRequestStatus } from '@/lib/dtk/access';
+import type { DtkLang } from '@/lib/dtk/pages';
 
 type DtkRequestRow = {
   id: string;
@@ -11,6 +12,7 @@ type DtkRequestRow = {
   note: string | null;
   status: DtkRequestStatus;
   created_at: string;
+  language: DtkLang;
 };
 
 const SECTIONS: { status: DtkRequestStatus; title: string }[] = [
@@ -36,7 +38,7 @@ export default async function AdminDiscipleshipPage({
 
   const { data } = await createAdminClient()
     .from('dtk_access_requests')
-    .select('id, name, email, note, status, created_at')
+    .select('id, name, email, note, status, created_at, language')
     .order('created_at', { ascending: false });
   const rows = (data ?? []) as DtkRequestRow[];
 
@@ -68,6 +70,7 @@ export default async function AdminDiscipleshipPage({
                     <tr>
                       <th style={cell}>Name</th>
                       <th style={cell}>Email</th>
+                      <th style={cell}>Language</th>
                       <th style={cell}>Note</th>
                       <th style={cell}>Requested</th>
                       <th style={cell} aria-label="Actions" />
@@ -78,6 +81,7 @@ export default async function AdminDiscipleshipPage({
                       <tr key={r.id}>
                         <td style={cell}>{r.name}</td>
                         <td style={cell}>{r.email}</td>
+                        <td style={cell}>{r.language === 'es' ? 'ES' : 'EN'}</td>
                         <td style={cell}>{r.note ?? ''}</td>
                         <td style={cell}>{new Date(r.created_at).toLocaleDateString('en-US')}</td>
                         <td style={{ ...cell, whiteSpace: 'nowrap' }}>
