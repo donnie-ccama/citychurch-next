@@ -1,0 +1,20 @@
+.dtk { --ink:#222; --muted:#666; --accent:#7a5c3e; --line:#e5e0d8; --bg:#faf8f5; font-family: Georgia, 'Times New Roman', serif; color:var(--ink); background:var(--bg); line-height:1.6; }
+.dtk * { box-sizing: border-box; }
+.dtk header.site { border-bottom:1px solid var(--line); padding:2rem 1.5rem 1rem; max-width:52rem; margin:0 auto; }
+.dtk header.site h1 { margin:0 0 .25rem; font-size:1.9rem; }
+.dtk header.site p.sub { margin:0; color:var(--muted); font-style:italic; }
+.dtk nav.site { max-width:52rem; margin:0 auto; padding:.75rem 1.5rem; border-bottom:1px solid var(--line); display:flex; gap:1.25rem; flex-wrap:wrap; font-family: -apple-system, 'Segoe UI', sans-serif; font-size:.95rem; }
+.dtk nav.site a { color:var(--accent); text-decoration:none; }
+.dtk nav.site a:hover { text-decoration:underline; }
+.dtk main { max-width:52rem; margin:0 auto; padding:1.5rem; }
+.dtk h2 { font-size:1.4rem; margin-top:2.25rem; border-bottom:1px solid var(--line); padding-bottom:.3rem; }
+.dtk h3 { font-size:1.1rem; margin-top:1.75rem; }
+.dtk table { border-collapse:collapse; width:100%; margin:1rem 0; font-family:-apple-system,'Segoe UI',sans-serif; font-size:.95rem; }
+.dtk td, .dtk th { border:1px solid var(--line); padding:.5rem .75rem; text-align:left; vertical-align:top; }
+.dtk .callout { background:#fff; border:1px solid var(--line); border-left:4px solid var(--accent); padding:1rem 1.25rem; margin:1.5rem 0; }
+.dtk .callout.warn { border-left-color:#b3541e; }
+.dtk .key { font-size:1.15rem; font-weight:bold; }
+.dtk .src { color:var(--muted); font-size:.85rem; font-family:-apple-system,'Segoe UI',sans-serif; }
+.dtk footer.site { max-width:52rem; margin:0 auto; padding:2rem 1.5rem; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); }
+.dtk a { color:var(--accent); }
+.dtk table { display:block; overflow-x:auto; }
