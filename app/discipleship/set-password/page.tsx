@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createBrowserClient } from '@supabase/ssr';
 
@@ -35,8 +35,12 @@ export default function DtkSetPasswordPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const started = useRef(false);
 
   useEffect(() => {
+    // Links are one-time use. StrictMode runs effects twice in dev.
+    if (started.current) return;
+    started.current = true;
     async function startSession() {
       const hash = new URLSearchParams(window.location.hash.slice(1));
       const code = new URLSearchParams(window.location.search).get('code');
@@ -57,6 +61,7 @@ export default function DtkSetPasswordPage() {
 
       // Drop the tokens from the address bar.
       window.history.replaceState(null, '', window.location.pathname);
+      setError('');
       setReady(true);
     }
     startSession();
