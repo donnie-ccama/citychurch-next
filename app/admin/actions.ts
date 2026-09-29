@@ -26,13 +26,22 @@ export async function approveDtkRequest(formData: FormData) {
 
   const { data: row } = await supabase
     .from('dtk_access_requests')
-    .select('email, status')
+    .select('email, status, decided_at, decided_by')
     .eq('id', id)
     .maybeSingle();
   if (!row) dtkAdminError('Request not found.');
 
-  // Already approved: a repeat invite would invalidate the first email's link.
-  if (row.status === 'approved') {
+  // Claim the request in one step before inviting. A second click (or a
+  // stale page) finds nothing to claim and sends no invite, because a repeat
+  // invite would invalidate the link in the first email.
+  const { data: claimed, error: claimError } = await supabase
+    .from('dtk_access_requests')
+    .update({ status: 'approved', decided_at: new Date().toISOString(), decided_by: adminEmail })
+    .eq('id', id)
+    .neq('status', 'approved')
+    .select('id');
+  if (claimError) dtkAdminError(`Could not save approval: ${claimError.message}`);
+  if (!claimed || claimed.length === 0) {
     revalidatePath(DTK_ADMIN_PATH);
     redirect(DTK_ADMIN_PATH);
   }
@@ -44,14 +53,13 @@ export async function approveDtkRequest(formData: FormData) {
   // An existing account can't be invited again. That's fine: they log in
   // with the password they already have.
   if (inviteError && inviteError.code !== 'email_exists') {
+    // Put the request back the way it was so the admin can retry.
+    await supabase
+      .from('dtk_access_requests')
+      .update({ status: row.status, decided_at: row.decided_at, decided_by: row.decided_by })
+      .eq('id', id);
     dtkAdminError(`Invite failed: ${inviteError.message}`);
   }
-
-  const { error: updateError } = await supabase
-    .from('dtk_access_requests')
-    .update({ status: 'approved', decided_at: new Date().toISOString(), decided_by: adminEmail })
-    .eq('id', id);
-  if (updateError) dtkAdminError(`Could not save approval: ${updateError.message}`);
 
   revalidatePath(DTK_ADMIN_PATH);
   redirect(DTK_ADMIN_PATH);

@@ -1,4 +1,5 @@
 import { approveDtkRequest, denyDtkRequest } from '@/app/admin/actions';
+import DtkAdminSubmitButton from '@/components/DtkAdminSubmitButton';
 import { createAdminClient } from '@/lib/supabase-admin';
 import { requireAdmin } from '@/lib/dtk/server';
 import type { DtkRequestStatus } from '@/lib/dtk/access';
@@ -23,15 +24,6 @@ const cell: React.CSSProperties = {
   borderBottom: '1px solid var(--border-color)',
   textAlign: 'left',
   verticalAlign: 'top',
-};
-
-const button: React.CSSProperties = {
-  padding: '0.375rem 0.75rem',
-  border: '1px solid var(--border-color)',
-  borderRadius: '6px',
-  background: 'var(--bg-card)',
-  color: 'var(--text-primary)',
-  cursor: 'pointer',
 };
 
 export default async function AdminDiscipleshipPage({
@@ -92,15 +84,17 @@ export default async function AdminDiscipleshipPage({
                           {status !== 'approved' && (
                             <form action={approveDtkRequest} style={{ display: 'inline' }}>
                               <input type="hidden" name="id" value={r.id} />
-                              <button type="submit" style={button}>Approve</button>
+                              <DtkAdminSubmitButton label="Approve" pendingLabel="Approving…" />
                             </form>
                           )}
                           {status !== 'denied' && (
                             <form action={denyDtkRequest} style={{ display: 'inline', marginLeft: '0.5rem' }}>
                               <input type="hidden" name="id" value={r.id} />
-                              <button type="submit" style={button}>
-                                {status === 'approved' ? 'Revoke' : 'Deny'}
-                              </button>
+                              {status === 'approved' ? (
+                                <DtkAdminSubmitButton label="Revoke" pendingLabel="Revoking…" />
+                              ) : (
+                                <DtkAdminSubmitButton label="Deny" pendingLabel="Denying…" />
+                              )}
                             </form>
                           )}
                         </td>
