@@ -29,5 +29,12 @@ export default async function DiscipleshipPage({
   }
 
   const html = await readFile(path.join(CONTENT_DIR, `${name}.html`), 'utf8');
-  return <div className="dtk" dangerouslySetInnerHTML={{ __html: extractBody(html) }} />;
+  // The kit menu comes before any other kit link in the page, so the first
+  // match is the menu tab for this page.
+  const href = name === 'index' ? '/discipleship' : `/discipleship/${name}`;
+  const body = extractBody(html).replace(
+    `<a href="${href}">`,
+    `<a href="${href}" aria-current="page">`
+  );
+  return <div className="dtk" dangerouslySetInnerHTML={{ __html: body }} />;
 }
