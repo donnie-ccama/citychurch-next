@@ -66,7 +66,7 @@ export default function DtkSetPasswordForm({ lang }: { lang: DtkLang }) {
       setReady(true);
     }
     startSession();
-  }, [supabase]);
+  }, [supabase, copy]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
