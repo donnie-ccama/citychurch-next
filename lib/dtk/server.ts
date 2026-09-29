@@ -28,11 +28,12 @@ export async function getDtkViewer(): Promise<{
   const email = await getSessionEmail();
   if (!email) return { email: null, status: null, allowed: false };
 
-  const { data } = await createAdminClient()
+  const { data, error } = await createAdminClient()
     .from('dtk_access_requests')
     .select('status')
     .eq('email', email)
     .maybeSingle();
+  if (error) console.error('[DTK Access Check Error]', error);
   const status = (data?.status ?? null) as DtkRequestStatus | null;
 
   return { email, status, allowed: canViewDtk(email, getAdminEmails(), status) };

@@ -26,10 +26,16 @@ export async function approveDtkRequest(formData: FormData) {
 
   const { data: row } = await supabase
     .from('dtk_access_requests')
-    .select('email')
+    .select('email, status')
     .eq('id', id)
     .maybeSingle();
   if (!row) dtkAdminError('Request not found.');
+
+  // Already approved: a repeat invite would invalidate the first email's link.
+  if (row.status === 'approved') {
+    revalidatePath(DTK_ADMIN_PATH);
+    redirect(DTK_ADMIN_PATH);
+  }
 
   const origin = (await headers()).get('origin') ?? 'https://www.citykid.me';
   const { error: inviteError } = await supabase.auth.admin.inviteUserByEmail(row.email, {

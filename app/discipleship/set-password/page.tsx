@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createBrowserClient } from '@supabase/ssr';
 
+const RESET_LINK_MESSAGE =
+  'This reset link didn\'t work. Open it in the same browser where you clicked "Forgot password?", or request a new one there.';
+
 const EXPIRED_MESSAGE =
   'This link is invalid or has expired. Use "Forgot password?" on the login page to get a new one.';
 
@@ -14,7 +17,7 @@ function createClient() {
   return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { auth: { detectSessionInUrl: false } }
+    { isSingleton: false, auth: { detectSessionInUrl: false } }
   );
 }
 
@@ -47,6 +50,7 @@ export default function DtkSetPasswordPage() {
       const accessToken = hash.get('access_token');
       const refreshToken = hash.get('refresh_token');
 
+      const usingHash = Boolean(accessToken && refreshToken);
       const result =
         accessToken && refreshToken
           ? await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
@@ -55,7 +59,7 @@ export default function DtkSetPasswordPage() {
             : null;
 
       if (!result || result.error) {
-        setError(EXPIRED_MESSAGE);
+        setError(!usingHash && code ? RESET_LINK_MESSAGE : EXPIRED_MESSAGE);
         return;
       }
 
