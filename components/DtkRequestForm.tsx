@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { DTK_COPY } from '@/lib/dtk/i18n';
+import type { DtkLang } from '@/lib/dtk/pages';
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
@@ -12,7 +14,8 @@ const inputStyle: React.CSSProperties = {
   font: 'inherit',
 };
 
-export default function DtkRequestForm({ defaultEmail }: { defaultEmail: string }) {
+export default function DtkRequestForm({ lang, defaultEmail }: { lang: DtkLang; defaultEmail: string }) {
+  const copy = DTK_COPY[lang];
   const [state, setState] = useState<'idle' | 'sending' | 'sent'>('idle');
   const [error, setError] = useState('');
 
@@ -32,9 +35,9 @@ export default function DtkRequestForm({ defaultEmail }: { defaultEmail: string 
         return;
       }
       const body = await res.json().catch(() => ({}));
-      setError(body.error ?? 'Something went wrong. Please try again.');
+      setError(body.error ?? copy.formGenericError);
     } catch {
-      setError('Something went wrong. Please try again.');
+      setError(copy.formGenericError);
     }
     setState('idle');
   }
@@ -42,23 +45,24 @@ export default function DtkRequestForm({ defaultEmail }: { defaultEmail: string 
   if (state === 'sent') {
     return (
       <p role="status" style={{ padding: '1rem', border: '1px solid var(--border-color)', borderRadius: '6px' }}>
-        Request received. An admin will review it.
+        {copy.formReceived}
       </p>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1rem' }}>
+      <input type="hidden" name="lang" value={lang} />
       <label style={{ display: 'grid', gap: '0.375rem' }}>
-        Name
+        {copy.formName}
         <input name="name" required maxLength={200} autoComplete="name" style={inputStyle} />
       </label>
       <label style={{ display: 'grid', gap: '0.375rem' }}>
-        Email
+        {copy.formEmail}
         <input name="email" type="email" required defaultValue={defaultEmail} autoComplete="email" style={inputStyle} />
       </label>
       <label style={{ display: 'grid', gap: '0.375rem' }}>
-        Note (optional)
+        {copy.formNote}
         <textarea name="note" rows={3} maxLength={2000} style={inputStyle} />
       </label>
       {/* Honeypot: hidden from people, filled in by bots. */}
@@ -86,7 +90,7 @@ export default function DtkRequestForm({ defaultEmail }: { defaultEmail: string 
           cursor: state === 'sending' ? 'wait' : 'pointer',
         }}
       >
-        {state === 'sending' ? 'Sending...' : 'Request access'}
+        {state === 'sending' ? copy.formSending : copy.formSubmit}
       </button>
     </form>
   );

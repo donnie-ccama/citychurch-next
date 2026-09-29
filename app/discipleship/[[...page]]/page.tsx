@@ -3,56 +3,54 @@ import path from 'node:path';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import DtkLanguageSwitch from '@/components/DtkLanguageSwitch';
 import DtkRequestGate from '@/components/DtkRequestGate';
-import { extractBody, resolveDtkPage, type DtkPage } from '@/lib/dtk/pages';
+import { DTK_COPY } from '@/lib/dtk/i18n';
+import { dtkPath, extractBody, resolveDtkRoute } from '@/lib/dtk/pages';
 import { getDtkViewer } from '@/lib/dtk/server';
 import '../dtk.css';
 
-export const metadata: Metadata = {
-  title: 'Discipleship Training Kit | Citychurch',
-  robots: { index: false, follow: false },
-};
+type Params = Promise<{ page?: string[] }>;
 
 const CONTENT_DIR = path.join(process.cwd(), 'content', 'discipleship');
 
-// Hero image descriptions, one per kit page. Images live in
-// public/images/discipleship/<page>.webp.
-const HERO_ALT: Record<DtkPage, string> = {
-  index: 'A small group of adults sitting in a circle with open Bibles, listening as one woman speaks',
-  pitfalls: 'A small group around a table listening closely as one man shares, a friend’s hand on his shoulder',
-  training: 'Group leaders around a table with Bibles and notebooks as one woman leads the discussion',
-  toolkit: 'Three women praying together with joined hands beside an open Bible',
-  sources: 'Hands resting on open Bibles and notebooks across a wooden table',
-};
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const route = resolveDtkRoute((await params).page);
+  return {
+    title: DTK_COPY[route?.lang ?? 'en'].pageTitle,
+    robots: { index: false, follow: false },
+  };
+}
 
-export default async function DiscipleshipPage({
-  params,
-}: {
-  params: Promise<{ page?: string[] }>;
-}) {
-  const { page } = await params;
-  const name = resolveDtkPage(page);
-  if (!name) notFound();
+export default async function DiscipleshipPage({ params }: { params: Params }) {
+  const route = resolveDtkRoute((await params).page);
+  if (!route) notFound();
+  const { lang, page } = route;
 
   const viewer = await getDtkViewer();
   if (!viewer.allowed) {
-    return <DtkRequestGate email={viewer.email} status={viewer.status} />;
+    return <DtkRequestGate lang={lang} page={page} email={viewer.email} status={viewer.status} />;
   }
 
-  const html = await readFile(path.join(CONTENT_DIR, `${name}.html`), 'utf8');
+  const file =
+    lang === 'es'
+      ? path.join(CONTENT_DIR, 'es', `${page}.html`)
+      : path.join(CONTENT_DIR, `${page}.html`);
+  const html = await readFile(file, 'utf8');
   // The kit menu comes before any other kit link in the page, so the first
   // match is the menu tab for this page.
-  const href = name === 'index' ? '/discipleship' : `/discipleship/${name}`;
+  const href = dtkPath(lang, page);
   const body = extractBody(html).replace(
     `<a href="${href}">`,
     `<a href="${href}" aria-current="page">`
   );
   return (
-    <div className="dtk">
+    <div className="dtk" lang={lang}>
+      <DtkLanguageSwitch lang={lang} page={page} />
       <div className="dtk-hero">
         <Image
-          src={`/images/discipleship/${name}.webp`}
-          alt={HERO_ALT[name]}
+          src={`/images/discipleship/${page}.webp`}
+          alt={DTK_COPY[lang].heroAlt[page]}
           width={2000}
           height={858}
           priority
