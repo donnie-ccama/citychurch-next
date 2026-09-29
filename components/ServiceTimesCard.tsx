@@ -8,8 +8,7 @@ const schedule = [
     heading: 'Sunday',
     items: [
       { label: 'Breakfast', time: '9:30 AM' },
-      { label: 'Bible Study', time: '10:00 AM' },
-      { label: 'Worship (EN)', time: '11:00 AM' },
+      { label: 'Worship (EN)', time: '10:30 AM' },
       { label: 'Worship (ES)', time: '12:30 PM' },
     ],
   },

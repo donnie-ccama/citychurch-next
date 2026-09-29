@@ -11,7 +11,7 @@ export const ministries: Ministry[] = [
     title: 'Sunday Worship',
     icon: '✶',
     description:
-      'Two services every Sunday — English at 11:00 AM, Spanish at 12:30 PM — preceded by breakfast and Bible study. Worship that gathers the whole family.',
+      'Two services every Sunday — English at 10:30 AM, Spanish at 12:30 PM — preceded by breakfast. Worship that gathers the whole family.',
   },
   {
     slug: 'family-night',
