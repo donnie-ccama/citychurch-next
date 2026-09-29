@@ -45,7 +45,7 @@ export const DTK_COPY: Record<DtkLang, DtkCopy> = {
     switchLabel: 'Language',
     heroAlt: {
       index: 'A small group of adults sitting in a circle with open Bibles, listening as one woman speaks',
-      pitfalls: "A small group around a table listening closely as one man shares, a friend's hand on his shoulder",
+      pitfalls: 'A small group around a table listening closely as one man shares, a friend’s hand on his shoulder',
       training: 'Group leaders around a table with Bibles and notebooks as one woman leads the discussion',
       toolkit: 'Three women praying together with joined hands beside an open Bible',
       sources: 'Hands resting on open Bibles and notebooks across a wooden table',
