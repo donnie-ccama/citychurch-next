@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   // server function. They are never placed in public/.
   outputFileTracingIncludes: {
     '/discipleship/*': ['./content/discipleship/**/*'],
+    '/api/discipleship/booklet': ['./content/discipleship/**/*.pdf'],
   },
   images: {
     remotePatterns: [
