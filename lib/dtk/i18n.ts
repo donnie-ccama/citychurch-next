@@ -37,6 +37,7 @@ export type DtkCopy = {
   setTooShort: string;
   setExpired: string;
   setResetLink: string;
+  downloadPdf: string;
 };
 
 export const DTK_COPY: Record<DtkLang, DtkCopy> = {
@@ -84,6 +85,7 @@ export const DTK_COPY: Record<DtkLang, DtkCopy> = {
       'This link is invalid or has expired. Use "Forgot password?" on the login page to get a new one.',
     setResetLink:
       'This reset link didn\'t work. Open it in the same browser where you clicked "Forgot password?", or request a new one there.',
+    downloadPdf: 'Download the PDF booklet',
   },
   es: {
     pageTitle: 'Kit de Capacitación en Discipulado | Citychurch',
@@ -129,5 +131,6 @@ export const DTK_COPY: Record<DtkLang, DtkCopy> = {
       'Este enlace no es válido o ya venció. Use "¿Olvidó su contraseña?" en la página de inicio de sesión para recibir uno nuevo.',
     setResetLink:
       'Este enlace para restablecer la contraseña no funcionó. Ábralo en el mismo navegador donde hizo clic en "¿Olvidó su contraseña?", o solicite uno nuevo allí.',
+    downloadPdf: 'Descargar el folleto en PDF',
   },
 };

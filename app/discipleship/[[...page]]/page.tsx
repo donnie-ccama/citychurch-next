@@ -47,6 +47,11 @@ export default async function DiscipleshipPage({ params }: { params: Params }) {
   return (
     <div className="dtk" lang={lang}>
       <DtkLanguageSwitch lang={lang} page={page} />
+      <p style={{ maxWidth: '1100px', margin: '0 auto 1rem', textAlign: 'right', fontFamily: "'Inter', system-ui, sans-serif", fontSize: '0.875rem' }}>
+        <a href={`/api/discipleship/booklet?lang=${lang}`} download>
+          {DTK_COPY[lang].downloadPdf}
+        </a>
+      </p>
       <div className="dtk-hero">
         <Image
           src={`/images/discipleship/${page}.webp`}
