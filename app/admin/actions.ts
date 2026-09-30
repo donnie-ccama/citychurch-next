@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { createSupabaseSSR } from '@/lib/supabase-ssr';
 import { createAdminClient } from '@/lib/supabase-admin';
 import { requireAdmin } from '@/lib/dtk/server';
+import { dtkPath, type DtkLang } from '@/lib/dtk/pages';
 
 export async function signOut() {
   const supabase = await createSupabaseSSR();
@@ -26,7 +27,7 @@ export async function approveDtkRequest(formData: FormData) {
 
   const { data: row } = await supabase
     .from('dtk_access_requests')
-    .select('email, status, decided_at, decided_by')
+    .select('email, status, decided_at, decided_by, language')
     .eq('id', id)
     .maybeSingle();
   if (!row) dtkAdminError('Request not found.');
@@ -48,7 +49,7 @@ export async function approveDtkRequest(formData: FormData) {
 
   const origin = (await headers()).get('origin') ?? 'https://www.citykid.me';
   const { error: inviteError } = await supabase.auth.admin.inviteUserByEmail(row.email, {
-    redirectTo: `${origin}/discipleship/set-password`,
+    redirectTo: `${origin}${dtkPath((row.language as DtkLang) === 'es' ? 'es' : 'en', 'set-password')}`,
   });
   // An existing account can't be invited again. That's fine: they log in
   // with the password they already have.

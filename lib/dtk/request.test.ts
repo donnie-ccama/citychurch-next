@@ -4,7 +4,29 @@ import { validateDtkRequest } from './request.ts';
 
 test('valid request is trimmed and email lowercased', () => {
   const result = validateDtkRequest({ name: ' Jane ', email: ' Jane@Example.com ', note: ' hi ' });
-  assert.deepEqual(result, { ok: true, spam: false, value: { name: 'Jane', email: 'jane@example.com', note: 'hi' } });
+  assert.deepEqual(result, {
+    ok: true,
+    spam: false,
+    value: { name: 'Jane', email: 'jane@example.com', note: 'hi', language: 'en' },
+  });
+});
+
+test('Spanish request keeps its language and gets Spanish errors', () => {
+  const ok = validateDtkRequest({ name: 'Ana', email: 'ana@example.com', lang: 'es' });
+  assert.equal(ok.ok && ok.value.language, 'es');
+  assert.deepEqual(validateDtkRequest({ name: '', email: 'ana@example.com', lang: 'es' }), {
+    ok: false,
+    error: 'Escriba su nombre.',
+  });
+  assert.deepEqual(validateDtkRequest({ name: 'Ana', email: 'ana', lang: 'es' }), {
+    ok: false,
+    error: 'Escriba un correo electrónico válido.',
+  });
+});
+
+test('unknown language falls back to English', () => {
+  const result = validateDtkRequest({ name: 'Jo', email: 'jo@example.com', lang: 'fr' });
+  assert.equal(result.ok && result.value.language, 'en');
 });
 
 test('empty note becomes null', () => {

@@ -1,25 +1,47 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveDtkPage, extractBody } from './pages.ts';
+import { dtkPath, extractBody, resolveDtkRoute } from './pages.ts';
 
-test('resolveDtkPage maps no segments to index', () => {
-  assert.equal(resolveDtkPage(undefined), 'index');
-  assert.equal(resolveDtkPage([]), 'index');
-});
-
-test('resolveDtkPage accepts every known page', () => {
-  for (const name of ['index', 'pitfalls', 'training', 'toolkit', 'sources']) {
-    assert.equal(resolveDtkPage([name]), name);
+test('resolveDtkRoute maps English addresses', () => {
+  assert.deepEqual(resolveDtkRoute(undefined), { lang: 'en', page: 'index' });
+  assert.deepEqual(resolveDtkRoute([]), { lang: 'en', page: 'index' });
+  for (const page of ['index', 'pitfalls', 'training', 'toolkit', 'sources']) {
+    assert.deepEqual(resolveDtkRoute([page]), { lang: 'en', page });
   }
 });
 
-test('resolveDtkPage rejects unknown, nested, cased, and traversal paths', () => {
-  assert.equal(resolveDtkPage(['secret']), null);
-  assert.equal(resolveDtkPage(['pitfalls', 'extra']), null);
-  assert.equal(resolveDtkPage(['Pitfalls']), null);
-  assert.equal(resolveDtkPage(['../package']), null);
-  assert.equal(resolveDtkPage(['..%2Fpackage']), null);
-  assert.equal(resolveDtkPage(['pitfalls.html']), null);
+test('resolveDtkRoute maps Spanish addresses', () => {
+  assert.deepEqual(resolveDtkRoute(['es']), { lang: 'es', page: 'index' });
+  for (const page of ['index', 'pitfalls', 'training', 'toolkit', 'sources']) {
+    assert.deepEqual(resolveDtkRoute(['es', page]), { lang: 'es', page });
+  }
+});
+
+test('resolveDtkRoute rejects unknown, nested, cased, and traversal paths', () => {
+  for (const segments of [
+    ['secret'],
+    ['pitfalls', 'extra'],
+    ['Pitfalls'],
+    ['../package'],
+    ['..%2Fpackage'],
+    ['pitfalls.html'],
+    ['es', 'es'],
+    ['ES'],
+    ['es', 'secret'],
+    ['es', 'pitfalls', 'extra'],
+    ['en'],
+  ]) {
+    assert.equal(resolveDtkRoute(segments), null, segments.join('/'));
+  }
+});
+
+test('dtkPath builds addresses for both languages', () => {
+  assert.equal(dtkPath('en', 'index'), '/discipleship');
+  assert.equal(dtkPath('en', 'pitfalls'), '/discipleship/pitfalls');
+  assert.equal(dtkPath('en', 'login'), '/discipleship/login');
+  assert.equal(dtkPath('es', 'index'), '/discipleship/es');
+  assert.equal(dtkPath('es', 'toolkit'), '/discipleship/es/toolkit');
+  assert.equal(dtkPath('es', 'set-password'), '/discipleship/es/set-password');
 });
 
 test('extractBody returns the markup inside body', () => {

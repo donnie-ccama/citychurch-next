@@ -211,9 +211,14 @@ export default async function Home() {
           <p style={{ color: 'var(--text-secondary)', marginBottom: '1.25rem' }}>
             Training for leading discipleship groups. Request access to get started.
           </p>
-          <Link href="/discipleship" className="nav-link" style={{ color: 'var(--accent)', fontWeight: 600 }}>
-            Open the kit →
-          </Link>
+          <p style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap', margin: 0 }}>
+            <Link href="/discipleship" className="nav-link" style={{ color: 'var(--accent)', fontWeight: 600 }}>
+              Open the kit →
+            </Link>
+            <Link href="/discipleship/es" lang="es" className="nav-link" style={{ color: 'var(--accent)', fontWeight: 600 }}>
+              En español →
+            </Link>
+          </p>
         </div>
       </section>
 
