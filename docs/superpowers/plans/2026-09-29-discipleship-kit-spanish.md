@@ -892,10 +892,10 @@ http://localhost:3000/discipleship/es/set-password
 
 ```html
 <h2>Citychurch</h2>
-<p>Su solicitud fue aprobada. Haga clic en el botón para crear su contraseña.</p>
-<p>Your request was approved. Click the button to set your password.</p>
+<p>Le invitamos a Citychurch. Haga clic en el botón para crear su contraseña.</p>
+<p>You've been invited to Citychurch. Click the button to set your password.</p>
 <p><a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:12px 20px;background:#1c1917;color:#ffffff;border-radius:999px;text-decoration:none;font-weight:600">Crear contraseña / Set password</a></p>
-<p style="color:#78716c;font-size:13px">Si no solicitó acceso, puede ignorar este correo.<br>If you didn't request access, you can ignore this email.</p>
+<p style="color:#78716c;font-size:13px">Si no esperaba esta invitación, puede ignorar este correo.<br>If you weren't expecting this invitation, you can ignore this email.</p>
 ```
 
 **Reset password** subject: `Restablezca su contraseña / Reset your password`
@@ -919,4 +919,4 @@ http://localhost:3000/discipleship/es/set-password
 
 - [ ] **Step 5: Spanish review (user).** A fluent Spanish-speaking leader reads the five Spanish pages and the gate, login, and set-password screens. Apply any wording changes before merge.
 
-- [ ] **Step 6: Publish (ask first).** Push the branch, open a PR, and merge to `main` only after Step 1 is done (the code needs the `language` column). Wait for the Vercel deploy, then confirm live: `/discipleship/es` 200 with Spanish gate, `/discipleship/es/secret` 404, `/discipleship/es/login` 200.
+- [ ] **Step 6: Publish (ask first).** Push the branch, open a PR, and merge to `main` only after Steps 1 and 2 are done (the code needs the `language` column, and Spanish invites need the `/discipleship/es/set-password` redirect URL allowed). Wait for the Vercel deploy, then confirm live: `/discipleship/es` 200 with Spanish gate, `/discipleship/es/secret` 404, `/discipleship/es/login` 200.

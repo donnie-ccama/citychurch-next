@@ -39,7 +39,13 @@ export default function DtkLoginForm({ lang }: { lang: DtkLang }) {
     });
 
     if (signInError) {
-      setError(copy.loginFailed ?? signInError.message);
+      setError(
+        copy.loginFailed === null
+          ? signInError.message
+          : signInError.code === 'invalid_credentials'
+            ? copy.loginFailed
+            : copy.formGenericError
+      );
       setIsLoading(false);
       return;
     }
@@ -59,7 +65,7 @@ export default function DtkLoginForm({ lang }: { lang: DtkLang }) {
       redirectTo: `${window.location.origin}${dtkPath(lang, 'set-password')}`,
     });
     if (resetError) {
-      setError(resetError.message);
+      setError(lang === 'es' ? copy.formGenericError : resetError.message);
       return;
     }
     setMessage(copy.forgotSent);

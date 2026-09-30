@@ -35,7 +35,7 @@ export default function DtkRequestForm({ lang, defaultEmail }: { lang: DtkLang; 
         return;
       }
       const body = await res.json().catch(() => ({}));
-      setError(body.error ?? copy.formGenericError);
+      setError(res.status === 400 && body.error ? body.error : copy.formGenericError);
     } catch {
       setError(copy.formGenericError);
     }

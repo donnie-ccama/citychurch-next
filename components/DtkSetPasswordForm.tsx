@@ -78,7 +78,7 @@ export default function DtkSetPasswordForm({ lang }: { lang: DtkLang }) {
     setIsLoading(true);
     const { error: updateError } = await supabase.auth.updateUser({ password });
     if (updateError) {
-      setError(updateError.message);
+      setError(lang === 'es' ? copy.formGenericError : updateError.message);
       setIsLoading(false);
       return;
     }
