@@ -36,12 +36,14 @@ citychurch-next/
 │   ├── sermons/page.tsx          # Sermon archive
 │   ├── media/page.tsx            # Media gallery
 │   ├── register/[slug]/page.tsx  # Event registration (dynamic)
+│   ├── christmas/page.tsx        # Christmas banquet table reservations
 │   ├── admin/                    # Admin dashboard (protected)
 │   ├── api/                      # API routes
 │   │   ├── visitors/route.ts     # Visitor sign-up form handler
 │   │   ├── contact/route.ts      # Contact form handler
 │   │   ├── subscribe/route.ts    # Email signup (Mailchimp + Supabase + Sheets)
 │   │   ├── register/route.ts     # Event registration handler
+│   │   ├── christmas/            # Capacity-safe Christmas reservations
 │   │   └── blog-share/route.ts   # Blog social share logging (→ Google Sheets)
 │   ├── layout.tsx                # Root layout (Navbar, Footer, ScrollReveal)
 │   └── globals.css               # Tailwind v4 + custom CSS (taupe palette, dark mode)
@@ -109,7 +111,9 @@ citychurch-next/
 | `/sermons` | Static | Sermon archive |
 | `/media` | Static | Media gallery |
 | `/register/[slug]` | SSG | Event registration (sunday-mornings, family-night, volunteer) |
+| `/christmas` | Dynamic | Choose a Christmas banquet and reserve one family table |
 | `/admin` | Static | Admin dashboard |
+| `/admin/christmas` | Dynamic | Christmas capacity, guest list, notification status, and cancellations |
 | `/api/visitors` | Dynamic | POST — visitor sign-up submissions |
 | `/api/contact` | Dynamic | POST — contact form submissions |
 | `/api/subscribe` | Dynamic | POST — email list signups |
@@ -163,6 +167,25 @@ All variables are set on Vercel for Production and Development environments.
 | `GOOGLE_SHEETS_SPREADSHEET_ID` | Target Google Sheets spreadsheet | `10Fm3rkvzCEn6bv6SNIyZFjjG-auLoVzpqP1pk0DLlEA` |
 | `GOOGLE_SHEETS_CLIENT_EMAIL` | GCP service account email | `citychurch-sheets@citychurch-website-491521.iam.gserviceaccount.com` |
 | `GOOGLE_SHEETS_PRIVATE_KEY` | GCP service account private key | Downloaded JSON key file |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only key for atomic Christmas reservations | Supabase Dashboard → Settings → API |
+| `RESEND_API_KEY` | Transactional reservation email | Resend / Vercel integration |
+| `RESERVATION_FROM_EMAIL` | Verified sender for confirmations | Example: `Citychurch Christmas <reservations@citykid.me>` |
+| `RESERVATION_ADMIN_EMAIL` | Staff reservation recipient | Defaults to `donnie@citykid.me` |
+| `NEXT_PUBLIC_SITE_URL` | Canonical website URL used in admin email links | `https://www.citykid.me` |
+
+## Christmas Banquet Reservations
+
+The `/christmas` flow lets a family choose December 14 or 15, 2026 and reserve one
+full table for up to eight guests. Each banquet has 15 tables. The database function
+in `20261005204610_christmas_banquet_reservations.sql` locks the selected banquet row
+while it checks capacity and creates the reservation, preventing simultaneous requests
+from overbooking a sixteenth table. The form also records whether the family regularly
+attends a church and, when provided, the name of that church.
+
+New reservations are stored in Supabase first, then confirmation emails are sent to
+the family and `donnie@citykid.me`. The existing Registrations Google Sheets tab receives
+a backup row. If email is unavailable, the reservation remains valid and the admin page
+shows its notification status.
 
 ### Mailchimp Settings
 

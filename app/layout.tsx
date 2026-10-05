@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.citykid.me"),
   title: "Citychurch — for the heart of the city.",
   description:
     "Citychurch is a vibrant community dedicated to faith, growth, and service in the heart of the city.",

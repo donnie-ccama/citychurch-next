@@ -148,6 +148,35 @@ body {
   font-style: italic;
 }
 
+/* --- Christmas banquet registration --- */
+.christmas-banquet-grid,
+.christmas-form-grid,
+.christmas-schedule-grid,
+.christmas-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.admin-christmas-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .christmas-banquet-grid,
+  .christmas-form-grid,
+  .christmas-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .christmas-schedule-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
 /* --- Homepage shared layout --- */
 .home-shell {
   background-color: var(--bg-primary);

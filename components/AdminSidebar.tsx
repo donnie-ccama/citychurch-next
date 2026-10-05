@@ -90,6 +90,9 @@ export default function AdminSidebar({ userEmail }: AdminSidebarProps) {
         <Link href="/admin/discipleship" style={linkStyle('/admin/discipleship')}>
           Discipleship
         </Link>
+        <Link href="/admin/christmas" style={linkStyle('/admin/christmas')}>
+          Christmas Banquets
+        </Link>
       </nav>
 
       <div
