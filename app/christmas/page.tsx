@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 export default async function ChristmasPage() {
   const { event, banquets, usingPreviewData } = await getChristmasEventWithBanquets();
   const firstBanquet = banquets[0];
+  const reservationsUnavailable = usingPreviewData && process.env.NODE_ENV !== 'development';
 
   return (
     <main
@@ -169,11 +170,23 @@ export default async function ChristmasPage() {
               boxShadow: '0 16px 45px rgba(54, 41, 35, 0.07)',
             }}
           >
-            <ChristmasReservationForm
-              banquets={banquets}
-              location={event.location}
-              usingPreviewData={usingPreviewData}
-            />
+            {reservationsUnavailable ? (
+              <div role="status" style={{ textAlign: 'center', padding: '1.25rem 0' }}>
+                <h3 style={{ fontSize: '1.35rem', marginBottom: '0.75rem' }}>
+                  Online reservations are opening soon
+                </h3>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: '0 auto', maxWidth: '540px' }}>
+                  We’re finishing the reservation setup now. Please check back shortly, or contact
+                  Citychurch if you need help.
+                </p>
+              </div>
+            ) : (
+              <ChristmasReservationForm
+                banquets={banquets}
+                location={event.location}
+                usingPreviewData={usingPreviewData}
+              />
+            )}
           </div>
         </div>
       </section>

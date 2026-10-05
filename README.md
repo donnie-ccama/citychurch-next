@@ -187,6 +187,34 @@ the family and `donnie@citykid.me`. The existing Registrations Google Sheets tab
 a backup row. If email is unavailable, the reservation remains valid and the admin page
 shows its notification status.
 
+Production fails closed: if the Christmas tables or public event data are unavailable,
+the live page shows an opening-soon message instead of a form backed by preview IDs.
+Local development can still use the preview reservation flow.
+
+### Christmas Reservation Release Checklist
+
+The Supabase CLI project is `citychurch-web` (`oykedxzykofrjvkbdckz`). Always confirm
+that exact target before any remote migration command.
+
+1. Confirm the production Resend domain is verified and set `RESERVATION_FROM_EMAIL`
+   and `RESERVATION_ADMIN_EMAIL` in Vercel. Redeploy so the server functions receive them.
+2. Reconcile any schema changes that were previously applied outside migration history.
+   On the current production database, `20260929000000` and `20260930000000` already
+   match the live `dtk_access_requests` table and should be marked applied, not re-run:
+
+   ```bash
+   supabase migration repair --linked --project-ref oykedxzykofrjvkbdckz \
+     --status applied 20260929000000 20260930000000
+   ```
+3. Run `supabase migration list --linked --project-ref oykedxzykofrjvkbdckz` and
+   `supabase db push --linked --project-ref oykedxzykofrjvkbdckz --dry-run`.
+   The final dry run must list only the Christmas banquet migration.
+4. Apply the migration during the agreed release window, then verify the event seed,
+   two banquet rows, 15-table capacity, RLS/grants, and both reservation functions.
+5. Submit one controlled reservation with a designated test email, verify both emails
+   and the Google Sheets backup, then cancel it through the admin page and confirm that
+   capacity returns to 15 tables.
+
 ### Mailchimp Settings
 
 - Audience: Citychurch Website Subscribers

@@ -111,6 +111,11 @@ CREATE POLICY "Admins can manage Christmas reservations"
   USING ((select public.is_admin()))
   WITH CHECK ((select public.is_admin()));
 
+-- Existing Supabase projects may still auto-grant table privileges in public.
+-- Reset these tables to the minimum access required by the application.
+REVOKE ALL ON public.christmas_events, public.christmas_banquets,
+  public.christmas_reservations FROM anon, authenticated;
+
 GRANT SELECT ON public.christmas_events, public.christmas_banquets TO anon, authenticated;
 GRANT SELECT, INSERT, UPDATE, DELETE ON public.christmas_events,
   public.christmas_banquets, public.christmas_reservations TO authenticated;
