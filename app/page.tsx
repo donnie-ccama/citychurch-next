@@ -1,17 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import SectionHeader from '@/components/SectionHeader';
-import HeroImage from '@/components/HeroImage';
-import EventCard from '@/components/EventCard';
 import BlogCard from '@/components/BlogCard';
 import DonateButton from '@/components/DonateButton';
 import ImpactStats from '@/components/ImpactStats';
 import EmailSignup from '@/components/EmailSignup';
 import ProofOfLifeHomepagePreview from '@/components/ProofOfLifeHomepagePreview';
 import PhotoCarousel from '@/components/PhotoCarousel';
-import { demoEvents } from '@/lib/supabase-server';
 import { createServerClient } from '@/lib/supabase-server';
 import { BlogPost } from '@/lib/types';
+import { FocusMonthHero } from '@/components/SeasonalEventCalendar';
+import { getCitychurchTodayIso, getInitialSeasonMonth, seasonEvents } from '@/lib/seasonal-events';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const upcomingEvents = demoEvents.slice(0, 3);
+  const todayIso = getCitychurchTodayIso();
 
   const supabase = createServerClient();
   const { data: blogPosts } = await supabase
@@ -36,15 +35,19 @@ export default async function Home() {
   return (
     <div className="home-shell">
 
-      {/* HERO SECTION — Static Image */}
-      <HeroImage src="/images/web-hero-3-27-26.png">
-        <div className="reveal hero-actions">
-          <DonateButton label="Feed a Child Today" />
-          <Link href="/donate" className="hero-secondary-link">
-            See How $2.50 Changes a Life
-          </Link>
-        </div>
-      </HeroImage>
+      {/*
+        THESIS: A photograph-driven calendar is the hero itself, replacing the category-default image plus buttons.
+        OWN-WORLD: Citychurch documentary photography, deep charcoal image scrim, warm serif display type, and red-pink accent controls.
+        STORY: Visitors immediately see that the season is active, explore a month, reveal a real event, and continue to the complete season.
+        FIRST VIEWPORT: Human story and headline occupy the left third; an interactive photo-date calendar occupies the right two thirds and defaults to the current season month.
+        FORM: The user-approved Focus Month composition; seed key user-approved-2026-10-05.
+        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+      */}
+      <FocusMonthHero
+        events={seasonEvents.filter((event) => event.featured)}
+        initialMonth={getInitialSeasonMonth(todayIso)}
+        todayIso={todayIso}
+      />
 
       {/* FIRST-TIME VISITOR BANNER */}
       <section className="home-section-card">
@@ -73,29 +76,6 @@ export default async function Home() {
           </div>
           <div className="reveal">
             <PhotoCarousel />
-          </div>
-        </div>
-      </section>
-
-      {/* UPCOMING EVENTS */}
-      <section className="home-section home-section-secondary">
-        <div className="home-container">
-          <div className="reveal">
-            <SectionHeader label="Get Involved" title="Upcoming Ministry Opportunities" />
-          </div>
-
-          <div className="home-grid">
-            {upcomingEvents.map((event) => (
-              <div key={event.id} className="reveal">
-                <EventCard {...event} />
-              </div>
-            ))}
-          </div>
-
-          <div className="home-view-all reveal">
-            <Link href="/ministries" className="home-text-link">
-              View All Ministries & Register →
-            </Link>
           </div>
         </div>
       </section>

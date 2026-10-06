@@ -31,6 +31,7 @@ export default function Navbar() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'Our Story' },
+    { href: '/events', label: 'Events' },
     { href: '/sermons', label: 'Sermons' },
     { href: '/ministries', label: 'How We Help' },
     { href: '/proof-of-life', label: 'Proof of Life' },
