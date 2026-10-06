@@ -132,6 +132,9 @@ function MonthCalendar({
                         <h3>{event.title}</h3>
                         <p>{event.time}</p>
                         <p>{event.location}</p>
+                        <p className="season-event-popover-description">
+                          {event.details ?? event.description}
+                        </p>
                         {event.href && event.actionLabel ? (
                           <Link href={event.href} onClick={(clickEvent) => clickEvent.stopPropagation()}>
                             {event.actionLabel} <span aria-hidden="true">→</span>

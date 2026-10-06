@@ -241,7 +241,7 @@ The navigation is a sticky 72px bar on the page ground, with the logo and Citych
 
 ### Photo-Marked Calendar Date
 
-An event date replaces the neutral date tile with approved documentary photography, a dark diagonal shade, the date number, and a short event label. Click, tap, or keyboard activation lifts the tile and reveals a light detail popover; a second selection closes it. Hover provides only a visual cue. Empty dates remain quiet so photography signals meaning.
+An event date replaces the neutral date tile with approved documentary photography, a dark diagonal shade, the date number, and a short event label. Click, tap, or keyboard activation lifts the tile and reveals a light detail popover with the source-of-truth long description and a Visit-page action; a second selection closes it. Hover provides only a visual cue. Empty dates remain quiet so photography signals meaning.
 
 ### Chronological Event Row
 

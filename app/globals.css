@@ -623,6 +623,11 @@ body {
   margin: 0.16rem 0;
 }
 
+.season-event-popover p.season-event-popover-description {
+  color: #241c18;
+  margin-top: 0.65rem;
+}
+
 .season-event-popover a {
   color: #a5224d;
   display: inline-flex;

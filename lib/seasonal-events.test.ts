@@ -59,6 +59,14 @@ test('one-time celebrations remain distinct from expanded weekly gatherings', ()
   ]);
 });
 
+test('every calendar event includes full details and a visit-page action', () => {
+  for (const event of seasonEvents) {
+    assert.ok(event.details);
+    assert.equal(event.href, '/visit');
+    assert.equal(event.actionLabel, 'Plan your visit');
+  }
+});
+
 test('Citychurch dates use America/Chicago instead of the server timezone', () => {
   assert.equal(getCitychurchTodayIso(new Date('2026-10-06T00:30:00Z')), '2026-10-05');
 });

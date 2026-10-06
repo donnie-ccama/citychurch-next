@@ -62,6 +62,8 @@ interface SourceEvent {
 
 const CITYCHURCH_DOWNTOWN = 'Citychurch Downtown, 205 S. Polk St, Amarillo, TX 79101';
 const SEASON_END = '2026-12-31';
+const VISIT_HREF = '/visit';
+const VISIT_ACTION_LABEL = 'Plan your visit';
 
 // Synced from the Ready rows in Citychurch Calendar — Source of Truth on October 6, 2026.
 // Spreadsheet: https://docs.google.com/spreadsheets/d/1WCHC3N-ICVZCvcKa9UALrfFy5_y8T0IrUuEfJR3cUGA
@@ -209,8 +211,8 @@ function expandSourceEvent(event: SourceEvent): SeasonEvent[] {
     location: event.location,
     image: event.image,
     imageAlt: event.imageAlt,
-    href: event.href,
-    actionLabel: event.actionLabel,
+    href: event.href ?? VISIT_HREF,
+    actionLabel: event.actionLabel ?? VISIT_ACTION_LABEL,
     category: event.category,
     recurring: event.recurrence === 'Weekly',
     featured: event.featured,
