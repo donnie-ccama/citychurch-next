@@ -26,9 +26,7 @@ interface FocusMonthHeroProps extends CalendarProps {
 interface MonthCalendarProps extends CalendarProps {
   month: SeasonMonth;
   compact?: boolean;
-  activeEventId: string | null;
   selectedEventId: string | null;
-  onPreview: (eventId: string | null) => void;
   onSelect: (eventId: string) => void;
 }
 
@@ -37,9 +35,7 @@ function MonthCalendar({
   month,
   todayIso,
   compact = false,
-  activeEventId,
   selectedEventId,
-  onPreview,
   onSelect,
 }: MonthCalendarProps) {
   const eventsByDate = useMemo(() => {
@@ -92,7 +88,6 @@ function MonthCalendar({
             );
           }
 
-          const active = activeEventId === primaryEvent.id;
           const selected = selectedEventId === primaryEvent.id;
           const column = index % 7;
           const row = Math.floor(index / 7);
@@ -104,19 +99,13 @@ function MonthCalendar({
 
           return (
             <div
-              className={`season-event-cell ${horizontalClass} ${verticalClass}${isPast ? ' is-past' : ''}${active || selected ? ' is-open' : ''}`}
+              className={`season-event-cell ${horizontalClass} ${verticalClass}${isPast ? ' is-past' : ''}${selected ? ' is-open' : ''}`}
               key={date}
-              onPointerEnter={() => onPreview(primaryEvent.id)}
-              onPointerLeave={() => onPreview(null)}
-              onFocusCapture={() => onPreview(primaryEvent.id)}
-              onBlurCapture={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) onPreview(null);
-              }}
             >
               <button
                 type="button"
                 className="season-event-day"
-                aria-expanded={active || selected}
+                aria-expanded={selected}
                 aria-label={`${formatSeasonDate(primaryEvent.date)}: ${eventSummary}`}
                 onClick={() => onSelect(primaryEvent.id)}
               >
@@ -134,7 +123,7 @@ function MonthCalendar({
                 {dayEvents.length > 1 ? <span className="season-event-count">+{dayEvents.length - 1}</span> : null}
               </button>
 
-              {active || selected ? (
+              {selected ? (
                 <div className="season-event-popover" role="status">
                   <p className="season-event-popover-date">{formatSeasonDate(primaryEvent.date)}</p>
                   <div className="season-event-popover-events">
@@ -163,13 +152,10 @@ function MonthCalendar({
 
 export function FocusMonthHero({ events, initialMonth, todayIso }: FocusMonthHeroProps) {
   const [month, setMonth] = useState<SeasonMonth>(initialMonth);
-  const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const activeEventId = hoveredEventId ?? selectedEventId;
 
   function selectMonth(nextMonth: SeasonMonth) {
     setMonth(nextMonth);
-    setHoveredEventId(null);
     setSelectedEventId(null);
   }
 
@@ -185,8 +171,8 @@ export function FocusMonthHero({ events, initialMonth, todayIso }: FocusMonthHer
     >
       <Image
         className="season-focus-background"
-        src="/images/web-hero-3-27-26.png"
-        alt="A smiling child at Citychurch Amarillo"
+        src="/images/hero-bubbles-3Y3A6297.webp"
+        alt="A child blowing bubbles in the sunlight at Citychurch"
         fill
         loading="eager"
         sizes="100vw"
@@ -221,12 +207,10 @@ export function FocusMonthHero({ events, initialMonth, todayIso }: FocusMonthHer
             events={events}
             month={month}
             todayIso={todayIso}
-            activeEventId={activeEventId}
             selectedEventId={selectedEventId}
-            onPreview={setHoveredEventId}
             onSelect={selectEvent}
           />
-          <p className="season-calendar-instruction">Hover, focus, or tap a photograph to see the event.</p>
+          <p className="season-calendar-instruction">Select a photograph to see the event. Select it again to close.</p>
         </div>
       </div>
     </section>
@@ -234,9 +218,7 @@ export function FocusMonthHero({ events, initialMonth, todayIso }: FocusMonthHer
 }
 
 export function WholeSeasonCalendar({ events, todayIso }: CalendarProps) {
-  const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const activeEventId = hoveredEventId ?? selectedEventId;
 
   function selectEvent(eventId: string) {
     setSelectedEventId((current) => (current === eventId ? null : eventId));
@@ -256,9 +238,7 @@ export function WholeSeasonCalendar({ events, todayIso }: CalendarProps) {
               events={events}
               month={month}
               todayIso={todayIso}
-              activeEventId={activeEventId}
               selectedEventId={selectedEventId}
-              onPreview={setHoveredEventId}
               onSelect={selectEvent}
             />
           </section>

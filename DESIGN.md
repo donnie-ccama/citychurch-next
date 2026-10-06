@@ -186,7 +186,7 @@ The palette is a warm taupe scale anchored by a restrained red-pink accent, with
 
 Public pages use centered containers from roughly 1000px to 1320px with generous fluid section padding. The seasonal hero divides the first viewport into a smaller story column and a larger calendar column; the full-season page presents three equal month cards above a chronological list.
 
-At 980px, the hero and event rows tighten while preserving the calendar-first hierarchy. At 760px, the hero becomes a vertical composition, month cards stack, calendar labels simplify, and list rows compress to image, date, title/time, and action. Touch, keyboard, and hover receive the same event detail.
+At 980px, the hero and event rows tighten while preserving the calendar-first hierarchy. At 760px, the hero becomes a vertical composition, month cards stack, calendar labels simplify, and list rows compress to image, date, title/time, and action. Click, touch, and keyboard activation receive the same event detail.
 
 **The Calendar Leads Rule.** Seasonal event surfaces show the date structure before the detail list; the list then supplies complete chronological context and actions.
 
@@ -241,7 +241,7 @@ The navigation is a sticky 72px bar on the page ground, with the logo and Citych
 
 ### Photo-Marked Calendar Date
 
-An event date replaces the neutral date tile with approved documentary photography, a dark diagonal shade, the date number, and a short event label. Hover, focus, or tap lifts the tile and reveals a light detail popover; a second selection closes it. Empty dates remain quiet so photography signals meaning.
+An event date replaces the neutral date tile with approved documentary photography, a dark diagonal shade, the date number, and a short event label. Click, tap, or keyboard activation lifts the tile and reveals a light detail popover; a second selection closes it. Hover provides only a visual cue. Empty dates remain quiet so photography signals meaning.
 
 ### Chronological Event Row
 
@@ -255,14 +255,14 @@ Rows combine a landscape image, serif date numeral, event copy, metadata, and a 
 
 - **Do** let approved photographs of Citychurch people and ministry activity carry the emotional story.
 - **Do** use Source Serif 4 for editorial headlines and Inter for controls, labels, and body copy.
-- **Do** preserve equivalent hover, keyboard-focus, and tap paths for calendar detail.
+- **Do** preserve equivalent click, keyboard-activation, and tap paths for calendar detail.
 - **Do** use the red-pink accent for actions, selections, and concise signals.
 - **Do** stack calendars and simplify event rows below 760px while keeping dates and actions visible.
 
 ### Don't:
 
 - **Don't** use generic event icons or invented graphics where approved documentary photography provides the meaning.
-- **Don't** make hover the only way to reveal an event.
+- **Don't** open event details on incidental hover or keyboard focus.
 - **Don't** fill neutral dates with decorative photography; photo dates are semantic markers.
 - **Don't** make bright white the dominant page ground.
 - **Don't** turn the chronological event list into a wall of independently elevated cards.
