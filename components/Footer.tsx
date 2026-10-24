@@ -4,7 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import EmailSignup from './EmailSignup';
 
-const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+const FOOTER_DONATE_URL =
+  'https://www.citykid.online/?form=FUNAFYBLTAV' +
+  '&utm_source=citykid_site&utm_medium=footer&utm_campaign=summer25&utm_content=footer_donate';
 
 export default function Footer() {
   const footerLinkStyle = {
@@ -138,7 +140,7 @@ export default function Footer() {
               <a href="https://www.youtube.com/@AmarilloCitychurch" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>YouTube</a>
               <a href="https://vimeo.com/heartofthecity" target="_blank" rel="noopener noreferrer" style={footerLinkStyle}>Vimeo</a>
               <a
-                href={DONATE_URL}
+                href={FOOTER_DONATE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

@@ -13,22 +13,26 @@ const mealTiers = [
     amount: '$2.50',
     label: 'Feed a Child',
     description: '1 meal — a hot item, fresh fruit, and popcorn',
+    utmContent: 'tier1_feed_child',
   },
   {
     amount: '$17.50',
     label: 'Feed a Child for a Week',
     description: '7 meals for one child',
+    utmContent: 'tier2_feed_week',
   },
   {
     amount: '$75',
     label: 'Feed a Child for a Month',
     description: '30 meals for one child',
+    utmContent: 'tier3_feed_month',
   },
   {
     amount: '$25/mo',
     label: 'Monthly Partner',
     description: '10 meals every month — ongoing impact',
     featured: true,
+    utmContent: 'tier4_monthly',
   },
 ];
 
@@ -167,6 +171,7 @@ export default function DonatePage() {
                 <DonateButton
                   label={tier.featured ? 'Give Monthly' : 'Give Now'}
                   fullWidth
+                  utmContent={tier.utmContent}
                 />
               </div>
             ))}
@@ -177,6 +182,7 @@ export default function DonatePage() {
               label="Give a Custom Amount"
               variant="outline"
               icon={false}
+              utmContent="custom_amount"
             />
           </div>
         </div>

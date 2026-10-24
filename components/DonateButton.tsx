@@ -4,16 +4,28 @@
  * DonateButton — Links to CityKid donation portal.
  *
  * Usage:
- *   <DonateButton />                              — default "Donate" button
- *   <DonateButton label="Feed a Child Today" />   — custom label
- *   <DonateButton variant="nav" />                — compact nav style
- *   <DonateButton href="...?utm_source=ig" />     — campaign-tracked URL
+ *   <DonateButton />                                      — default "Donate" button
+ *   <DonateButton label="Feed a Child Today" />           — custom label
+ *   <DonateButton variant="nav" />                        — compact nav style
+ *   <DonateButton utmContent="tier1_feed_child" />        — with UTM tracking
+ *   <DonateButton href="...?utm_source=ig" />             — campaign-tracked URL (wins over utmContent)
  *
- * Opens https://www.citykid.online/?form=FUNAFYBLTAV in a new tab by default.
- * The portal redirects donors back to the main site upon completion.
+ * UTM params are appended to the FundraiseUp URL before the form iframe loads,
+ * which is required for attribution to pass through correctly.
  */
 
-const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+const BASE_DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+
+function buildDonateUrl(utmContent?: string, utmMedium?: string): string {
+  if (!utmContent) return BASE_DONATE_URL;
+  const params = new URLSearchParams({
+    utm_source: 'citykid_site',
+    utm_medium: utmMedium ?? 'donate_page',
+    utm_campaign: 'summer25',
+    utm_content: utmContent,
+  });
+  return `${BASE_DONATE_URL}&${params.toString()}`;
+}
 
 interface DonateButtonProps {
   label?: string;
@@ -21,6 +33,10 @@ interface DonateButtonProps {
   icon?: boolean;
   fullWidth?: boolean;
   className?: string;
+  /** utm_content value for this specific button placement */
+  utmContent?: string;
+  /** utm_medium override — defaults to 'donate_page' */
+  utmMedium?: string;
   /** Optional override URL (e.g. with UTM params). Defaults to the main donate URL. */
   href?: string;
 }
@@ -31,15 +47,19 @@ export default function DonateButton({
   icon = true,
   fullWidth = false,
   className,
+  utmContent,
+  utmMedium,
   href,
 }: DonateButtonProps) {
   const isPrimary = variant === 'primary';
   const isOutline = variant === 'outline';
   const isNav = variant === 'nav';
 
+  const resolvedHref = href || buildDonateUrl(utmContent, utmMedium);
+
   return (
     <a
-      href={href || DONATE_URL}
+      href={resolvedHref}
       target="_blank"
       rel="noopener noreferrer"
       className={className}
