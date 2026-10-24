@@ -372,6 +372,7 @@ export default function BlogAdminPage() {
               />
               {formData.featured_image ? (
                 <div style={{ position: 'relative' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- admin preview of a user-uploaded URL; next/image would require remote-domain config */}
                   <img
                     src={formData.featured_image}
                     alt="Featured preview"

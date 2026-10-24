@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.citykid.me"),
   title: "Citychurch — for the heart of the city.",
   description:
     "Citychurch is a vibrant community dedicated to faith, growth, and service in the heart of the city.",
@@ -51,12 +52,13 @@ export default function RootLayout({
           }}
         />
         {/* End Fundraise Up */}
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- App Router root layout applies to every page; next/font would rename the 'Source Serif 4' family referenced in inline styles */}
         <link
           href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased themed-transition">
         <ScrollReveal />
         <Navbar />
         {children}

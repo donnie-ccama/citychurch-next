@@ -1,37 +1,32 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
+
+const emptySubscribe = () => () => {};
 
 export default function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
+  // false during SSR/hydration, true after mount — avoids a markup mismatch
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === 'undefined') return false;
     // Check localStorage or system preference
     const stored = localStorage.getItem('citychurch-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return stored === 'dark' || (!stored && prefersDark);
+  });
 
-    if (stored === 'dark' || (!stored && prefersDark)) {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark);
+  }, [isDark]);
 
   const toggleTheme = () => {
     const newDark = !isDark;
     setIsDark(newDark);
-
-    if (newDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('citychurch-theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('citychurch-theme', 'light');
-    }
+    localStorage.setItem('citychurch-theme', newDark ? 'dark' : 'light');
   };
 
   if (!mounted) {

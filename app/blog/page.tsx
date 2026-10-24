@@ -1,6 +1,4 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import SectionHeader from '@/components/SectionHeader';
 import BlogCard from '@/components/BlogCard';
 import BlogClient from '@/components/BlogClient';
 import { createServerClient } from '@/lib/supabase-server';

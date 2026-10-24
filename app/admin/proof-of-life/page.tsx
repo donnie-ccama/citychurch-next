@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Submission {
   id: string;
@@ -19,21 +19,13 @@ export default function AdminProofOfLife() {
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
-  const fetchSubmissions = useCallback(async () => {
-    try {
-      const res = await fetch('/api/proof-of-life/list');
-      const data = await res.json();
-      setSubmissions(data.submissions || []);
-    } catch {
-      console.error('Failed to fetch submissions');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchSubmissions();
-  }, [fetchSubmissions]);
+    fetch('/api/proof-of-life/list')
+      .then((res) => res.json())
+      .then((data) => setSubmissions(data.submissions || []))
+      .catch(() => console.error('Failed to fetch submissions'))
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleApprove = async (id: string) => {
     setActionLoading(id);

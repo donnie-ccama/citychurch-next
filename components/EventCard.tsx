@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Event } from '@/lib/types';
 
-interface EventCardProps extends Event {}
+type EventCardProps = Event;
 
 export default function EventCard({
   title,
@@ -42,6 +42,7 @@ export default function EventCard({
             overflow: 'hidden',
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element -- event images come from arbitrary remote URLs; next/image would require remote-domain config */}
           <img
             src={image_url}
             alt={title}

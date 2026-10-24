@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import { Sermon } from '@/lib/types';
-import VideoEmbed from './VideoEmbed';
 
-interface SermonCardProps extends Sermon {}
+type SermonCardProps = Sermon;
 
 export default function SermonCard({
   title,

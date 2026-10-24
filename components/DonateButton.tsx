@@ -8,6 +8,7 @@
  *   <DonateButton label="Feed a Child Today" />           — custom label
  *   <DonateButton variant="nav" />                        — compact nav style
  *   <DonateButton utmContent="tier1_feed_child" />        — with UTM tracking
+ *   <DonateButton href="...?utm_source=ig" />             — campaign-tracked URL (wins over utmContent)
  *
  * UTM params are appended to the FundraiseUp URL before the form iframe loads,
  * which is required for attribution to pass through correctly.
@@ -36,6 +37,8 @@ interface DonateButtonProps {
   utmContent?: string;
   /** utm_medium override — defaults to 'donate_page' */
   utmMedium?: string;
+  /** Optional override URL (e.g. with UTM params). Defaults to the main donate URL. */
+  href?: string;
 }
 
 export default function DonateButton({
@@ -46,16 +49,17 @@ export default function DonateButton({
   className,
   utmContent,
   utmMedium,
+  href,
 }: DonateButtonProps) {
   const isPrimary = variant === 'primary';
   const isOutline = variant === 'outline';
   const isNav = variant === 'nav';
 
-  const href = buildDonateUrl(utmContent, utmMedium);
+  const resolvedHref = href || buildDonateUrl(utmContent, utmMedium);
 
   return (
     <a
-      href={href}
+      href={resolvedHref}
       target="_blank"
       rel="noopener noreferrer"
       className={className}

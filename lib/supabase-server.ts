@@ -63,7 +63,7 @@ export const demoEvents = [
     title: 'Sunday Mornings @ Citychurch',
     event_date: '2026-03-29',
     event_time: 'Every Sunday',
-    description: 'Breakfast @ 9:30 AM\nBible Study @ 10:00 AM\nWorship in English @ 11:00 AM\nWorship in Spanish @ 12:30 PM',
+    description: 'Breakfast @ 9:30 AM\nWorship in English @ 10:30 AM\nWorship in Spanish @ 12:30 PM',
     location: 'Citychurch Downtown, 205 S. Polk St, Amarillo, TX 79101',
     google_maps_url: 'https://maps.google.com/?q=205+S+Polk+St+Amarillo+TX+79101',
     apple_maps_url: 'https://maps.apple.com/?address=205+S+Polk+St,+Amarillo,+TX+79101',

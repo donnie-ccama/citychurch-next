@@ -101,10 +101,10 @@ export default function EventRegistrationForm({
         }}
       >
         <p style={{ fontWeight: 700, fontSize: '1.125rem', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-          You're registered!
+          You&apos;re registered!
         </p>
         <p style={{ fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-          We're looking forward to seeing you at {eventTitle}. We'll be in touch soon.
+          We&apos;re looking forward to seeing you at {eventTitle}. We&apos;ll be in touch soon.
         </p>
       </div>
     );

@@ -14,8 +14,8 @@ import { useState } from 'react';
  * Find it in Mailchimp → Audience → Signup forms → Embedded forms → form action URL.
  */
 
-// TODO: Replace with your Mailchimp form action URL
-const MAILCHIMP_FORM_URL = 'https://YOUR_MAILCHIMP_FORM_ACTION_URL';
+// TODO: Replace with your Mailchimp form action URL and uncomment (used by Option 1 below)
+// const MAILCHIMP_FORM_URL = 'https://YOUR_MAILCHIMP_FORM_ACTION_URL';
 
 interface EmailSignupProps {
   variant?: 'inline' | 'stacked' | 'footer';
@@ -82,7 +82,7 @@ export default function EmailSignup({
         }}
       >
         <p style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.25rem' }}>
-          You're in.
+          You&apos;re in.
         </p>
         <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
           Thank you for joining us. Watch your inbox for stories of hope from Amarillo.

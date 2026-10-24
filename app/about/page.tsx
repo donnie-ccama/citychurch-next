@@ -83,7 +83,7 @@ export default function About() {
               textAlign: 'center',
             }}
           >
-            "Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these."
+            &quot;Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these.&quot;
             <span
               style={{
                 display: 'block',

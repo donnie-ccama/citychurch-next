@@ -38,7 +38,7 @@ export default function MediaAdminPage() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
-    media_type: 'photo' as const,
+    media_type: 'photo' as MediaItem['media_type'],
     url: '',
     thumbnail_url: '',
     description: '',
@@ -155,7 +155,7 @@ export default function MediaAdminPage() {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    media_type: e.target.value as any,
+                    media_type: e.target.value as MediaItem['media_type'],
                   })
                 }
                 style={{

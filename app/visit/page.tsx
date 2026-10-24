@@ -13,7 +13,7 @@ const expectCards = [
   {
     icon: '🙏',
     title: 'Worship & Teaching',
-    text: 'Sunday mornings start with breakfast at 9:30 AM, Bible Study at 10:00 AM, and worship at 11:00 AM (English) or 12:30 PM (Spanish). Come as you are — all are welcome.',
+    text: 'Sunday mornings start with breakfast at 9:30 AM and worship at 10:30 AM (English) or 12:30 PM (Spanish). Come as you are — all are welcome.',
   },
   {
     icon: '👨‍👩‍👧‍👦',
@@ -28,7 +28,7 @@ const expectCards = [
 ];
 
 const serviceTimes = [
-  'Sunday: Breakfast 9:30 AM · Bible Study 10:00 AM · Worship 11:00 AM (EN) / 12:30 PM (ES)',
+  'Sunday: Breakfast 9:30 AM · Worship 10:30 AM (EN) / 12:30 PM (ES)',
   'Wednesday: Family Night — Dinner 5:30 PM · Groups 6:15 PM',
   'Mon–Thu: Volunteer — 9:00 AM to 5:00 PM',
 ];
@@ -74,8 +74,8 @@ export default function Visit() {
               marginRight: 'auto',
             }}
           >
-            Whether you're walking through our doors for the first time or
-            discovering us online, we're glad you're here. Here's what to
+            Whether you&apos;re walking through our doors for the first time or
+            discovering us online, we&apos;re glad you&apos;re here. Here&apos;s what to
             expect.
           </p>
         </div>
@@ -250,7 +250,7 @@ export default function Visit() {
                 marginBottom: '0.75rem',
               }}
             >
-              We'd Love to Meet You
+              We&apos;d Love to Meet You
             </h2>
             <p
               style={{
@@ -260,7 +260,7 @@ export default function Visit() {
                 marginBottom: '2rem',
               }}
             >
-              Fill out the form below and we'll reach out to welcome you
+              Fill out the form below and we&apos;ll reach out to welcome you
               personally.
             </p>
           </div>

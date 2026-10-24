@@ -52,10 +52,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/visit', label: 'Visit' },
     { href: '/about', label: 'Our Story' },
+    { href: '/events', label: 'Events' },
+    { href: '/sermons', label: 'Sermons' },
     { href: '/ministries', label: 'How We Help' },
-    { href: '/resources', label: 'Free Resources' },
     { href: '/proof-of-life', label: 'Proof of Life' },
     { href: '/donate', label: 'Give' },
     { href: '/contact', label: 'Get Involved' },
