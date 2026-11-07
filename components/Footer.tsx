@@ -5,6 +5,7 @@ import Image from 'next/image';
 import EmailSignup from './EmailSignup';
 
 import { DONATE_URL } from '@/lib/donate';
+import { LOGO_SRC } from '@/lib/brand';
 
 export default function Footer() {
   const footerLinkStyle = {
@@ -44,7 +45,7 @@ export default function Footer() {
               }}
             >
               <Image
-                src="/logo.png"
+                src={LOGO_SRC}
                 alt="Citychurch"
                 width={32}
                 height={32}

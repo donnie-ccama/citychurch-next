@@ -6,6 +6,7 @@ import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
 
 import { DONATE_URL } from '@/lib/donate';
+import { LOGO_SRC } from '@/lib/brand';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +73,7 @@ export default function Navbar() {
             }}
           >
             <Image
-              src="/logo.png"
+              src={LOGO_SRC}
               alt="Citychurch Logo"
               width={40}
               height={40}
