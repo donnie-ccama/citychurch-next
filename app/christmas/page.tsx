@@ -9,11 +9,11 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Family Christmas Banquets — Citychurch',
   description:
-    'Reserve a family table for the Citychurch Christmas Banquets on December 14 or 15, 2026. Doors open at 5:30 PM.',
+    'Reserve a family table for the Citychurch Christmas Banquets on December 15 or 16, 2026. Doors open at 5:30 PM.',
   openGraph: {
     title: 'Reserve Your Family’s Christmas Table',
     description:
-      'Choose December 14 or 15 and reserve one table for up to eight family members at Citychurch Amarillo.',
+      'Choose December 15 or 16 and reserve one table for up to eight family members at Citychurch Amarillo.',
     url: 'https://www.citykid.me/christmas',
     siteName: 'Citychurch Amarillo',
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Reserve Your Family’s Christmas Table',
-    description: 'December 14 or 15 · Doors open at 5:30 PM · Dinner at 6:00 PM',
+    description: 'December 15 or 16 · Doors open at 5:30 PM · Dinner at 6:00 PM',
     images: ['/images/web-hero-3-27-26.png'],
   },
 };
@@ -108,7 +108,7 @@ export default async function ChristmasPage() {
               Banquet dates
             </p>
             <p style={{ marginTop: '0.3rem', fontWeight: 700 }}>
-              December 14 &amp; 15, 2026
+              December 15 &amp; 16, 2026
             </p>
           </div>
           <div>

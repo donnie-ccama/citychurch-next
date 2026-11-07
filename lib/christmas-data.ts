@@ -19,9 +19,9 @@ const previewEvent: ChristmasEvent = {
 
 const previewBanquets: ChristmasBanquet[] = [
   {
-    id: '00000000-0000-4000-8000-000000000014',
+    id: '00000000-0000-4000-8000-000000000015',
     event_id: previewEvent.id,
-    event_date: '2026-12-14',
+    event_date: '2026-12-15',
     doors_open: '17:30:00',
     dinner_at: '18:00:00',
     ends_at: '19:30:00',
@@ -31,9 +31,9 @@ const previewBanquets: ChristmasBanquet[] = [
     active: true,
   },
   {
-    id: '00000000-0000-4000-8000-000000000015',
+    id: '00000000-0000-4000-8000-000000000016',
     event_id: previewEvent.id,
-    event_date: '2026-12-15',
+    event_date: '2026-12-16',
     doors_open: '17:30:00',
     dinner_at: '18:00:00',
     ends_at: '19:30:00',

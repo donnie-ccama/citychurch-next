@@ -175,7 +175,7 @@ All variables are set on Vercel for Production and Development environments.
 
 ## Christmas Banquet Reservations
 
-The `/christmas` flow lets a family choose December 14 or 15, 2026 and reserve one
+The `/christmas` flow lets a family choose December 15 or 16, 2026 and reserve one
 full table for up to eight guests. Each banquet has 15 tables. The database function
 in `20261005204610_christmas_banquet_reservations.sql` locks the selected banquet row
 while it checks capacity and creates the reservation, preventing simultaneous requests

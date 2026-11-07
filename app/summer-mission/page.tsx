@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { DONATE_URL } from '@/lib/donate';
 import Link from 'next/link';
 import DonateButton from '@/components/DonateButton';
 import EmailSignup from '@/components/EmailSignup';
@@ -7,7 +8,7 @@ import SummerMissionFAQ from '@/components/SummerMissionFAQ';
 /**
  * /summer-mission — Campaign landing page for cold social traffic.
  *
- * Primary CTA: FundraiseUp portal with UTM params for attribution.
+ * Primary CTA: the shared donate link with UTM params for attribution.
  * Lead magnet: 2026 Impact Report email capture (tagged in Mailchimp).
  *
  * Design: matches the citykid.me taupe / oatmeal theme — Inter + Source Serif 4,
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 
 // Donate URL with UTM params for campaign attribution
 const SUMMER_MISSION_DONATE_URL =
-  'https://www.citykid.online/?form=FUNAFYBLTAV' +
+  DONATE_URL +
   '&utm_source=social' +
   '&utm_medium=organic' +
   '&utm_campaign=summer_mission_2026' +

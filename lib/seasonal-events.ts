@@ -161,6 +161,8 @@ const sourceEvents: SourceEvent[] = [
     location: CITYCHURCH_DOWNTOWN,
     image: '/images/web-hero-3-27-26.png',
     imageAlt: 'A smiling child at Citychurch Amarillo',
+    href: '/christmas',
+    actionLabel: 'Reserve a table',
     category: 'Outreach',
     recurrence: 'One-time',
     featured: true,
@@ -177,6 +179,8 @@ const sourceEvents: SourceEvent[] = [
     location: CITYCHURCH_DOWNTOWN,
     image: '/images/web-hero-3-27-26.png',
     imageAlt: 'A smiling child at Citychurch Amarillo',
+    href: '/christmas',
+    actionLabel: 'Reserve a table',
     category: 'Outreach',
     recurrence: 'One-time',
     featured: true,
@@ -234,6 +238,16 @@ export const ongoingSeasonOpportunity: OngoingSeasonOpportunity = {
   href: '/register/volunteer',
   actionLabel: 'Find a time to serve',
 };
+
+export const SEASON_HIGHLIGHT_LIMIT = 3;
+
+/** The next few one-time featured events on or after today, in date order. */
+export function getSeasonHighlights(events: SeasonEvent[], todayIso: string) {
+  return events
+    .filter((event) => event.featured && !event.recurring && event.date >= todayIso)
+    .sort((a, b) => a.date.localeCompare(b.date) || a.sortTime.localeCompare(b.sortTime))
+    .slice(0, SEASON_HIGHLIGHT_LIMIT);
+}
 
 export function monthName(month: SeasonMonth) {
   return new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'UTC' }).format(

@@ -9,15 +9,16 @@ import ProofOfLifeHomepagePreview from '@/components/ProofOfLifeHomepagePreview'
 import PhotoCarousel from '@/components/PhotoCarousel';
 import { createServerClient } from '@/lib/supabase-server';
 import { BlogPost } from '@/lib/types';
-import { FocusMonthHero } from '@/components/SeasonalEventCalendar';
-import { getCitychurchTodayIso, getInitialSeasonMonth, seasonEvents } from '@/lib/seasonal-events';
+import HolidayGivingHero from '@/components/HolidayGivingHero';
+import SeasonHighlights from '@/components/SeasonHighlights';
+import { getCitychurchTodayIso, getSeasonHighlights, seasonEvents } from '@/lib/seasonal-events';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'Citychurch — ...for the heart of the city.',
-  description: 'Citychurch Amarillo — Finding, feeding, and teaching children and families who are most vulnerable. $2.50 feeds a child a hot meal, fresh fruit, and popcorn.',
+  description: 'Citychurch Amarillo — Finding, feeding, and teaching children and families who are most vulnerable. This Christmas, $25 gives one child gifts, a banquet seat, and a year of care.',
 };
 
 export default async function Home() {
@@ -36,18 +37,11 @@ export default async function Home() {
     <div className="home-shell">
 
       {/*
-        THESIS: A photograph-driven calendar is the hero itself, replacing the category-default image plus buttons.
-        OWN-WORLD: Citychurch documentary photography, deep charcoal image scrim, warm serif display type, and red-pink accent controls.
-        STORY: Visitors immediately see that the season is active, explore a month, reveal a real event, and continue to the complete season.
-        FIRST VIEWPORT: Human story and headline occupy the left third; an interactive photo-date calendar occupies the right two thirds and defaults to the current season month.
-        FORM: The user-approved Focus Month composition; seed key user-approved-2026-10-05.
-        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+        Holiday 2026: the first screen asks. $25 gives one child Christmas.
+        The season calendar lives on /events; the strip below keeps the dates in view.
       */}
-      <FocusMonthHero
-        events={seasonEvents.filter((event) => event.featured)}
-        initialMonth={getInitialSeasonMonth(todayIso)}
-        todayIso={todayIso}
-      />
+      <HolidayGivingHero />
+      <SeasonHighlights events={getSeasonHighlights(seasonEvents, todayIso)} />
 
       {/* FIRST-TIME VISITOR BANNER */}
       <section className="home-section-card">

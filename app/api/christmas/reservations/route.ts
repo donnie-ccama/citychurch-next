@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
 
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
     if (process.env.NODE_ENV === 'development') {
-      const eventDate = banquetId.endsWith('14') ? '2026-12-14' : '2026-12-15';
+      const eventDate = banquetId.endsWith('15') ? '2026-12-15' : '2026-12-16';
       return NextResponse.json({
         success: true,
         preview: true,

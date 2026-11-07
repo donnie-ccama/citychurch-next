@@ -102,7 +102,7 @@ export default async function ChristmasAdminPage() {
     <div>
       <div style={{ marginBottom: '2rem' }}>
         <p style={{ color: 'var(--accent)', fontSize: '0.75rem', fontWeight: 750, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>
-          December 14 &amp; 15, 2026
+          December 15 &amp; 16, 2026
         </p>
         <h1 style={{ fontSize: '2rem', fontWeight: 750, letterSpacing: '-0.035em', marginBottom: '0.5rem' }}>
           Christmas Banquets

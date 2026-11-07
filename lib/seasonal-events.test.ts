@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   getCitychurchTodayIso,
   getInitialSeasonMonth,
+  getSeasonHighlights,
   seasonEvents,
 } from './seasonal-events.ts';
 
@@ -59,11 +60,16 @@ test('one-time celebrations remain distinct from expanded weekly gatherings', ()
   ]);
 });
 
-test('every calendar event includes full details and a visit-page action', () => {
+test('every calendar event includes full details and an action link', () => {
   for (const event of seasonEvents) {
     assert.ok(event.details);
-    assert.equal(event.href, '/visit');
-    assert.equal(event.actionLabel, 'Plan your visit');
+    if (event.title.endsWith('Night Christmas Banquet')) {
+      assert.equal(event.href, '/christmas');
+      assert.equal(event.actionLabel, 'Reserve a table');
+    } else {
+      assert.equal(event.href, '/visit');
+      assert.equal(event.actionLabel, 'Plan your visit');
+    }
   }
 });
 
@@ -75,4 +81,38 @@ test('the focus month stays inside the October through December season', () => {
   assert.equal(getInitialSeasonMonth('2026-09-30'), 9);
   assert.equal(getInitialSeasonMonth('2026-11-12'), 10);
   assert.equal(getInitialSeasonMonth('2027-01-01'), 11);
+});
+
+test('season highlights are the upcoming one-time featured events, in date order', () => {
+  const highlights = getSeasonHighlights(seasonEvents, '2026-11-06');
+  assert.deepEqual(
+    highlights.map((event) => [event.date, event.title]),
+    [
+      ['2026-11-22', 'Thanksgiving Worship and Banquet'],
+      ['2026-12-15', 'Tuesday Night Christmas Banquet'],
+      ['2026-12-16', 'Wednesday Night Christmas Banquet'],
+    ]
+  );
+});
+
+test('season highlights drop events that already happened', () => {
+  const highlights = getSeasonHighlights(seasonEvents, '2026-11-23');
+  assert.deepEqual(
+    highlights.map((event) => event.date),
+    ['2026-12-15', '2026-12-16']
+  );
+});
+
+test('season highlights cap at three events', () => {
+  const highlights = getSeasonHighlights(seasonEvents, '2026-10-01');
+  assert.equal(highlights.length, 3);
+  assert.equal(highlights[0].title, "Citychurch Children's Day Celebration");
+});
+
+test('Christmas banquet highlights link to the reservation page', () => {
+  const highlights = getSeasonHighlights(seasonEvents, '2026-12-01');
+  for (const event of highlights) {
+    assert.equal(event.href, '/christmas');
+    assert.equal(event.actionLabel, 'Reserve a table');
+  }
 });

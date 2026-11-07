@@ -9,11 +9,10 @@
  *   <DonateButton variant="nav" />                — compact nav style
  *   <DonateButton href="...?utm_source=ig" />     — campaign-tracked URL
  *
- * Opens https://www.citykid.online/?form=FUNAFYBLTAV in a new tab by default.
- * The portal redirects donors back to the main site upon completion.
+ * Opens DONATE_URL from lib/donate.ts in a new tab by default.
  */
 
-const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+import { DONATE_URL } from '@/lib/donate';
 
 interface DonateButtonProps {
   label?: string;

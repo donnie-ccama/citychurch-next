@@ -5,23 +5,27 @@
    Oatmeal / Taupe Theme with Light + Dark Mode
    ============================================ */
 
-/* --- Taupe Color Palette (Tailwind v4) --- */
+/* --- Ground Color Scale (Tailwind v4) ---
+   Holiday 2026: the warm taupe scale wears a light Christmas green.
+   Same lightness steps as the taupe scale, hue moved to evergreen.
+   The variable names stay --taupe-* so every token below keeps working. */
 :root {
-  --taupe-50: oklch(98.6% 0.002 67.8);
-  --taupe-100: oklch(96% 0.002 17.2);
-  --taupe-200: oklch(92.2% 0.005 34.3);
-  --taupe-300: oklch(86.8% 0.007 39.5);
-  --taupe-400: oklch(71.4% 0.014 41.2);
-  --taupe-500: oklch(54.7% 0.021 43.1);
-  --taupe-600: oklch(43.8% 0.017 39.3);
-  --taupe-700: oklch(36.7% 0.016 35.7);
-  --taupe-800: oklch(26.8% 0.011 36.5);
-  --taupe-900: oklch(21.4% 0.009 43.1);
-  --taupe-950: oklch(14.7% 0.004 49.3);
+  --taupe-50: oklch(97% 0.026 152);
+  --taupe-100: oklch(94% 0.038 152);
+  --taupe-200: oklch(90% 0.05 152);
+  --taupe-300: oklch(84% 0.06 152);
+  --taupe-400: oklch(70% 0.07 152);
+  --taupe-500: oklch(54% 0.08 152);
+  --taupe-600: oklch(43% 0.08 152);
+  --taupe-700: oklch(36% 0.07 152);
+  --taupe-800: oklch(27% 0.055 152);
+  --taupe-900: oklch(21% 0.045 152);
+  --taupe-950: oklch(15% 0.035 152);
 
-  /* Brand accent — from logo */
-  --accent: oklch(63% 0.2 360);
-  --accent-soft: oklch(63% 0.12 360);
+  /* Brand accent — Holiday 2026: Christmas red in place of the logo's red-pink.
+     White text on --accent reads at 5:1. The red-pink was oklch(63% 0.2 360). */
+  --accent: oklch(54% 0.2 27);
+  --accent-soft: oklch(54% 0.12 27);
 
   /* Light mode defaults */
   --bg-primary: var(--taupe-50);
@@ -587,7 +591,7 @@ body {
 }
 
 .season-event-popover-date {
-  color: #a5224d;
+  color: #9e1b1b;
   font-size: 0.66rem;
   font-weight: 750;
   letter-spacing: 0.08em;
@@ -629,7 +633,7 @@ body {
 }
 
 .season-event-popover a {
-  color: #a5224d;
+  color: #9e1b1b;
   display: inline-flex;
   font-size: 0.75rem;
   font-weight: 750;
@@ -2140,5 +2144,258 @@ body.themed-transition {
   /* Larger tap targets */
   .nav-link {
     padding: 0.5rem 0 !important;
+  }
+}
+
+/* --- Holiday 2026 giving hero --- */
+.holiday-hero {
+  align-items: flex-end;
+  background: #17110f;
+  color: #fff;
+  display: flex;
+  isolation: isolate;
+  min-height: clamp(560px, calc(100svh - 72px), 720px);
+  overflow: hidden;
+  position: relative;
+}
+
+.holiday-hero ::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+.holiday-hero-background {
+  object-fit: cover;
+  object-position: 62% 30%;
+  z-index: -3;
+}
+
+.holiday-hero-scrim {
+  background:
+    linear-gradient(90deg, rgba(20, 14, 12, 0.94) 0%, rgba(20, 14, 12, 0.78) 38%, rgba(20, 14, 12, 0.22) 72%, rgba(20, 14, 12, 0.3) 100%),
+    linear-gradient(0deg, rgba(20, 14, 12, 0.6) 0%, transparent 46%);
+  inset: 0;
+  position: absolute;
+  z-index: -2;
+}
+
+.holiday-hero-layout {
+  margin: 0 auto;
+  max-width: 1320px;
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(2.5rem, 5vw, 4rem);
+  width: 100%;
+}
+
+.holiday-hero-copy {
+  max-width: 580px;
+}
+
+.holiday-hero-copy h1 {
+  color: #fff;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(3.2rem, 6vw, 5.7rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.holiday-hero-accent {
+  color: oklch(78% 0.14 27);
+}
+
+.holiday-hero-lede {
+  color: #fff;
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 1.5rem 0 0;
+  max-width: 500px;
+}
+
+.holiday-hero-copy > p:not(.holiday-hero-lede) {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0.9rem 0 0;
+  max-width: 480px;
+}
+
+.holiday-hero-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.holiday-hero-cta {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  transition: box-shadow 180ms ease, transform 180ms ease, filter 180ms ease;
+}
+
+.holiday-hero-cta:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.34);
+  filter: brightness(0.92);
+  transform: translateY(-2px);
+}
+
+.holiday-hero-cta:focus-visible,
+.holiday-hero-secondary:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.holiday-hero-secondary {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color 180ms ease;
+}
+
+.holiday-hero-secondary:hover {
+  text-decoration-color: #fff;
+}
+
+/* --- Season highlights strip --- */
+.season-highlights {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+}
+
+.season-highlights-list {
+  display: grid;
+  gap: 1.5rem 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0 auto;
+  max-width: 1320px;
+  padding: 0;
+}
+
+.season-highlight {
+  align-items: center;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.season-highlight-date {
+  align-items: center;
+  background: var(--text-primary);
+  border-radius: 12px;
+  color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  width: 52px;
+}
+
+.season-highlight-month {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.season-highlight-day {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-top: 0.15rem;
+}
+
+.season-highlight-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.season-highlight-meta {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  margin: 0.15rem 0 0;
+}
+
+.season-highlight-link {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-underline-offset: 0.25em;
+  white-space: nowrap;
+}
+
+.season-highlight-link:hover {
+  text-decoration: underline;
+}
+
+.season-highlight-link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 980px) {
+  .season-highlights-list {
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .season-highlight {
+    padding: 0.85rem 0;
+  }
+
+  .season-highlight + .season-highlight {
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+@media (max-width: 760px) {
+  .holiday-hero {
+    min-height: auto;
+  }
+
+  .holiday-hero-background {
+    object-position: 68% 18%;
+  }
+
+  .holiday-hero-scrim {
+    background: linear-gradient(180deg, rgba(20, 14, 12, 0.35) 0%, rgba(20, 14, 12, 0.88) 42%, rgba(20, 14, 12, 0.98) 100%);
+  }
+
+  .holiday-hero-layout {
+    padding: 12.5rem 1rem 2.25rem;
+  }
+
+  .holiday-hero-copy h1 {
+    font-size: clamp(3rem, 15vw, 4.4rem);
+  }
+
+  .holiday-hero-lede {
+    font-size: 1.1rem;
+    margin-top: 1.1rem;
+  }
+
+  .holiday-hero-actions {
+    margin-top: 1.4rem;
+  }
+
+  .holiday-hero-cta {
+    width: 100%;
+  }
+
+  .season-highlight-link {
+    white-space: normal;
+    text-align: right;
   }
 }
