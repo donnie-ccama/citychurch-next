@@ -14,7 +14,7 @@ The website for Citychurch Amarillo, a non-profit ministry that finds, feeds, an
 | Framework | Next.js 16 (App Router, Turbopack, React 19) |
 | Styling | Tailwind CSS v4 + inline styles with CSS custom properties |
 | Database | Supabase (PostgreSQL with Row-Level Security) |
-| Donations | CityKid Online (citykid.online) |
+| Donations | Stripe, embedded Checkout on `/donate` |
 | Email list | Mailchimp (Audience ID: 4fed0cb6a0, Server: us21) |
 | Sheets sync | Google Sheets API via googleapis (service account) |
 | Hosting | Vercel |
@@ -53,7 +53,7 @@ citychurch-next/
 │   ├── Footer.tsx                # Site footer with links + email signup
 │   ├── HeroImage.tsx             # Static hero image with gradient overlay (homepage)
 │   ├── HeroVideo.tsx             # Vimeo background video hero (preserved, not active)
-│   ├── DonateButton.tsx          # CityKid Online donation link
+│   ├── DonateButton.tsx          # Links to the /donate giving page
 │   ├── EmailSignup.tsx           # Mailchimp email list signup
 │   ├── ContactForm.tsx           # Contact form (→ /api/contact)
 │   ├── VisitorSignupForm.tsx     # Visitor sign-up form (→ /api/visitors)
@@ -104,7 +104,7 @@ citychurch-next/
 | `/visit` | Static | First-time visitor landing page — what to expect, $2.50 callout, photo gallery, sign-up form, location |
 | `/about` | Static | Our Story |
 | `/ministries` | Static | How We Help — ministry event cards |
-| `/donate` | Static | Give — donation tiers with CityKid Online |
+| `/donate` | Dynamic | Give — Christmas giving with embedded Stripe Checkout |
 | `/contact` | Static | Get Involved — ways to connect, contact form, church info |
 | `/blog` | Static | Blog listing — featured story + category filter grid |
 | `/blog/[slug]` | SSG | Blog article — featured image, markdown body, social share, related posts |
@@ -222,12 +222,19 @@ that exact target before any remote migration command.
 - Server: `us21`
 - Tag for website signups: `website-signup-2026`
 
-### CityKid Online Settings
+### Stripe Giving
 
-- Portal URL: `https://www.citykid.online/?form=FUNAFYBLTAV`
-- Donors are redirected back to the site upon completion (no JS modal)
-- Cost per meal: $2.50 (hot item + fresh fruit + popcorn)
-- Suggested tiers: $2.50 (1 meal), $17.50 (1 week), $75 (1 month)
+- Stripe account: `citykid.online` (`acct_1S6ZsnITt6ZyhWML`), live mode only.
+- `/donate` shows a giving form (one time or monthly, 1/2/4/10 children at $25 each, or a custom
+  amount from $5 to $25,000). `POST /api/donate/checkout` creates an embedded Checkout Session and
+  the form mounts it in place. Stripe returns the donor to `/donate/thank-you`.
+- Stripe objects (not secrets, set in `lib/giving.ts`): product `prod_Va7nhJFpCkfekk`
+  "Christmas for one child", prices `christmas_child_once` and `christmas_child_monthly`.
+- Checkout branding (Settings → Branding): button and brand color `#c92324`, page background
+  `#e9fbed`, font Inter. Upload the gold mark (`public/holiday/logo-gold-a.png`) as the icon.
+- Vercel needs `STRIPE_SECRET_KEY` and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` from
+  https://dashboard.stripe.com/apikeys. Without them the form shows "Online giving is not set up yet."
+- Receipts: turn on "Successful payments" emails in Stripe Settings → Emails.
 
 ### GCP Service Account
 

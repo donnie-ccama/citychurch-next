@@ -1,5 +1,5 @@
 /**
  * The one place the site's donate link lives.
- * Replace this value with the Stripe donation page when it is ready.
+ * Holiday 2026: the giving page on this site, with embedded Stripe Checkout.
  */
-export const DONATE_URL = 'https://www.citykid.online/?form=FUNAFYBLTAV';
+export const DONATE_URL = '/donate';

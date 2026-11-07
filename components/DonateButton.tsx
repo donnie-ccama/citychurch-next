@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * DonateButton — Links to CityKid donation portal.
+ * DonateButton — Links to the giving page.
  *
  * Usage:
  *   <DonateButton />                              — default "Donate" button
@@ -9,7 +9,7 @@
  *   <DonateButton variant="nav" />                — compact nav style
  *   <DonateButton href="...?utm_source=ig" />     — campaign-tracked URL
  *
- * Opens DONATE_URL from lib/donate.ts in a new tab by default.
+ * Uses DONATE_URL from lib/donate.ts. Outside links open in a new tab.
  */
 
 import { DONATE_URL } from '@/lib/donate';
@@ -35,12 +35,14 @@ export default function DonateButton({
   const isPrimary = variant === 'primary';
   const isOutline = variant === 'outline';
   const isNav = variant === 'nav';
+  const target = href || DONATE_URL;
+  const external = /^https?:/i.test(target);
 
   return (
     <a
-      href={href || DONATE_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={target}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
       className={className}
       style={{
         display: 'inline-flex',

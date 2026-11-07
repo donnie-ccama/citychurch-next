@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 // Donate URL with UTM params for campaign attribution
 const SUMMER_MISSION_DONATE_URL =
   DONATE_URL +
-  '&utm_source=social' +
+  '?utm_source=social' +
   '&utm_medium=organic' +
   '&utm_campaign=summer_mission_2026' +
   '&utm_content=monthly_partner';
